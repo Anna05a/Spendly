@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>Login</title>
 </head>
 <body>
-    <h2>Registration</h2>
+    <h2>Login</h2>
     <form method="post">
         {% csrf_token %}
         <div>
@@ -14,14 +14,10 @@
             <input type="email" id="email" name="email" required>
         </div>
         <div>
-            <label for="password1">Password:</label>
-            <input type="password" id="password1" name="password1" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
         </div>
-        <div>
-            <label for="password2">Confirm Password:</label>
-            <input type="password" id="password2" name="password2" required>
-        </div>
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
     </form>
 </body>
 </html>
