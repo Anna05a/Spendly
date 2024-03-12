@@ -5,10 +5,11 @@ from django.forms import CharField, EmailField
 
 
 class RegistrationForm(UserCreationForm):
-    email = EmailField(widget=forms.EmailInput())
-    password1 = CharField(widget=forms.PasswordInput())
-    password2 = CharField(widget=forms.PasswordInput())
+    email = forms.EmailField(required=True)
 
+    class Meta(UserCreationForm):
+        model = User
+        fields = ['username', 'email', 'password']
 
 class LoginForm(AuthenticationForm):
     email = EmailField(widget=forms.EmailInput())
