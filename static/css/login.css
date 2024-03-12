@@ -1,0 +1,177 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+body {
+  min-height: 100%;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+article > * + * {
+  margin-top: 1em;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+body,
+html {
+  height: 100%;
+  width: 100%;
+}
+
+.wrapper {
+  background: rgba(232, 231, 231, 1);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.circle {
+  margin-top: -90px;
+}
+
+.prev {
+  width: 42px;
+  height: auto;
+  color: #001d35;
+  position: absolute;
+  margin-bottom: 600px;
+  margin-right: 1200px;
+}
+
+.circle::before {
+  content: "";
+  position: absolute;
+  margin-top: -23px;
+  margin-left: -90px;
+  display: inline-block;
+  width: 180px; /* Ширина елемента */
+  height: 180px; /* Висота елемента */
+  background: radial-gradient(
+    rgba(123, 26, 198, 0.64) 20%,
+    rgba(232, 231, 231, 0.64) 70%
+  );
+  border-radius: 50%; /* Заокруглення контура для отримання кругової форми */
+}
+
+h1 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 96px;
+  color: rgb(16, 16, 16);
+  margin-left: -30px;
+  position: relative;
+}
+
+h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: 0%;
+  margin-top: -20px;
+  text-align: center;
+}
+
+input {
+  width: 600px;
+  height: 50px;
+  padding-left: 40px;
+  font-size: 20px;
+  border-radius: 15px;
+  border: none;
+  margin-top: 30px;
+  background-color: rgb(217, 217, 217);
+}
+
+input::placeholder {
+  font-family: "Montserrat", sans-serif;
+  color: rgba(113, 113, 113, 1);
+  font-weight: 200;
+  text-rendering: initial;
+  opacity: 70%;
+}
+
+a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 100;
+  position: relative;
+  margin-left: 460px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: rgba(9, 167, 217, 1);
+}
+
+.action {
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  background-color: rgb(123, 26, 198);
+  width: 185px;
+  height: 71px;
+  margin-top: 40px;
+  border: none;
+  border-radius: 20px;
+  color: rgb(232, 231, 231);
+}
+
+h4 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+  margin-top: 60px;
+}
+
+.a_h4 {
+  margin: 0%;
+  position: relative;
+  font-size: 24px;
+}

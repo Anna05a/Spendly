@@ -1,24 +1,41 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-</head>
+    <link rel="stylesheet" href="{%   static 'css/login.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+
 <body>
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+    <div class="wrapper">
+        <img class="prev" src="{%   static 'img/pngwing.com.png' %}" alt="">
+        <div class="circle">
+            <h1>Spendly</h1>
         </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+        <h3>Login</h3>
+           <form method="post">
+               {% csrf_token %}
+        <div class="text_input">
+            <input id="labelmail" type="email" placeholder="Email">
         </div>
-        <button type="submit">Login</button>
-        <a href="{% url 'reset_password' %}">reset password</a>
-    </form>
+
+        <div class="text_input">
+            <input type="password" placeholder="Password">
+        </div>
+
+        <a href="">Forgot password?</a>
+
+        <button class="action">Login</button>
+
+        <h4>Not a member yet? <a class="a_h4" href=""> Sing up</a></h4>
+           </form>
+    </div>
 </body>
+
 </html>
