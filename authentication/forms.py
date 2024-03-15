@@ -1,17 +1,46 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from  django.contrib.auth.models import User
-from django.forms import CharField, EmailField
-
+from django.forms import CharField, EmailField, TextInput
+from django.utils.translation import gettext_lazy as _
 
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+        username = forms.CharField(
+            label=_(""),
+            max_length=30,
+            help_text=None,
+            widget=forms.TextInput(attrs={'placeholder': 'Username'}),
+        )
+        email = forms.EmailField(
+            label="",
+            widget=forms.EmailInput(attrs={'placeholder': 'Email'})
+        )
+        password1 = forms.CharField(
+            label="",
+            widget=forms.PasswordInput(attrs={'placeholder': 'Password'}),
+            help_text=None,
+        )
+        password2 = forms.CharField(
+            label="",
+            widget=forms.PasswordInput(attrs={'placeholder': 'Password confirmation'}),
+            help_text=None,
+        )
 
-    class Meta(UserCreationForm):
-        model = User
-        fields = ['username', 'email', 'password']
+fields = [ 'email']
+
 
 class LoginForm(AuthenticationForm):
-    email = EmailField(widget=forms.EmailInput())
-    password = CharField(widget=forms.PasswordInput())
+    username = forms.CharField(
+        label=_(""),
+        max_length=30,
+        help_text=None,
+        widget=forms.TextInput(attrs={'placeholder': 'Username'}),
+    )
+    password = forms.CharField(
+        label="",
+        widget=forms.PasswordInput(attrs={'placeholder': 'Password'}),
+        help_text=None,
+    )
+    fields = [ 'username', 'password' ]
+
 

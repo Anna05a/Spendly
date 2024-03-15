@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign up</title>
-  <link rel="stylesheet" href="{%   static 'css/sign_up.css' %}">
+  <link rel="stylesheet" href="{%   static 'css/sign_up.css' %}?{% now "U" %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
@@ -19,18 +19,10 @@
       <h1>Spendly</h1>
     </div>
     <h3>Sing up</h3>
-    <form method="post">
-        {% csrf_token %}
-    <div class="text_input">
-      <input id="labelmail" type="email" placeholder="Email">
-    </div>
-
-    <div class="text_input">
-      <input type="password" placeholder="Password">
-    </div>
-
-    <h4>Already have an account? <a href="">Login</a></h4>
-
+      <form method="post">
+          {% csrf_token %}
+        {{ registerForm.as_div }}
+        
     <button class="action">Sign up</button>
 
     <p>_________or_________</p>

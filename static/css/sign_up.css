@@ -136,11 +136,11 @@ h4 {
 
 .action {
   font-family: "Montserrat", sans-serif;
-  font-size: 24px;
-  font-weight: 400;
+  font-size: 19px;
+  font-weight: 300;
   background-color: rgb(123, 26, 198);
-  width: 185px;
-  height: 71px;
+  width: 150px;
+  height: 51px;
   margin-top: 40px;
   border: none;
   border-radius: 20px;
@@ -168,8 +168,8 @@ p {
   cursor: pointer;
   font-family: "Montserrat", sans-serif;
   font-weight: 100;
-  font-size: 24px;
-  height: 62px;
+  font-size: 22px;
+  height: 51px;
   letter-spacing: 1px;
   outline: none;
   overflow: hidden;
@@ -181,7 +181,7 @@ p {
   transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
   vertical-align: middle;
   white-space: nowrap;
-  width: 468px;
+  width: 200px;
   max-width: 400px;
   min-width: min-content;
 }
