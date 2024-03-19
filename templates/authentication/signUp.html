@@ -22,9 +22,9 @@
       <form method="post">
           {% csrf_token %}
         {{ registerForm.as_div }}
-        
+          
     <button class="action">Sign up</button>
-
+    <a href={% url 'login' %}>already have an account?</a>
     <p>_________or_________</p>
 
 

@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="{%   static 'css/login.css' %}">
+    <link rel="stylesheet" href="{%   static 'css/login.css' %}?{% now "U" %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
@@ -14,7 +14,9 @@
 
 <body>
     <div class="wrapper">
-        <img class="prev" src="{%   static 'img/pngwing.com.png' %}" alt="">
+        <a class="prev" href={% url 'sign-up' %}>
+          <img   src={% static "img/pngwing.com.png" %} alt="">
+        </a>
         <div class="circle">
             <h1>Spendly</h1>
         </div>
@@ -22,11 +24,8 @@
            <form method="post">
                {% csrf_token %}
             {{ loginForm.as_p }}
-
-        <a href={% url 'forgot_password' %}>Forgot password?</a>
-
         <button class="action">Login</button>
-
+            <a href={% url 'password_reset' %}>Forgot password?</a>
         <h4>Not a member yet? <a class="a_h4" href={% url 'sign-up' %}> Sing up</a></h4>
            </form>
     </div>

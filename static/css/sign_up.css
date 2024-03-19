@@ -114,7 +114,7 @@ input {
   font-size: 20px;
   border-radius: 15px;
   border: none;
-  margin-top: 30px;
+  margin-top: 20px;
   background-color: rgb(217, 217, 217);
 }
 
@@ -124,6 +124,16 @@ input::placeholder {
   font-weight: 200;
   text-rendering: initial;
   opacity: 70%;
+}
+
+a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 100;
+  position: relative;
+  margin-left: 250px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: rgba(9, 167, 217, 1);
 }
 
 h4 {
@@ -154,6 +164,7 @@ p {
   font-weight: 300;
   margin-bottom: 40px;
   margin-top: 10px;
+  text-align: center;
 }
 
 .gsi-material-button {
@@ -175,6 +186,7 @@ p {
   overflow: hidden;
   padding: 0 12px;
   position: relative;
+  margin-left: 145px;
   text-align: center;
   -webkit-transition: background-color 0.218s, border-color 0.218s,
     box-shadow 0.218s;
@@ -190,6 +202,7 @@ p {
   height: 35px;
   margin-left: 10px;
   margin-right: 5px;
+
   min-width: 20px;
   width: 34px;
 }

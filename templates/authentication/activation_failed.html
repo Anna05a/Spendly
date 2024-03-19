@@ -1,18 +1,17 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verification</title>
-    <link rel="stylesheet" href={% static "css/verification.css" %}>
+     <link rel="stylesheet" href={% static "css/verification.css" %}?{% now "U" %}>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
-
+    <title>this link been used </title>
+</head>
 <body>
+
     <div class="wrapper">
         
         <div class="header">
@@ -20,20 +19,9 @@
                 <h1>Spendly</h1>
             </div>
 
-            <h3>Verification</h3>
+    <h3>This link has already used! Try another one
+    </h3>
         </div>
-        <div class="verification">
-            <h2>Check your inbox</h2>
-            <div class="code">
-            </div>
-                     <h4>We send verification link to your email <br>
-                <span>{{ email }}</span>.
-            </h4>
-        </div>
-        
-        <button class="action">Sign up</button>
-
     </div>
 </body>
-
 </html>

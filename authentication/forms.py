@@ -1,5 +1,7 @@
+import self
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, SetPasswordForm, PasswordResetForm
 from  django.contrib.auth.models import User
 from django.forms import CharField, EmailField, TextInput
 from django.utils.translation import gettext_lazy as _
@@ -25,8 +27,9 @@ class RegistrationForm(UserCreationForm):
             widget=forms.PasswordInput(attrs={'placeholder': 'Password confirmation'}),
             help_text=None,
         )
-
-fields = [ 'email']
+        class Meta:
+            model = User
+            fields = ('username','email','password1', 'password2')
 
 
 class LoginForm(AuthenticationForm):
@@ -43,4 +46,11 @@ class LoginForm(AuthenticationForm):
     )
     fields = [ 'username', 'password' ]
 
-
+class ResetPassword(PasswordResetForm):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.fields['new_password1'].widget.attrs.attrs['placeholder']= 'Password'
+            self.fields['new_password2'].widget.attrs.update['placeholder']='Password Confirmation'
+        class Meta:
+            model = get_user_model()
+            fields = ("new_password1", "new_password2")
