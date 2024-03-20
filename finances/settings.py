@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-!4=(0c6825!0pqj5_tst%8nhx!y*!eyrzs7)n=7a0-_491op=)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     "main.apps.MainConfig",
     "authentication.apps.AuthenticationConfig",
     'allauth',
-    'allauth.account'
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware'
+    'allauth.account.middleware.AccountMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'finances.urls'
@@ -75,6 +78,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'finances.wsgi.application'
 
+AUTHENTICATION_BACKENDS = [
+     'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -132,6 +138,8 @@ STATICFILES_DIRS=[
     BASE_DIR / 'static'
 ]
 
+LOGIN_REDIRECT_URL = '/'
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
@@ -140,3 +148,20 @@ EMAIL_HOST_USER ='spendly0@gmail.com'
 DEFAULT_FROM_EMAIL = 'spendly0@gmail.com'
 EMAIL_HOST_PASSWORD ='yuav rgoq vyue cazd'
 #PASSWORD_RESET_TIMEOUT=14400
+
+#client_id=1092548556919-jq86hubuusgofevuccq95drlkub4gteo.apps.googleusercontent.com
+#client_secret=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
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    }
+}

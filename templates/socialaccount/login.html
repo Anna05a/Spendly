@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+    <link rel="stylesheet" href={% static "css/verification.css" %}>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+
+<body>
+    <div class="wrapper">
+        
+        <div class="header">
+            <div class="circle">
+                <h1>Spendly</h1>
+            </div>
+
+            <h3>Sign In Via Google</h3>
+        </div>
+        <div class="verification">
+            <div class="code">
+            </div>
+                     <h4>You are about to sign in using a third-party account from Google.<br>
+            </h4>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+        <button class="action">Continue</button>
+        </form>
+    </div>
+</body>
+
+</html>

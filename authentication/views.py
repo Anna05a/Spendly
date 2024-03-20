@@ -56,7 +56,7 @@ def login_user(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('home')
+    return redirect('login')
 
 def reset_password(request):
 
@@ -83,7 +83,7 @@ def activate(request, uidb64, token):
 
 
 def activate_email(request, user, to_email):
-    subject = 'Activate your account'
+    subject = 'Activate your accounts'
     message=render_to_string('authentication/account_activation.html',{
         'user': user.username,
         'domain':get_current_site(request).domain,
@@ -93,33 +93,6 @@ def activate_email(request, user, to_email):
 
     email = EmailMessage(subject, message,to=[to_email])
     if email.send():
-        messages.success(request, f'Please, check your email <b>{to_email}</b> and click on link below to activate your account.')
+        messages.success(request, f'Please, check your email <b>{to_email}</b> and click on link below to activate your accounts.')
     else:
         messages.error(request, f'There is a problem with sending an email. Please, check if you typed it correctly')
-
-#def send_password_reset_email(request, user, to_email):
- #   subject='Reset your password'
-  #  message=render_to_string('authentication/password_reset_email.html', {
-   #     'user':user.username,
-    #    'domain':get_current_site(request).domain,
-     #   'uid':urlsafe_base64_encode(),
-      #  'token':PasswordResetTokenGenerator.make_token(user),
-       # 'protocol': 'https' if request.is_secure() else 'http' })
-
-#    email=EmailMessage(subject, message, to=[to_email])
- #   if email.send():
-  #      messages.success(request, f'Please, check your email <b>{to_email}</b> and click on link below to reset your password.')
-   # else:
-    #    messages.error(request, f'There is a problem with sending an email. Please, check if you typed it correctly')
-
-def reset_password(request):
-    if request.method == 'POST':
-        form = MyPasswordResetForm(request.POST)  # Validate submitted data
-        if form.is_valid():
-            # Handle successful form submission (e.g., save new password)
-            pass
-    else:
-        form = MyPasswordResetForm()  # Create an empty form
-
-    context = {'form': form}
-    return render(request, 'reset_password.html', context)

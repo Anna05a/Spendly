@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,16 +20,16 @@
       <h1>Spendly</h1>
     </div>
     <h3>Sing up</h3>
-      <form method="post">
+    <form method="post">
           {% csrf_token %}
         {{ registerForm.as_div }}
           
-    <button class="action">Sign up</button>
-    <a href={% url 'login' %}>already have an account?</a>
-    <p>_________or_________</p>
-
-
-    <button class="gsi-material-button">
+ 
+     <a href={% url 'login' %}>already have an account?</a>  
+       <br> <button class="action">Sign up</button>
+    <p class="or">_________or_________</p>
+    <a href="{% provider_login_url 'google' %}?next=/">
+       <br> <button type="button" class="gsi-material-button">
       <div class="gsi-material-button-state"></div>
       <div class="gsi-material-button-content-wrapper">
         <div class="gsi-material-button-icon">
@@ -53,7 +54,8 @@
         <span style="display: none;">Continue with Google</span>
       </div>
     </button>
-
+    </a>
+        
     </form>
   </div>
 </body>
