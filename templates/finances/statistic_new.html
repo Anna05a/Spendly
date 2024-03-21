@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistic/new</title>
+    <link rel="stylesheet" href="statistic_new.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="menu">
+            <div class="circle">
+                <h1>Spendly</h1>
+            </div>
+            <div class="top">
+                <button class="button_menu pasive">
+                    <img src="./img/main_page.png" alt="">
+                    <span>Main page</span>
+                </button>
+
+                <button class="button_menu active">
+                    <img src="./img/statistics.png" alt="">
+                    <span>Statistic</span>
+                </button>
+            </div>
+
+            <div class="bottom">
+                <button class="button_menu pasive">
+                    <img src="./img/clear.svg" alt="">
+                    <span>Clear history</span>
+                </button>
+
+                <button class="button_menu pasive">
+                    <img src="./img/delete.png" alt="">
+                    <span>Delete account</span>
+                </button>
+
+                <button class="button_menu pasive">
+                    <img src="./img/log_out.svg" alt="">
+                    <span>Log out</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="main">
+
+            <header>
+
+                <h2>Statistic</h2>
+
+                <button class="notification">
+                    <img src="./img/notification.png" alt="">
+                </button>
+
+            </header>
+
+            <div class="comparison_chart">
+                <div class="header_chart">
+                    <h3>Comparison Chart</h3>
+
+                    <button class="calendar" id="datepicker">
+                        <span>January - February, 2024</span>
+                        <img src="./img/calendar.svg.png" alt="">
+                    </button>
+                </div>
+
+                <hr>
+
+                <div class="diagram">
+                    <canvas id="myChart"></canvas>
+                </div>
+
+                <div class="diagram_buttons">
+                    <button class="prev">
+                        <img src="./img/next.png" alt="">
+                    </button>
+
+                    <button class="next">
+                        <img src="./img/next.png" alt="">
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="financial_and_category_container">
+
+                <div class="financial_and_category left">
+                    <div class="header_financeal_and_category">
+                        <h3>Financial Breakdown</h3>
+                        <div class="dropdown">
+                            <button class="dropbtn">
+                                <span class="button_content">
+                                    <span class="button_text">Month</span>
+                                    <img class="button_img" src="./img/next.png" alt="">
+                                </span>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="#">Day</a>
+                                <a href="#">Week</a>
+                                <a href="#">Month</a>
+                                <a href="#">Year</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="diagram_wrapper">
+
+                        <div class="diagram_doughnut">
+                            <canvas id="myDoughnutChart"></canvas>
+                        </div>
+                        <div class="diagram_text">
+                            <div class="text_diagram">
+                                <p>Total Revenue <br>
+                                    <span>UAH 0</span> %
+                                </p>
+                            </div>
+
+                            <div class="text_diagram">
+                                <p>Total Expense <br>
+                                    <span>UAH 0</span> %
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="financial_and_category right">
+                    <div class="header_financeal_and_category">
+                        <h3>Category rating</h3>
+
+                        <div class="dropdown">
+                            <button class="dropbtn">
+                                <span class="button_content">
+                                    <span class="button_text">Month</span>
+                                    <img class="button_img" src="./img/next.png" alt="">
+                                </span>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="#">Day</a>
+                                <a href="#">Week</a>
+                                <a href="#">Month</a>
+                                <a href="#">Year</a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <h4>You don't use any category yet</h4>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
+
+    <script>
+        //реалізація календаря
+        document.addEventListener('DOMContentLoaded', function () {
+            var picker = new Litepicker({
+                element: document.getElementById('datepicker'),
+                singleMode: false,
+                autoApply: true,
+            });
+        });
+
+
+        //diagram
+        const ctx = document.getElementById('myChart').getContext('2d');
+
+        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: 'Продажі',
+                data: [100, 120, 150, 180, 200, 220, 250, 280, 300, 320, 350, 380],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 199, 132, 0.2)',
+                    'rgba(102, 255, 178, 0.2)',
+                    'rgba(128, 128, 128, 0.2)',
+                    'rgba(0, 0, 0, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(255, 199, 132, 1)',
+                    'rgba(102, 255, 178, 1)',
+                    'rgba(128, 128, 128, 1)',
+                    'rgba(0, 0, 0, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        //donut diagram
+        const newdata = {
+            labels: [
+                'Red',
+                'Blue',
+                'Yellow'
+            ],
+            datasets: [{
+                label: 'My First Dataset',
+                data: [300, 50, 100],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)'
+                ],
+                hoverOffset: 4
+            }]
+        };
+
+        const config = {
+            type: 'doughnut',
+            data: newdata,
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('myDoughnutChart').getContext('2d'); // Змінено id на myDoughnutChart
+            new Chart(ctx, config);
+        });
+
+
+        //кнопка для обирання day/week/month/year
+        document.addEventListener("DOMContentLoaded", function () {
+    var dropbtns = document.querySelectorAll(".dropbtn"); // Змінили на querySelectorAll для знаходження всіх кнопок
+
+    dropbtns.forEach(function (dropbtn) { // Використовуємо forEach для ітерації по кожній кнопці
+        var dropdownContent = dropbtn.nextElementSibling; // Знаходимо наступний елемент після кнопки, який є випадаючим списком
+
+        dropbtn.addEventListener("click", function () {
+            dropdownContent.classList.toggle("show");
+        });
+
+        var menuItems = dropdownContent.getElementsByTagName("a");
+        for (var i = 0; i < menuItems.length; i++) {
+            menuItems[i].addEventListener("click", function () {
+                var buttonText = this.textContent; // Отримуємо текст кнопки
+                var buttonImg = this.querySelector("img");
+                var buttonImgSrc = buttonImg ? buttonImg.getAttribute("src") : null;
+                dropbtn.querySelector(".button_text").textContent = buttonText; // Встановлюємо текст кнопки
+                var img = dropbtn.querySelector(".button_img");
+                if (buttonImgSrc) {
+                    img.setAttribute("src", buttonImgSrc);
+                    img.style.display = "inline"; // Показуємо зображення, якщо воно є
+                } else {
+                    img.style.display = "none"; // Ховаємо зображення, якщо його немає
+                }
+                dropdownContent.classList.remove("show");
+            });
+        }
+    });
+});
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
