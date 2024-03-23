@@ -23,12 +23,11 @@
     <form method="post">
           {% csrf_token %}
         {{ registerForm.as_div }}
-          
  
      <a href={% url 'login' %}>already have an account?</a>  
        <br> <button class="action">Sign up</button>
     <p class="or">_________or_________</p>
-    <a href="{% provider_login_url 'google' %}?next=/">
+    <a href="{% provider_login_url 'google' %}?next=/home">
        <br> <button type="button" class="gsi-material-button">
       <div class="gsi-material-button-state"></div>
       <div class="gsi-material-button-content-wrapper">

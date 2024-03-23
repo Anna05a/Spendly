@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main page/new</title>
-    <link rel="stylesheet" href="main_new.css">
+    <link rel="stylesheet" href="{%  static 'css/main_new.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
@@ -19,30 +20,34 @@
                 <h1>Spendly</h1>
             </div>
             <div class="top">
+              <a href={% url 'home' %}>
                 <button class=" button_menu active">
-                    <img src="./img/main_page.png" alt="">
+                    <img src={% static "img/main_page.png" %} alt="">
                     <span>Main page</span>
                 </button>
-
+              </a>  
+                
+              <a href={% url 'statistics' %}>
                 <button class="button_menu pasive">
-                    <img src="./img/statistics.png" alt="">
+                    <img src={% static "img/statistics.png" %} alt="">
                     <span>Statistic</span>
                 </button>
+              </a>
             </div>
 
             <div class="bottom">
                 <button class="button_menu pasive">
-                    <img src="./img/clear.svg" alt="">
+                    <img src={% static "img/clear.svg" %} alt="">
                     <span>Clear history</span>
                 </button>
 
                 <button class="button_menu pasive">
-                    <img src="./img/delete.png" alt="">
+                    <img src={% static "img/delete.png" %} alt="">
                     <span>Delete account</span>
                 </button>
 
                 <button class="button_menu pasive">
-                    <img src="./img/log_out.svg" alt="">
+                    <img src={% static "img/log_out.svg" %} alt="">
                     <span>Log out</span>
                 </button>
             </div>
@@ -56,7 +61,7 @@
                 <h2>Main page</h2>
 
                 <button class="notification">
-                    <img src="./img/notification.png" alt="">
+                    <img src={% static "img/notification.png" %} alt="">
                 </button>
 
             </header>
@@ -84,7 +89,7 @@
 
                     <button class="calendar" id="datepicker">
                         <span>January - February, 2024</span>
-                        <img src="./img/calendar.svg.png" alt="">
+                        <img src={% static "img/calendar.svg.png" %} alt="">
                     </button>
 
                 </div>
@@ -104,7 +109,7 @@
             <dialog .my_modal>
 
                 <div class="dialog_header">
-                    <button id="closeDialog" class="close"><img src="./img/pngwing.com.png" alt=""></button>
+                    <button id="closeDialog" class="close"><img src={% static "img/pngwing.com.png" %} alt=""></button>
                     <h4>Add category</h4>
                 </div>
                 <hr>
@@ -113,12 +118,12 @@
 
                     <div class="two_buttons">
                         <button class="button_category" style="border: 2px solid rgba(16, 176, 80, 1);" >
-                            <img src="./img/shopping.svg" alt="">
+                            <img src={% static "img/shopping.svg" %} alt="">
                             <span>Shopping</span>
                         </button>
 
                         <button class="button_category" style="border: 2px solid rgba(207, 211, 18, 1);">
-                            <img src="./img/cafe.svg" alt="">
+                            <img src={% static "img/cafe.svg" %}alt="">
                             <span>Cafe</span>
                         </button>
                     </div>
@@ -126,12 +131,12 @@
 
                     <div class="two_buttons">
                         <button class="button_category" style="border: 2px solid rgba(15, 161, 208, 1);">
-                            <img src="./img/transport.png" alt="">
+                            <img src={% static "img/transport.png" %} alt="">
                             <span>Transport</span>
                         </button>
 
                         <button class="button_category" style="border: 2px solid rgba(154, 16, 176, 1)">
-                            <img src="./img/subscription.svg" alt="">
+                            <img src={% static "img/subscription.svg" %} alt="">
                             <span>Subscription</span>
                         </button>
                     </div>
@@ -139,12 +144,12 @@
 
                     <div class="two_buttons">
                         <button class="button_category" style="border: 2px solid rgba(253, 74, 160, 1)">
-                            <img src="./img/food.png" alt="">
+                            <img src={%  static "img/food.png" %} alt="">
                             <span>Food</span>
                         </button>
 
                         <button class="button_category" style="border: 2px solid rgba(211, 18, 18, 1)">
-                            <img src="./img/utility_bils.png" alt="">
+                            <img src={% static "img/utility_bils.png" %} alt="">
                             <span>Utility bills</span>
                         </button>
                     </div>

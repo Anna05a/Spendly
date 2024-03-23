@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statistic/new</title>
-    <link rel="stylesheet" href="statistic_new.css">
+    <link rel="stylesheet" href={% static "css/statistic_new.css" %}>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
@@ -18,31 +19,36 @@
             <div class="circle">
                 <h1>Spendly</h1>
             </div>
+            
             <div class="top">
+                <a href={% url 'home' %}>
                 <button class="button_menu pasive">
-                    <img src="./img/main_page.png" alt="">
+                    <img src={% static "img/main_page.png"  %} alt="">
                     <span>Main page</span>
                 </button>
-
+                </a>
+                
+              <a href={% url 'statistics' %}>
                 <button class="button_menu active">
-                    <img src="./img/statistics.png" alt="">
+                    <img src={% static "img/statistics.png"  %} alt="">
                     <span>Statistic</span>
                 </button>
+              </a>
             </div>
 
             <div class="bottom">
                 <button class="button_menu pasive">
-                    <img src="./img/clear.svg" alt="">
+                    <img src={% static "img/clear.svg"  %} alt="">
                     <span>Clear history</span>
                 </button>
 
                 <button class="button_menu pasive">
-                    <img src="./img/delete.png" alt="">
+                    <img src={% static "img/delete.png"  %} alt="">
                     <span>Delete account</span>
                 </button>
 
                 <button class="button_menu pasive">
-                    <img src="./img/log_out.svg" alt="">
+                    <img src={% static "img/log_out.svg"  %} alt="">
                     <span>Log out</span>
                 </button>
             </div>
@@ -56,7 +62,7 @@
                 <h2>Statistic</h2>
 
                 <button class="notification">
-                    <img src="./img/notification.png" alt="">
+                    <img src={% static "img/notification.png"  %} alt="">
                 </button>
 
             </header>
@@ -67,7 +73,7 @@
 
                     <button class="calendar" id="datepicker">
                         <span>January - February, 2024</span>
-                        <img src="./img/calendar.svg.png" alt="">
+                        <img src={% static "img/calendar.svg.png"  %} alt="">
                     </button>
                 </div>
 
@@ -79,11 +85,11 @@
 
                 <div class="diagram_buttons">
                     <button class="prev">
-                        <img src="./img/next.png" alt="">
+                        <img src={% static "img/next.png"  %} alt="">
                     </button>
 
                     <button class="next">
-                        <img src="./img/next.png" alt="">
+                        <img src={% static "img/next.png"  %} alt="">
                     </button>
                 </div>
 
@@ -98,7 +104,7 @@
                             <button class="dropbtn">
                                 <span class="button_content">
                                     <span class="button_text">Month</span>
-                                    <img class="button_img" src="./img/next.png" alt="">
+                                    <img class="button_img" src={% static "img/next.png"  %} alt="">
                                 </span>
                             </button>
                             <div class="dropdown-content">
@@ -143,7 +149,7 @@
                             <button class="dropbtn">
                                 <span class="button_content">
                                     <span class="button_text">Month</span>
-                                    <img class="button_img" src="./img/next.png" alt="">
+                                    <img class="button_img" src={% static "img/next.png"  %} alt="">
                                 </span>
                             </button>
                             <div class="dropdown-content">

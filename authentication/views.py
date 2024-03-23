@@ -37,6 +37,7 @@ def sign_up(request):
         form = RegistrationForm()
     context = {'registerForm': form}
     return render(request, 'authentication/signUp.html', context)
+
 def login_user(request):
     form = LoginForm()
     if request.method == 'POST':
@@ -80,7 +81,6 @@ def activate(request, uidb64, token):
         return redirect(reverse('login'))
 
     return render(request, 'authentication/activation_failed.html', {"user": user})
-
 
 def activate_email(request, user, to_email):
     subject = 'Activate your accounts'

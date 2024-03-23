@@ -26,13 +26,13 @@
                {% csrf_token %}
                 {{ loginForm.as_p }}
                <a href={% url 'password_reset' %}>Forgot password?</a>
-               
+
               <br> <button class="action">Login</button>
 
-        <h4>Not a member yet? 
+        <h4>Not a member yet?
             <a class="a_h4" href={% url 'sign-up' %}> Sing up </a>
               <br><p>_________or_________</p>
-            <a href={% provider_login_url 'google' %}?next=/><br>
+            <a href={% provider_login_url 'google' %}?next=/home><br>
        <button type="button" class="gsi-material-button">
       <div class="gsi-material-button-state"></div>
       <div class="gsi-material-button-content-wrapper">
