@@ -1,24 +1,16 @@
-
 from django.contrib import messages
-from django.core.exceptions import ValidationError
 from django.urls import reverse
-from django.views import View
 
-import username
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, SetPasswordForm
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from validate_email import validate_email
 
-from finances import settings
 from .tokens import account_activation_token
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
-from . forms import RegistrationForm, LoginForm, ResetPassword
-from django.contrib.auth import login, authenticate, logout, get_user_model
+from . forms import RegistrationForm, LoginForm
+from django.contrib.auth import authenticate, logout
 from django.contrib.auth.models import auth, User
 
 
@@ -28,9 +20,8 @@ def sign_up(request):
         if form.is_valid():
             user=form.save(commit=False)
             user.is_active = False
-            user.save()
-
             activate_email(request, user, form.cleaned_data.get('email'))
+            user.save()
             return render(request,'authentication/verification.html',{'email':request.POST.get('email')})
 
     else:
@@ -46,7 +37,6 @@ def login_user(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
             user=authenticate(request, username=username, password=password)
-
 
             if user is not None:
                 auth.login(request, user)
@@ -65,21 +55,18 @@ def reset_password(request):
 
 def activate(request, uidb64, token):
     try:
-        uid = force_str(urlsafe_base64_decode(uidb64))
+        uid = force_str(urlsafe_base64_decode(uidb64))   #декодування uid з формату base64, та надавання гарантії що це буде рядком
 
-        user = User.objects.get(pk=uid)
+        user = User.objects.get(pk=uid)   #отримаємо pk (первинний ключ) з моделі та впевнюємося що він дорівнює uid
 
     except Exception as e:
         user = None
 
-    if user and account_activation_token.check_token(user, token):
+    if user and account_activation_token.check_token(user, token): #перевіряє чи користувач існує та чи токен дійсний
         user.is_active = True
-        user.save()
-
-        messages.add_message(request, messages.SUCCESS,
-                             'Email verified, you can now login')
+        #user.save()
+        messages.add_message(request, messages.SUCCESS,'Email verified, you can now login')
         return redirect(reverse('login'))
-
     return render(request, 'authentication/activation_failed.html', {"user": user})
 
 def activate_email(request, user, to_email):
