@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main page</title>
+    <link rel="stylesheet" href="main_page.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="overlay"></div>
+    <div class="wrapper">
+        <div class="menu">
+            <div class="circle">
+                <h1>Spendly</h1>
+            </div>
+            <div class="top">
+                <button class=" button_menu active">
+                    <img src="./img/main_page.png" alt="">
+                    <span>Main page</span>
+                </button>
+
+                <button class="button_menu pasive">
+                    <img src="./img/statistics.png" alt="">
+                    <span>Statistic</span>
+                </button>
+            </div>
+
+            <div class="bottom">
+                <button class="button_menu pasive" id="openDialogClear">
+                    <img src="./img/clear.svg" alt="">
+                    <span>Clear history</span>
+                </button>
+
+                <button class="button_menu pasive" id="openDialogDelete">
+                    <img src="./img/delete.png" alt="">
+                    <span>Delete account</span>
+                </button>
+
+                <button class="button_menu pasive" id="openLogOut">
+                    <img src="./img/log_out.svg" alt="">
+                    <span>Log out</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="main">
+
+            <header>
+
+                <h2>Main page</h2>
+
+                <button class="notification">
+                    <img src="./img/notification.png" alt="">
+
+                </button>
+                <div class="red_circle" style="border-color: aliceblue; border: 2px;"></div>
+
+            </header>
+
+            <div class="accounts_cards">
+
+                <h3>Accounts & Cards</h3>
+                <hr>
+                <div class="wrapper_cards">
+                    <div class="card">
+                        <div class="card_top">
+                            <h2>Universal card</h2>
+                            <img src="./img/visa.png" alt="">
+                        </div>
+
+                        <div class="balance">
+                            <h2>UAH 4700</h2>
+                        </div>
+
+                        <div class="bank_account_number">
+                            <p>**** **** **** 8467</p>
+                        </div>
+
+                    </div>
+                    <div class="card">
+                        <div class="card_top">
+                            <h2>Universal card</h2>
+                            <img src="./img/visa.png" alt="">
+                        </div>
+
+                        <div class="balance">
+                            <h2>UAH 570</h2>
+                        </div>
+
+                        <div class="bank_account_number">
+                            <p>**** **** **** 7835</p>
+                        </div>
+
+                    </div>
+
+                    <div class="plus">
+                        <button class="button_plus">+</button>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="categories">
+
+                <h3>Categories</h3>
+                <hr>
+
+                <div class="buttons">
+
+                    <button id="openDialog" class="mini_plus">+</button>
+
+                    <button class="calendar" id="datepicker">
+                        <span>January - February, 2024</span>
+                        <img src="./img/calendar.svg.png" alt="">
+                    </button>
+
+                </div>
+                <div class="diaram_and_inf">
+                    <div class="diagram">
+                        <canvas id="myChart"></canvas>
+                    </div>
+
+                    <div class="categories_inf">
+                        <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
+                            <img src="./img/shopping.svg" alt="">
+                            <span>Shopping</span>
+                            <h6>- UAH 360</h6>
+                        </div>
+                        <div class="category" style="border: 2px solid rgba(207, 211, 18, 1);">
+                            <img src="./img/cafe.svg" alt="">
+                            <span>Cafe</span>
+                            <h6>- UAH 550</h6>
+                        </div>
+                        <div class="category" style="border: 2px solid rgba(15, 161, 208, 1);">
+                            <img src="./img/transport.png" alt="">
+                            <span>Transport</span>
+                            <h6>- UAH 20</h6>
+                        </div>
+                        <button class="scroll">
+                            <img src="./img/next.png" alt="">
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- діалогове вікно вибір категорій -->
+            <dialog id="choseCategory" class="choseCategory">
+
+                <div class="dialog_header">
+                    <button id="closeDialogCategory" class="close"><img src="./img/pngwing.com.png" alt=""></button>
+                    <h4>Add category</h4>
+                </div>
+                <hr>
+                <h5>Choose category:</h5>
+                <div class="buttons_category">
+
+                    <div class="two_buttons">
+                        <button class="button_category" style="border: 2px solid rgba(16, 176, 80, 1);">
+                            <img src="./img/shopping.svg" alt="">
+                            <span>Shopping</span>
+                        </button>
+
+                        <button class="button_category" style="border: 2px solid rgba(207, 211, 18, 1);">
+                            <img src="./img/cafe.svg" alt="">
+                            <span>Cafe</span>
+                        </button>
+                    </div>
+
+
+                    <div class="two_buttons">
+                        <button class="button_category" style="border: 2px solid rgba(15, 161, 208, 1);">
+                            <img src="./img/transport.png" alt="">
+                            <span>Transport</span>
+                        </button>
+
+                        <button class="button_category" style="border: 2px solid rgba(154, 16, 176, 1)">
+                            <img src="./img/subscription.svg" alt="">
+                            <span>Subscription</span>
+                        </button>
+                    </div>
+
+
+                    <div class="two_buttons">
+                        <button class="button_category" style="border: 2px solid rgba(253, 74, 160, 1)">
+                            <img src="./img/food.png" alt="">
+                            <span>Food</span>
+                        </button>
+
+                        <button class="button_category" style="border: 2px solid rgba(211, 18, 18, 1)">
+                            <img src="./img/utility_bils.png" alt="">
+                            <span>Utility bills</span>
+                        </button>
+                    </div>
+
+
+                </div>
+
+                <button class="add">Add</button>
+
+
+            </dialog>
+
+            <!-- діалогове вікно "Очищення історії" -->
+            <dialog id="clearHistory" class="clearHistory">
+                <div class="dialog_header">
+                    <button id="closeDialogClear" class="close">
+                        <img src="./img/pngwing.com.png" alt="">
+                    </button>
+                    <h4>Warning</h4>
+                </div>
+                <hr>
+                <div class="сontent">
+                    <p>You really want to clear history?</p>
+                    <button>Clear</button>
+                </div>
+            </dialog>
+
+            <!-- діалогове вікно "Видалення акаунту" -->
+            <dialog id="deleteAcount" class="deleteAcount">
+                <div class="dialog_header">
+                    <button id="closeDialogDelete" class="close">
+                        <img src="./img/pngwing.com.png" alt="">
+                    </button>
+                    <h4>Warning</h4>
+                </div>
+                <hr>
+                <div class="сontent">
+                    <p>You really want to delete your account?</p>
+                    <button>Delete</button>
+                </div>
+            </dialog>
+
+            <!-- діалогове вікно "Вихід з акаунту" -->
+            <dialog id="logOut" class="logOut">
+                <div class="dialog_header">
+                    <button id="closeDialogLogOut" class="close">
+                        <img src="./img/pngwing.com.png" alt="">
+                    </button>
+                    <h4>Warning</h4>
+                </div>
+                <hr>
+                <div class="сontent">
+                    <p>You really want to log out of your account?</p>
+                    <button>Log out</button>
+                </div>
+            </dialog>
+
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
+
+    <script>
+        //diagram
+        const data = {
+            labels: [
+                'Red',
+                'Blue',
+                'Yellow'
+            ],
+            datasets: [{
+                label: 'My First Dataset',
+                data: [300, 50, 100],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)'
+                ],
+                hoverOffset: 4
+            }]
+        };
+
+        const config = {
+            type: 'doughnut',
+            data: data,
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, config);
+        });
+
+
+        //реалізація модального вікна з можливістю обрати категорії
+        document.querySelector('#openDialog').onclick = function () {
+            document.body.classList.add('dialog-open');
+            document.querySelector('.overlay').style.display = 'block';
+            document.getElementById('choseCategory').showModal();
+        }
+        document.querySelector('#closeDialogCategory').onclick = function () {
+            document.body.classList.remove('dialog-open');
+            document.querySelector('.overlay').style.display = 'none';
+            document.getElementById('choseCategory').close();
+        }
+
+
+        //діалогове вікно очищення історії
+        document.querySelector('#openDialogClear').onclick = function () {
+            document.body.classList.add('dialog-open');
+            document.querySelector('.overlay').style.display = 'block';
+            document.getElementById('clearHistory').showModal();
+        }
+
+        document.querySelector('#closeDialogClear').onclick = function () {
+            document.body.classList.remove('dialog-open');
+            document.querySelector('.overlay').style.display = 'none';
+            document.getElementById('clearHistory').close();
+        }
+
+        //діалогове вікно видалення акаунта
+        document.querySelector('#openDialogDelete').onclick = function () {
+            document.body.classList.add('dialog-open');
+            document.querySelector('.overlay').style.display = 'block';
+            document.getElementById('deleteAcount').showModal();
+        }
+
+        document.querySelector('#closeDialogDelete').onclick = function () {
+            document.body.classList.remove('dialog-open');
+            document.querySelector('.overlay').style.display = 'none';
+            document.getElementById('deleteAcount').close();
+        }
+
+        //діалогове вікно "вийти з акаунта"
+        document.querySelector('#openLogOut').onclick = function () {
+            document.body.classList.add('dialog-open');
+            document.querySelector('.overlay').style.display = 'block';
+            document.getElementById('logOut').showModal();
+        }
+
+        document.querySelector('#closeDialogLogOut').onclick = function () {
+            document.body.classList.remove('dialog-open');
+            document.querySelector('.overlay').style.display = 'none';
+            document.getElementById('logOut').close();
+        }
+
+        //реалізація календаря
+        document.addEventListener('DOMContentLoaded', function () {
+            var picker = new Litepicker({
+                element: document.getElementById('datepicker'),
+                singleMode: false,
+                autoApply: true,
+            });
+        });
+
+    </script>
+</body>
+
+</html>
