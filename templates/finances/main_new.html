@@ -46,10 +46,12 @@
                     <span>Delete account</span>
                 </button>
 
+                <a href={% url 'logout' %}>
                 <button class="button_menu pasive">
                     <img src={% static "img/log_out.svg" %} alt="">
                     <span>Log out</span>
                 </button>
+                </a>
             </div>
 
         </div>
@@ -123,7 +125,7 @@
                         </button>
 
                         <button class="button_category" style="border: 2px solid rgba(207, 211, 18, 1);">
-                            <img src={% static "img/cafe.svg" %}alt="">
+                            <img src={% static "img/cafe.svg" %} alt="">
                             <span>Cafe</span>
                         </button>
                     </div>

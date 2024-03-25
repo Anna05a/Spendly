@@ -49,6 +49,11 @@ def logout(request):
     auth.logout(request)
     return redirect('login')
 
+def delete_user(request):
+    user = request.user
+    user.delete()
+    redirect('sign-up')
+
 def reset_password(request):
 
    return render(request, 'authentication')

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main page</title>
-    <link rel="stylesheet" href="main_page.css">
+    <link rel="stylesheet" href="{%  static 'css/main_page.css' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,29 +23,29 @@
             </div>
             <div class="top">
                 <button class=" button_menu active">
-                    <img src="./img/main_page.png" alt="">
+                    <img src={% static "img/main_page.png" %} alt="">
                     <span>Main page</span>
                 </button>
 
                 <button class="button_menu pasive">
-                    <img src="./img/statistics.png" alt="">
+                     <img src={% static "img/statistics.png" %} alt="">
                     <span>Statistic</span>
                 </button>
             </div>
 
             <div class="bottom">
                 <button class="button_menu pasive" id="openDialogClear">
-                    <img src="./img/clear.svg" alt="">
+                    <img src={% static "img/clear.svg" %} alt="">
                     <span>Clear history</span>
                 </button>
 
                 <button class="button_menu pasive" id="openDialogDelete">
-                    <img src="./img/delete.png" alt="">
+                    <img src={% static "img/delete.png" %} alt="">
                     <span>Delete account</span>
                 </button>
 
                 <button class="button_menu pasive" id="openLogOut">
-                    <img src="./img/log_out.svg" alt="">
+                    <img src={% static "img/log_out.svg" %} alt="">
                     <span>Log out</span>
                 </button>
             </div>
@@ -58,7 +59,7 @@
                 <h2>Main page</h2>
 
                 <button class="notification">
-                    <img src="./img/notification.png" alt="">
+                    <img src={% static "img/notification.png" %} alt="">
 
                 </button>
                 <div class="red_circle" style="border-color: aliceblue; border: 2px;"></div>
@@ -73,7 +74,7 @@
                     <div class="card">
                         <div class="card_top">
                             <h2>Universal card</h2>
-                            <img src="./img/visa.png" alt="">
+                            <img src={%  static "img/visa.png" %} alt="">
                         </div>
 
                         <div class="balance">
@@ -88,7 +89,7 @@
                     <div class="card">
                         <div class="card_top">
                             <h2>Universal card</h2>
-                            <img src="./img/visa.png" alt="">
+                            <img src={%  static "img/visa.png" %} alt="">
                         </div>
 
                         <div class="balance">
@@ -120,7 +121,7 @@
 
                     <button class="calendar" id="datepicker">
                         <span>January - February, 2024</span>
-                        <img src="./img/calendar.svg.png" alt="">
+                        <img src={% static "img/calendar.svg.png" %} alt="">
                     </button>
 
                 </div>
@@ -131,22 +132,22 @@
 
                     <div class="categories_inf">
                         <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
-                            <img src="./img/shopping.svg" alt="">
+                            <img src={% static "img/shopping.svg" %} alt="">
                             <span>Shopping</span>
                             <h6>- UAH 360</h6>
                         </div>
                         <div class="category" style="border: 2px solid rgba(207, 211, 18, 1);">
-                            <img src="./img/cafe.svg" alt="">
+                            <img src={% static "img/cafe.svg" %} alt="">
                             <span>Cafe</span>
                             <h6>- UAH 550</h6>
                         </div>
                         <div class="category" style="border: 2px solid rgba(15, 161, 208, 1);">
-                            <img src="./img/transport.png" alt="">
+                            <img src={% static "img/transport.png" %} alt="">
                             <span>Transport</span>
                             <h6>- UAH 20</h6>
                         </div>
                         <button class="scroll">
-                            <img src="./img/next.png" alt="">
+                            <img src={% static "img/next.png" %} alt="">
                         </button>
                     </div>
 
@@ -158,7 +159,7 @@
             <dialog id="choseCategory" class="choseCategory">
 
                 <div class="dialog_header">
-                    <button id="closeDialogCategory" class="close"><img src="./img/pngwing.com.png" alt=""></button>
+                    <button id="closeDialogCategory" class="close"><img src={% static "img/pngwing.com.png" %} alt=""></button>
                     <h4>Add category</h4>
                 </div>
                 <hr>
@@ -167,12 +168,12 @@
 
                     <div class="two_buttons">
                         <button class="button_category" style="border: 2px solid rgba(16, 176, 80, 1);">
-                            <img src="./img/shopping.svg" alt="">
+                            <img src={% static "img/shopping.svg" %} alt="">
                             <span>Shopping</span>
                         </button>
 
                         <button class="button_category" style="border: 2px solid rgba(207, 211, 18, 1);">
-                            <img src="./img/cafe.svg" alt="">
+                            <img src={% static "img/cafe.svg" %} alt="">
                             <span>Cafe</span>
                         </button>
                     </div>
@@ -180,12 +181,12 @@
 
                     <div class="two_buttons">
                         <button class="button_category" style="border: 2px solid rgba(15, 161, 208, 1);">
-                            <img src="./img/transport.png" alt="">
+                            <img src={% static "img/transport.png" %} alt="">
                             <span>Transport</span>
                         </button>
 
                         <button class="button_category" style="border: 2px solid rgba(154, 16, 176, 1)">
-                            <img src="./img/subscription.svg" alt="">
+                            <img src={% static "img/subscription.svg" %} alt="">
                             <span>Subscription</span>
                         </button>
                     </div>
@@ -193,12 +194,12 @@
 
                     <div class="two_buttons">
                         <button class="button_category" style="border: 2px solid rgba(253, 74, 160, 1)">
-                            <img src="./img/food.png" alt="">
+                            <img src={%  static "img/food.png" %} alt="">
                             <span>Food</span>
                         </button>
 
                         <button class="button_category" style="border: 2px solid rgba(211, 18, 18, 1)">
-                            <img src="./img/utility_bils.png" alt="">
+                            <img src={% static "img/utility_bils.png" %} alt="">
                             <span>Utility bills</span>
                         </button>
                     </div>
@@ -215,7 +216,7 @@
             <dialog id="clearHistory" class="clearHistory">
                 <div class="dialog_header">
                     <button id="closeDialogClear" class="close">
-                        <img src="./img/pngwing.com.png" alt="">
+                        <img src={% static "img/pngwing.com.png" %} alt="">
                     </button>
                     <h4>Warning</h4>
                 </div>
@@ -230,7 +231,7 @@
             <dialog id="deleteAcount" class="deleteAcount">
                 <div class="dialog_header">
                     <button id="closeDialogDelete" class="close">
-                        <img src="./img/pngwing.com.png" alt="">
+                        <img src={% static "img/pngwing.com.png" %} alt="">
                     </button>
                     <h4>Warning</h4>
                 </div>
@@ -245,7 +246,7 @@
             <dialog id="logOut" class="logOut">
                 <div class="dialog_header">
                     <button id="closeDialogLogOut" class="close">
-                        <img src="./img/pngwing.com.png" alt="">
+                        <img src={% static "img/pngwing.com.png" %} alt="">
                     </button>
                     <h4>Warning</h4>
                 </div>

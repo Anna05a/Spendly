@@ -8,3 +8,11 @@ def home(request):
 
 def statistics(request):
     return render(request, 'finances/statistic_new.html')
+
+def statistics_page(request):
+    return render(request, 'finances/statistic_page.html')
+
+def home_page(request):
+    return render(request, 'finances/main_page.html')
+
+
