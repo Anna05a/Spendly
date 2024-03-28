@@ -20,8 +20,9 @@ def sign_up(request):
         if form.is_valid():
             user=form.save(commit=False)
             user.is_active = False
-            activate_email(request, user, form.cleaned_data.get('email'))
             user.save()
+            activate_email(request, user, form.cleaned_data.get('email'))
+
             return render(request,'authentication/verification.html',{'email':request.POST.get('email')})
 
     else:
@@ -52,7 +53,7 @@ def logout(request):
 def delete_user(request):
     user = request.user
     user.delete()
-    redirect('sign-up')
+    return redirect('sign-up')
 
 def reset_password(request):
 
@@ -69,10 +70,11 @@ def activate(request, uidb64, token):
 
     if user and account_activation_token.check_token(user, token): #перевіряє чи користувач існує та чи токен дійсний
         user.is_active = True
-        #user.save()
+        user.save()
         messages.add_message(request, messages.SUCCESS,'Email verified, you can now login')
         return redirect(reverse('login'))
-    return render(request, 'authentication/activation_failed.html', {"user": user})
+    else:
+        return render(request, 'authentication/activation_failed.html', {"user": user})
 
 def activate_email(request, user, to_email):
     subject = 'Activate your accounts'

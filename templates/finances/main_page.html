@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main page</title>
-    <link rel="stylesheet" href="{%  static 'css/main_page.css' %}">
+    <link rel="stylesheet" href="{%  static 'css/main_page.css' %}?{% now "U" %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,7 +67,7 @@
             </header>
 
             <div class="accounts_cards">
-
+                
                 <h3>Accounts & Cards</h3>
                 <hr>
                 <div class="wrapper_cards">
@@ -78,15 +78,14 @@
                         </div>
 
                         <div class="balance">
-                            <h2>UAH 4700</h2>
+                            <h2>UAH {{balance}}</h2>
                         </div>
 
                         <div class="bank_account_number">
-                            <p>**** **** **** 8467</p>
+                            <p>{{number}}</p>
                         </div>
-
                     </div>
-                    <div class="card">
+                    {% comment %}<div class="card">
                         <div class="card_top">
                             <h2>Universal card</h2>
                             <img src={%  static "img/visa.png" %} alt="">
@@ -99,8 +98,8 @@
                         <div class="bank_account_number">
                             <p>**** **** **** 7835</p>
                         </div>
-
-                    </div>
+                        {% endfor %}
+                    </div>{% endcomment %}
 
                     <div class="plus">
                         <button class="button_plus">+</button>
@@ -238,7 +237,10 @@
                 <hr>
                 <div class="сontent">
                     <p>You really want to delete your account?</p>
+                    <form method="post" action="{% url "delete_profile" %}">
+                        {% csrf_token %}
                     <button>Delete</button>
+                    </form>
                 </div>
             </dialog>
 
@@ -253,7 +255,11 @@
                 <hr>
                 <div class="сontent">
                     <p>You really want to log out of your account?</p>
-                    <button>Log out</button>
+                    <form method="post" action="{% url "logout" %}">
+                            {% csrf_token %}
+                        <button>Log out</button>  
+                    </form>
+      
                 </div>
             </dialog>
 

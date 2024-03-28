@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    <div class="overlay"></div>
     <div class="wrapper">
         <div class="menu">
             <div class="circle">
@@ -36,24 +37,21 @@
             </div>
 
             <div class="bottom">
-                <button class="button_menu pasive">
+                <button class="button_menu pasive" id="openDialogClear">
                     <img src={% static "img/clear.svg" %} alt="">
                     <span>Clear history</span>
                 </button>
 
-                <button class="button_menu pasive">
+                <button class="button_menu pasive" id="openDialogDelete">
                     <img src={% static "img/delete.png" %} alt="">
                     <span>Delete account</span>
                 </button>
 
-                <a href={% url 'logout' %}>
-                <button class="button_menu pasive">
+                <button class="button_menu pasive" id="openLogOut">
                     <img src={% static "img/log_out.svg" %} alt="">
                     <span>Log out</span>
                 </button>
-                </a>
             </div>
-
         </div>
 
         <div class="main">
@@ -164,7 +162,57 @@
 
             </dialog>
 
+<!-- діалогове вікно "Очищення історії" -->
+            <dialog id="clearHistory" class="clearHistory">
+                <div class="dialog_header">
+                    <button id="closeDialogClear" class="close">
+                        <img src={% static "img/pngwing.com.png" %} alt="">
+                    </button>
+                    <h4>Warning</h4>
+                </div>
+                <hr>
+                <div class="сontent">
+                    <p>You really want to clear history?</p>
+                    <button>Clear</button>
+                </div>
+            </dialog>
 
+            <!-- діалогове вікно "Видалення акаунту" -->
+            <dialog id="deleteAcount" class="deleteAcount">
+                <div class="dialog_header">
+                    <button id="closeDialogDelete" class="close">
+                        <img src={% static "img/pngwing.com.png" %} alt="">
+                    </button>
+                    <h4>Warning</h4>
+                </div>
+                <hr>
+                <div class="сontent">
+                    <p>You really want to delete your account?</p>
+                    <form method="post" action="{% url "delete_profile" %}">
+                        {% csrf_token %}
+                    <button>Delete</button>
+                    </form>
+                </div>
+            </dialog>
+
+            <!-- діалогове вікно "Вихід з акаунту" -->
+            <dialog id="logOut" class="logOut">
+                <div class="dialog_header">
+                    <button id="closeDialogLogOut" class="close">
+                        <img src={% static "img/pngwing.com.png" %} alt="">
+                    </button>
+                    <h4>Warning</h4>
+                </div>
+                <hr>
+                <div class="сontent">
+                    <p>You really want to log out of your account?</p>
+                    <form method="post" action="{% url "logout" %}">
+                            {% csrf_token %}
+                        <button>Log out</button>  
+                    </form>
+      
+                </div>
+            </dialog>
 
         </div>
     </div>

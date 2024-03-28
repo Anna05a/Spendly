@@ -10,18 +10,25 @@ mono = monobank.Client(token)
 def get_cards():
     try:
         user_info = mono.get_client_info()
-        card_ids = [] 
+        card_ids = []
+        card_info = []
         if user_info:
             for user in user_info['accounts']:
                 originBalance = user['balance'] // 100
                 temp = user['maskedPan'][0]
+                number=user['maskedPan']
                 if temp[0] == '4':
                     print('VISA ''Назва карти ', user['type'], 'Номер карти ', user['maskedPan'], 'Баланс по карті', originBalance)
                 elif temp[0] == '5':
                     print('Master ''Назва карти ', user['type'], 'Номер карти ', user['maskedPan'], 'Баланс по карті', originBalance)
-                
-                card_ids.append(user['id']) 
-        return card_ids
+                    card_info = {
+                        'card_id': user['id'],  # ID картки
+                        'card_name': user['type'],  # Назва картки
+                        'card_number': user['maskedPan'],  # Номер картки
+                        'card_balance': originBalance  # Баланс картки
+                    }
+                card_ids.append(user['id'])
+        return card_ids, card_info
     except Exception as e:
         print("Помилка у функції get_cards:", e)
         return []

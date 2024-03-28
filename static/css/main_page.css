@@ -115,7 +115,7 @@ h1 {
 }
 
 .bottom {
-  margin-top: 200px;
+  margin-top: 180px;
   margin-left: 50px;
 }
 
@@ -130,8 +130,6 @@ h1 {
   border-radius: 8px;
   color: rgb(232, 231, 231);
   display: flex;
-  justify-content: safe;
-  justify-content: flex-start;
   align-items: center;
 }
 .active {
@@ -217,8 +215,8 @@ header h2 {
 
 .accounts_cards {
   display: block;
-  width: 930px;
-  height: 30%;
+  width: 900px;
+  height: 230px;
   background-color: rgba(232, 231, 231, 1);
   font-family: "Montserrat", sans-serif;
   margin: auto;
@@ -248,7 +246,7 @@ hr {
   height: 148px;
   background: linear-gradient(to left,rgba(123, 26, 198, 1),rgba(214, 172, 247, 0.1));
   border-radius: 8px;
-  margin-top: 10px;
+  margin-top: 5px;
   margin-left: 30px;
 }
 
@@ -314,7 +312,7 @@ hr {
 }
 
 .categories {
-  width: 930px;
+  width: 900px;
   height: 50%;
   display: block;
   background-color: rgba(232, 231, 231, 1);
