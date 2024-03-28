@@ -46,11 +46,3 @@ class LoginForm(AuthenticationForm):
     )
     fields = [ 'username', 'password' ]
 
-class ResetPassword(PasswordResetForm):
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            self.fields['new_password1'].widget.attrs.attrs['placeholder']= 'Password'
-            self.fields['new_password2'].widget.attrs.update['placeholder']='Password Confirmation'
-        class Meta:
-            model = get_user_model()
-            fields = ("new_password1", "new_password2")

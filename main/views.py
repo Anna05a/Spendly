@@ -24,9 +24,9 @@ def get_token(request):
 def add_card(request):
     if request.method == 'POST':
         user = request.user
-        token = request.POST.get('token')
+        token=request.POST['token']
         try:
-            card_data = get_cards()
+            card_data = get_cards(token)
             if card_data:
                 for card in card_data:
                     card_id = card['card_id']  # ID картки
