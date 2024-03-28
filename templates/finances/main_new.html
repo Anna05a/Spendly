@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main page/new</title>
-    <link rel="stylesheet" href="{%  static 'css/main_new.css' %}">
+    <link rel="stylesheet" href="{%  static 'css/main_new.css' ?{% now "U" %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
@@ -106,10 +106,12 @@
 
             </div>
 
-            <dialog .my_modal>
+           
+            <!-- діалогове вікно вибір категорій -->
+            <dialog id="choseCategory" class="choseCategory">
 
                 <div class="dialog_header">
-                    <button id="closeDialog" class="close"><img src={% static "img/pngwing.com.png" %} alt=""></button>
+                    <button id="closeDialogCategory" class="close"><img src={% static "img/pngwing.com.png" %} alt=""></button>
                     <h4>Add category</h4>
                 </div>
                 <hr>
@@ -117,7 +119,7 @@
                 <div class="buttons_category">
 
                     <div class="two_buttons">
-                        <button class="button_category" style="border: 2px solid rgba(16, 176, 80, 1);" >
+                        <button class="button_category" style="border: 2px solid rgba(16, 176, 80, 1);">
                             <img src={% static "img/shopping.svg" %} alt="">
                             <span>Shopping</span>
                         </button>
@@ -253,16 +255,56 @@
         });
 
 
-
-        var dialog = document.querySelector('dialog');
+        //реалізація модального вікна з можливістю обрати категорії
         document.querySelector('#openDialog').onclick = function () {
             document.body.classList.add('dialog-open');
-
-            dialog.show();
+            document.querySelector('.overlay').style.display = 'block';
+            document.getElementById('choseCategory').showModal();
         }
-        document.querySelector('#closeDialog').onclick = function () {
+        document.querySelector('#closeDialogCategory').onclick = function () {
             document.body.classList.remove('dialog-open');
-            dialog.close();
+            document.querySelector('.overlay').style.display = 'none';
+            document.getElementById('choseCategory').close();
+        }
+
+
+        //діалогове вікно очищення історії
+        document.querySelector('#openDialogClear').onclick = function () {
+            document.body.classList.add('dialog-open');
+            document.querySelector('.overlay').style.display = 'block';
+            document.getElementById('clearHistory').showModal();
+        }
+
+        document.querySelector('#closeDialogClear').onclick = function () {
+            document.body.classList.remove('dialog-open');
+            document.querySelector('.overlay').style.display = 'none';
+            document.getElementById('clearHistory').close();
+        }
+
+        //діалогове вікно видалення акаунта
+        document.querySelector('#openDialogDelete').onclick = function () {
+            document.body.classList.add('dialog-open');
+            document.querySelector('.overlay').style.display = 'block';
+            document.getElementById('deleteAcount').showModal();
+        }
+
+        document.querySelector('#closeDialogDelete').onclick = function () {
+            document.body.classList.remove('dialog-open');
+            document.querySelector('.overlay').style.display = 'none';
+            document.getElementById('deleteAcount').close();
+        }
+
+        //діалогове вікно "вийти з акаунта"
+        document.querySelector('#openLogOut').onclick = function () {
+            document.body.classList.add('dialog-open');
+            document.querySelector('.overlay').style.display = 'block';
+            document.getElementById('logOut').showModal();
+        }
+
+        document.querySelector('#closeDialogLogOut').onclick = function () {
+            document.body.classList.remove('dialog-open');
+            document.querySelector('.overlay').style.display = 'none';
+            document.getElementById('logOut').close();
         }
         
 //реалізація календаря

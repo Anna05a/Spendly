@@ -42,6 +42,10 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
+a{
+  text-decoration: none;
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -64,7 +68,7 @@ html {
   width: 100%;
 }
 
-button:hover{
+button:hover {
   cursor: pointer;
 }
 .wrapper {
@@ -227,23 +231,6 @@ hr {
   margin-top: 10px;
 }
 
-/* main button {
-  font-family: "Montserrat", sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-  background-color: rgb(123, 26, 198);
-  width: 300px;
-  height: 58px;
-  margin-top: 100px;
-  margin-left: 50px;
-  border-radius: 8px;
-  color: rgb(232, 231, 231);
-  display: flex;
-  justify-content: safe;
-  justify-content: flex-start;
-  align-items: center;
-} */
-
 .plus {
   display: flex;
 }
@@ -260,7 +247,7 @@ hr {
   margin-top: 10px;
 }
 
-.plus  h4 {
+.plus h4 {
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: 300;
@@ -284,6 +271,7 @@ hr {
   display: flex;
   justify-content: space-between;
 }
+
 .buttons button {
   background-color: rgb(123, 26, 198);
   font-family: "Montserrat", sans-serif;
@@ -316,6 +304,7 @@ hr {
   margin-top: 3px;
   margin-left: 20px;
 }
+
 .calendar span {
   margin-top: 7px;
   margin-left: 10px;
@@ -343,7 +332,7 @@ hr {
   align-items: center;
 }
 
-.categories_inf  h4 {
+.categories_inf h4 {
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: 300;
@@ -352,7 +341,7 @@ hr {
   margin-left: 70px;
 }
 
-dialog {
+.choseCategory {
   width: 476px;
   height: 413px;
   border-radius: 8px;
@@ -360,12 +349,13 @@ dialog {
   background-color: rgba(232, 231, 231, 1);
   margin: auto;
   z-index: 10;
-  position: fixed; /* фіксоване позиціонування */
-  top: 50%; /* розмістити зверху на 50% відносно висоти вікна браузера */
-  left: 50%; /* розмістити зліва на 50% відносно ширини вікна браузера */
+  position: fixed;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
+
 
 body.dialog-open::before {
   content: "";
@@ -374,58 +364,63 @@ body.dialog-open::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Півпрозорий чорний фон */
-  z-index: 1; /* Позиціонування позаду діалогового вікна */
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1;
 }
-.dialog_header{
+
+.dialog_header {
   display: flex;
 }
-.dialog_header h4{
+
+.dialog_header h4 {
   font-family: "Montserrat", sans-serif;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 500;
   color: rgba(0, 0, 0, 1);
-
+  margin-left: 10px;
 }
+
 .close {
   background-color: rgba(232, 231, 231, 1);
   border: none;
+  background-color: transparent;
 }
+
 .close img {
   height: 13px;
   width: 16px;
 }
 
- h5{
+h5 {
   font-family: "Montserrat", sans-serif;
   font-size: 13px;
   font-weight: 100;
   color: rgba(113, 113, 113, 1);
 }
 
-.buttons_category{
+.buttons_category {
   display: block;
 }
 
-.button_category{
-width: 193px;
-height: 47px;
-border-radius: 8px;
-display: flex;
-margin: 10px;
+.button_category {
+  width: 193px;
+  height: 47px;
+  border-radius: 8px;
+  display: flex;
+  margin: 10px;
 }
 
-.two_buttons{
+.two_buttons {
   display: flex;
 }
 
-.button_category img{
+.button_category img {
   width: 32px;
   height: 32px;
   margin-top: 5px;
 }
 
-.button_category span{
+.button_category span {
   margin-top: 10px;
   margin-left: 10px;
   font-family: "Montserrat", sans-serif;
@@ -434,19 +429,67 @@ margin: 10px;
   color: rgba(113, 113, 113, 1);
 }
 
-.add{
+.add {
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: 500;
-  color:  rgba(232, 231, 231, 1);
-  background-color:rgba(123, 26, 198, 1);
+  color: rgba(232, 231, 231, 1);
+  background-color: rgba(123, 26, 198, 1);
   border-radius: 8px;
   border: none;
-width: 124px;
-height: 48px;
-position: absolute;
-margin-left: 150px;
-margin-top: 30px;
+  width: 124px;
+  height: 48px;
+  position: absolute;
+  margin-left: 150px;
+  margin-top: 30px;
+}
 
+
+.clearHistory {
+  width: 476px;
+  height: 188px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  border: 1px solid red;
+  border-radius: 8px;
+}
+
+.deleteAcount {
+  width: 476px;
+  height: 211px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  border: 1px solid red;
+  border-radius: 8px;
+}
+
+.logOut {
+  width: 476px;
+  height: 211px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  border: 1px solid red;
+  border-radius: 8px;
+}
+
+.сontent {
+  width: 300px;
+  margin-left: 50px;
+  position: relative;
+}
+
+.сontent button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(232, 231, 231, 1);
+  background-color: rgba(123, 26, 198, 1);
+  border-radius: 8px;
+  border: none;
+  width: 124px;
+  height: 48px;
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 100px;
 }
 

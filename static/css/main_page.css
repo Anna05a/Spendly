@@ -483,11 +483,13 @@ body.dialog-open::before {
   color: rgba(0, 0, 0, 1);
   margin-left: 10px;
 }
+
 .close {
   background-color: rgba(232, 231, 231, 1);
   border: none;
   background-color: transparent;
 }
+
 .close img {
   height: 13px;
   width: 16px;
