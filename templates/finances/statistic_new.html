@@ -83,17 +83,8 @@
                     <canvas id="myChart"></canvas>
                 </div>
 
-                <div class="diagram_buttons">
-                    <button class="prev">
-                        <img src={% static "img/next.png"  %} alt="">
-                    </button>
-
-                    <button class="next">
-                        <img src={% static "img/next.png"  %} alt="">
-                    </button>
-                </div>
-
-            </div>
+                
+            
 
             <div class="financial_and_category_container">
 
@@ -195,30 +186,25 @@
             labels: labels,
             datasets: [{
                 label: 'Продажі',
-                data: [100, 120, 150, 180, 200, 220, 250, 280, 300, 320, 350, 380],
+                data: [100, 50, 40, 70, 60, 30 ],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
                     'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 199, 132, 0.2)',
-                    'rgba(102, 255, 178, 0.2)',
-                    'rgba(128, 128, 128, 0.2)',
-                    'rgba(0, 0, 0, 0.2)'
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(153, 102, 255, 0.2)'
+                    
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
                     'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 199, 132, 1)',
-                    'rgba(102, 255, 178, 1)',
-                    'rgba(128, 128, 128, 1)',
-                    'rgba(0, 0, 0, 1)'
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(153, 102, 255, 1)'
                 ],
                 borderWidth: 1
             }]
