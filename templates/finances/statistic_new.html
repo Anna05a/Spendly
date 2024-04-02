@@ -16,9 +16,11 @@
 <body>
     <div class="wrapper">
         <div class="menu">
+            
             <div class="circle">
                 <h1>Spendly</h1>
             </div>
+            
             
             <div class="top">
                 <a href={% url 'home' %}>
@@ -28,6 +30,7 @@
                 </button>
                 </a>
                 
+                
               <a href={% url 'statistics' %}>
                 <button class="button_menu active">
                     <img src={% static "img/statistics.png"  %} alt="">
@@ -35,18 +38,18 @@
                 </button>
               </a>
             </div>
-
+            
             <div class="bottom">
                 <button class="button_menu pasive">
                     <img src={% static "img/clear.svg"  %} alt="">
                     <span>Clear history</span>
                 </button>
-
+                
                 <button class="button_menu pasive">
                     <img src={% static "img/delete.png"  %} alt="">
                     <span>Delete account</span>
                 </button>
-
+                
                 <button class="button_menu pasive">
                     <img src={% static "img/log_out.svg"  %} alt="">
                     <span>Log out</span>
@@ -71,6 +74,7 @@
                 <div class="header_chart">
                     <h3>Comparison Chart</h3>
 
+                    
                     <button class="calendar" id="datepicker">
                         <span>January - February, 2024</span>
                         <img src={% static "img/calendar.svg.png"  %} alt="">
@@ -78,7 +82,6 @@
                 </div>
 
                 <hr>
-
                 <div class="diagram">
                     <canvas id="myChart"></canvas>
                 </div>
@@ -177,49 +180,45 @@
         });
 
 
-        //diagram
+        //diagram до календаря
         const ctx = document.getElementById('myChart').getContext('2d');
 
-        const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+        const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
 
         const data = {
-            labels: labels,
-            datasets: [{
-                label: 'Продажі',
-                data: [100, 50, 40, 70, 60, 30 ],
-                backgroundColor: [
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(153, 102, 255, 0.2)'
-                    
-                ],
-                borderColor: [
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(153, 102, 255, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
+    labels: labels,
+    datasets: [{
+        label: 'Доходи',
+        data: [100, 50, 40, 70, 60, 30, 80], // дані для доходів
+        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+        borderColor: 'rgba(153, 102, 255, 1)',
+        borderWidth: 1
+    },
+    {
+        label: 'Витрати',
+        data: [50, 60, 70, 30, 40, 50, 20], // дані для витрат
+        backgroundColor: 'rgba(200, 120, 255, 0.2)',
+        borderColor: 'rgba(200, 120, 255)',
+        borderWidth: 1
+    }]
+};
 
         const myChart = new Chart(ctx, {
             type: 'bar',
-            data: data,
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+  data: data,
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart'
+      }
+    }
+  },
         });
 
         //donut diagram

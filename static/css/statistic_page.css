@@ -133,7 +133,6 @@ h1 {
   border-radius: 8px;
   color: rgb(232, 231, 231);
   display: flex;
-  justify-content: safe;
   justify-content: flex-start;
   align-items: center;
 }
@@ -310,6 +309,7 @@ hr {
 
 .financial_and_category_container {
   display: flex;
+  margin-bottom: 40%;
 }
 
 .financial_and_category {
