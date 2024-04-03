@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="{%  static 'css/main_new.css' %}?{% now " U" %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 </head>
 
@@ -191,7 +193,7 @@
                 <hr>
                 <div class="сontent">
                     <p>You really want to delete your account?</p>
-                    <form method="post" action="{% url " delete_profile" %}">
+                    <form method="post" action={% url "delete_profile" %}>
                         {% csrf_token %}
                         <button>Delete</button>
                     </form>
@@ -254,6 +256,8 @@
                         <a style="color: rgba(9, 167, 217, 1)"
                             href="https://api.monobank.ua/">https://api.monobank.ua/</a>
                     </p>
+
+
 
                     <button>Add cards</button>
 
