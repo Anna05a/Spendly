@@ -4,11 +4,10 @@ import monobank
 from datetime import datetime, date, timezone
 import time
 token = 'token'
-
+mono = monobank.Client(token)
 
 def get_cards():
     try:
-        mono = monobank.Client(token)
         user_info = mono.get_client_info()
         card_ids = []
         card_info = []
@@ -34,7 +33,6 @@ def get_cards():
         return []
 
 def get_pay(user_ids):
-    mono = monobank.Client(token)
     originAmounts = [] 
     try:
         for user_id in user_ids: 
