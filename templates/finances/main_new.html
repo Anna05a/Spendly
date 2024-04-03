@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main page/new</title>
-    <link rel="stylesheet" href="{%  static 'css/main_new.css' %}?{% now "U" %}">
+    <link rel="stylesheet" href="{%  static 'css/main_new.css' %}?{% now " U" %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
@@ -21,19 +21,19 @@
                 <h1>Spendly</h1>
             </div>
             <div class="top">
-              <a href={% url 'home' %}>
-                <button class=" button_menu active">
-                    <img src={% static "img/main_page.png" %} alt="">
-                    <span>Main page</span>
-                </button>
-              </a>  
-                
-              <a href={% url 'statistics' %}>
-                <button class="button_menu pasive">
-                    <img src={% static "img/statistics.png" %} alt="">
-                    <span>Statistic</span>
-                </button>
-              </a>
+                <a href={% url 'home' %}>
+                    <button class=" button_menu active">
+                        <img src={% static "img/main_page.png" %} alt="">
+                        <span>Main page</span>
+                    </button>
+                </a>
+
+                <a href={% url 'statistics' %}>
+                    <button class="button_menu pasive">
+                        <img src={% static "img/statistics.png" %} alt="">
+                        <span>Statistic</span>
+                    </button>
+                </a>
             </div>
 
             <div class="bottom">
@@ -72,7 +72,7 @@
                 <hr>
 
                 <div class="plus">
-                    <button  class="button_plus">+</button>
+                    <button class="button_plus" id="openAddCard1">+</button>
                     <h4>You haven't added a card yet</h4>
                 </div>
 
@@ -106,12 +106,13 @@
 
             </div>
 
-           
+
             <!-- діалогове вікно вибір категорій -->
             <dialog id="choseCategory" class="choseCategory">
 
                 <div class="dialog_header">
-                    <button id="closeDialogCategory" class="close"><img src={% static "img/pngwing.com.png" %} alt=""></button>
+                    <button id="closeDialogCategory" class="close"><img src={% static "img/pngwing.com.png" %}
+                            alt=""></button>
                     <h4>Add category</h4>
                 </div>
                 <hr>
@@ -146,7 +147,7 @@
 
                     <div class="two_buttons">
                         <button class="button_category" style="border: 2px solid rgba(253, 74, 160, 1)">
-                            <img src={%  static "img/food.png" %} alt="">
+                            <img src={% static "img/food.png" %} alt="">
                             <span>Food</span>
                         </button>
 
@@ -164,7 +165,7 @@
 
             </dialog>
 
-<!-- діалогове вікно "Очищення історії" -->
+            <!-- діалогове вікно "Очищення історії" -->
             <dialog id="clearHistory" class="clearHistory">
                 <div class="dialog_header">
                     <button id="closeDialogClear" class="close">
@@ -190,9 +191,9 @@
                 <hr>
                 <div class="сontent">
                     <p>You really want to delete your account?</p>
-                    <form method="post" action="{% url "delete_profile" %}">
+                    <form method="post" action="{% url " delete_profile" %}">
                         {% csrf_token %}
-                    <button>Delete</button>
+                        <button>Delete</button>
                     </form>
                 </div>
             </dialog>
@@ -208,11 +209,54 @@
                 <hr>
                 <div class="сontent">
                     <p>You really want to log out of your account?</p>
-                    <form method="post" action="{% url "logout" %}">
-                            {% csrf_token %}
-                        <button>Log out</button>  
+                    <form method="post" action="{% url " logout" %}">
+                        {% csrf_token %}
+                        <button>Log out</button>
                     </form>
-      
+
+                </div>
+            </dialog>
+
+            <!-- діалогове вікно "Додати карту 1 крок" -->
+            <dialog id="addCard1" class="addCard1">
+                <div class="dialog_header">
+                    <button id="closeAddCard1" class="close">
+                        <img src={% static "img/pngwing.com.png" %} alt="">
+                    </button>
+                    <h4>Add cards</h4>
+                </div>
+                <hr>
+                <div class="сontent">
+                    <p class="add_card_p content-text"> To apply for a Monobank cards, you <br>
+                        need <span class="bold">to follow this link:</span></p>
+                    <a class="content_link" href="https://api.monobank.ua/">https://api.monobank.ua/</a>
+                    <p class="add_card_p">and <span class="bold">scan the QR code</span>. <br>
+                        After which in the Monobank<br>
+                        application, confirm the operation.</p>
+                    <button id="continue">Continue</button>
+                </div>
+            </dialog>
+
+            <!-- діалогове вікно "Додати карту 2 крок" -->
+            <dialog id="addCard2" class="addCard2">
+                <div class="dialog_header">
+                    <button id="closeAddCard2" class="close">
+                        <img src={% static "img/pngwing.com.png" %} alt="">
+                    </button>
+                    <h4>Add cards</h4>
+                </div>
+                <hr>
+                <div class="сontent">
+                    <p class="add_card_p">Copy the token and <span class="bold">paste it here:</span></p>
+                    <input class="token_input" type="text" placeholder="Token">
+
+                    <p class="small">If you lost the link, click here again: <br>
+                        <a style="color: rgba(9, 167, 217, 1)"
+                            href="https://api.monobank.ua/">https://api.monobank.ua/</a>
+                    </p>
+
+                    <button>Add cards</button>
+
                 </div>
             </dialog>
 
@@ -222,7 +266,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
 
     <script>
 
@@ -306,15 +350,50 @@
             document.querySelector('.overlay').style.display = 'none';
             document.getElementById('logOut').close();
         }
-        
-//реалізація календаря
-document.addEventListener('DOMContentLoaded', function () {
-    var picker = new Litepicker({
-        element: document.getElementById('datepicker'),
-        singleMode: false, 
-        autoApply: true, 
-    });
-});
+
+        //діалогове вікно "Додавання карти"
+        document.querySelector('#openAddCard1').onclick = function () {
+            closeCurrentModal();
+            document.body.classList.add('dialog-open');
+            document.querySelector('.overlay').style.display = 'block';
+            document.getElementById('addCard1').showModal();
+        }
+
+        document.querySelector('#closeAddCard1').onclick = function () {
+            document.body.classList.remove('dialog-open');
+            document.querySelector('.overlay').style.display = 'none';
+            document.getElementById('addCard1').close();
+        }
+
+        //діалогове вікно "Додавання карти крок 2"
+        document.querySelector('#continue').onclick = function () {
+            closeCurrentModal();
+            document.body.classList.add('dialog-open');
+            document.querySelector('.overlay').style.display = 'block';
+            document.getElementById('addCard2').showModal();
+        }
+
+        document.querySelector('#closeAddCard2').onclick = function () {
+            document.body.classList.remove('dialog-open');
+            document.querySelector('.overlay').style.display = 'none';
+            document.getElementById('addCard2').close();
+        }
+
+        function closeCurrentModal() {
+            var currentModal = document.querySelector('dialog[open]');
+            if (currentModal) {
+                currentModal.close();
+            }
+        }
+
+        //реалізація календаря
+        document.addEventListener('DOMContentLoaded', function () {
+            var picker = new Litepicker({
+                element: document.getElementById('datepicker'),
+                singleMode: false,
+                autoApply: true,
+            });
+        });
 
     </script>
 </body>
