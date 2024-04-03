@@ -276,7 +276,7 @@ hr {
 
 .financial_and_category_container {
   display: flex;
-  margin-bottom: 40%;
+  flex-direction: column;
 }
 .financial_and_category {
   width: 440px;
