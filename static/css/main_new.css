@@ -386,6 +386,7 @@ body.dialog-open::before {
 .close img {
   height: 13px;
   width: 16px;
+  border: none;
 }
 
 h5 {
@@ -472,6 +473,7 @@ h5 {
   padding-top: 30px;
   padding-bottom: 30px;
   border-radius: 8px;
+  border: none;
 }
 
 .addCard2 {
@@ -480,6 +482,8 @@ h5 {
   padding-top: 30px;
   padding-bottom: 30px;
   border-radius: 8px;
+  border: none;
+
 }
 
 .сontent {
