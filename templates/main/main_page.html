@@ -84,7 +84,7 @@
                         </div>
 
                         <div class="bank_account_number">
-                            <p>{{number}}</p>
+                            <p>{{ number }}</p>
                         </div>
                     </div>
                     {% comment %}<div class="card">
@@ -133,6 +133,12 @@
 
                     <div class="categories_inf">
                         <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
+                            <span>{{ category }}</span>
+                            <h6>- {{ amounts }}</h6>
+                        </div>
+                    </div>
+                    {% comment %}<div class="categories_inf">
+                        <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
                             <img src={% static "img/shopping.svg" %} alt="">
                             <span>Shopping</span>
                             <h6>- UAH 360</h6>
@@ -150,7 +156,7 @@
                         <button class="scroll">
                             <img src={% static "img/next.png" %} alt="">
                         </button>
-                    </div>
+                    </div>{% endcomment %}
 
                 </div>
 

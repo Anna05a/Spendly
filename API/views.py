@@ -1,32 +1,31 @@
 from django.shortcuts import render
-
+from monobank import Client
 import monobank
 from datetime import datetime, date, timezone
 import time
-token = 'token'
+card_info = []
+token = "ujxtrfVpnFJSI6EO8pbd0nDbrYxu-N7w_E0DUwJStEjA"
 mono = monobank.Client(token)
-
 def get_cards():
     try:
+        mono = monobank.Client(token)
         user_info = mono.get_client_info()
         card_ids = []
-        card_info = []
+
         if user_info:
             for user in user_info['accounts']:
                 originBalance = user['balance'] // 100
                 temp = user['maskedPan'][0]
                 number=user['maskedPan']
-                if temp[0] == '4':
-                    print('VISA ''Назва карти ', user['type'], 'Номер карти ', user['maskedPan'], 'Баланс по карті', originBalance)
-                elif temp[0] == '5':
-                    print('Master ''Назва карти ', user['type'], 'Номер карти ', user['maskedPan'], 'Баланс по карті', originBalance)
-                    card_info = {
-                        'card_id': user['id'],  # ID картки
-                        'card_name': user['type'],  # Назва картки
-                        'card_number': user['maskedPan'],  # Номер картки
-                        'card_balance': originBalance  # Баланс картки
-                    }
+                # if temp[0] == '4':
+                #    print('VISA ''Назва карти ', number, 'Номер карти ', number, 'Баланс по карті', originBalance)
+                # elif temp[0] == '5':
+                #    print('Master ''Назва карти ', user['type'], 'Номер карти ', user['maskedPan'], 'Баланс по карті', originBalance)
+                card_info.append(user['type'])
+                card_info.append(user['maskedPan'])
+                card_info.append(originBalance)
                 card_ids.append(user['id'])
+                #print(card_info)
         return card_ids, card_info
     except Exception as e:
         print("Помилка у функції get_cards:", e)
@@ -51,6 +50,8 @@ def get_pay(user_ids):
     return originAmounts 
 
 def get_category_earn_cost(originAmounts):
+    token = 'token'
+    mono = monobank.Client(token)
     try:
         for originAmount in originAmounts:
             if str(originAmount).startswith('-'):

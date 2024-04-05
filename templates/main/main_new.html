@@ -250,8 +250,7 @@
                     <p class="add_card_p">Copy the token and <span class="bold">paste it here:</span></p>
                     <form method="post" action="{% url 'add_card' %}">
                         {% csrf_token %}
-                        <input class="token_input" id="token" name="token" type="text" placeholder="Token">
-                        
+                        <input class="token_input" name="token" type="text" placeholder="Token">
                      <p class="small">If you lost the link, click here again: <br>
                         <a style="color: rgba(9, 167, 217, 1)"
                             href="https://api.monobank.ua/">https://api.monobank.ua/</a>
