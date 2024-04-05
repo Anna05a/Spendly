@@ -278,22 +278,15 @@ hr {
   display: flex;
   flex-direction: column;
 }
+
 .financial_and_category {
-  width: 440px;
-  height: 350px;
-  background-color: rgba(232, 231, 231, 1);
   border-radius: 8px;
-  margin-top: 50px;
-  margin-left: 0px;
+  margin-top: 30px;
+  margin-left: 50px;
 }
 
 .right {
   margin-left: 50px;
-}
-
-.header_financeal_and_category {
-  display: flex;
-  justify-content: space-between;
 }
 
 hr {
