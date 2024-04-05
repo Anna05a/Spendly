@@ -42,6 +42,10 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
+a {
+  text-decoration: none;
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -56,6 +60,7 @@ button,
 textarea,
 select {
   font: inherit;
+  cursor: pointer;
 }
 
 body,
@@ -64,20 +69,18 @@ html {
   width: 100%;
 }
 
-
-button:hover {
-  cursor: pointer;
-}
 .wrapper {
   display: flex;
   height: 100%;
   width: 100%;
 }
+
 .menu {
   width: 30%;
   height: 100%;
   background-color: black;
 }
+
 .main {
   width: 70%;
   height: 100%;
@@ -109,6 +112,7 @@ h1 {
   margin-left: 77px;
   position: relative;
 }
+
 .top {
   margin-top: 100px;
   margin-left: 50px;
@@ -186,23 +190,6 @@ header h2 {
   font-weight: 500;
   font-size: 30px;
 }
-.notification {
-  height: 52px;
-  width: 52px;
-  border-radius: 50%;
-  background-color: rgb(123, 26, 198);
-  border: none;
-  margin-top: 15px;
-  margin-left: 70%;
-}
-
-.notification img {
-  font-weight: 400;
-  filter: invert(100%);
-  height: 32px;
-  width: 32px;
-  margin: auto;
-}
 
 .comparison_chart {
   display: block;
@@ -237,24 +224,26 @@ hr {
   width: 260px;
   height: 40px;
   margin-right: 20px;
+  padding-left: 5px;
+  margin-top: 10px;
   display: flex;
   font-size: 16px;
-  font-weight: 100;
-  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
   background-color: rgb(123, 26, 198);
   border-radius: 8px;
   border: none;
-  color: rgb(232, 231, 231);
-  margin-top: 10px;
+  color: #f9f9f9;
 }
+
 .calendar img {
   width: 32px;
   height: 32px;
   font-weight: 400;
   filter: invert(100%);
   margin-top: 3px;
-  margin-left: 20px;
+  margin-left: 10px;
 }
+
 .calendar span {
   margin-top: 7px;
   margin-left: 10px;
@@ -266,6 +255,7 @@ hr {
   width: 350px;
   margin-top: 20px;
 }
+
 .diagram_buttons {
   display: flex;
   width: 800px;
@@ -276,13 +266,20 @@ hr {
 
 .financial_and_category_container {
   display: flex;
-  flex-direction: column;
+  flex-direction: inherit;
 }
 
 .financial_and_category {
   border-radius: 8px;
-  margin-top: 30px;
-  margin-left: 50px;
+  min-width: 438px;
+  max-height: 391px;
+  margin-top: 50px;
+  background-color: rgba(232, 231, 231, 1);
+}
+
+.header_financeal_and_category {
+  display: flex;
+  justify-content: space-between;
 }
 
 .right {
@@ -294,27 +291,28 @@ hr {
 }
 
 .dropbtn {
-    font-family: "Montserrat", sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    width: 88px;
-    height: 28px;
-    background-color: rgb(123, 26, 198);
-    border: none;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center; /* Додано justify-content: center; */
-    color: rgba(217, 217, 217, 1);
-    margin-top: 20px;
-    margin-right: 20px;
-    position: relative;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  width: 88px;
+  height: 28px;
+  background-color: rgb(123, 26, 198);
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  color: rgba(217, 217, 217, 1);
+  margin-top: 20px;
+  position: relative;
 }
-.button_content{
-    display: flex;
+
+.button_content {
+  display: flex;
 }
+
 .button_content span {
-    margin-top: 5px;
-    text-align: center;
+  margin-top: 5px;
+  text-align: center;
 }
 
 .button_content img {
@@ -327,83 +325,79 @@ hr {
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
 }
 
-
-
 .dropdown-content {
-    display: none;
-    position: absolute;
-    align-items: center;
-    background-color: #f9f9f9;
-    min-width: 88px;
-    z-index: 1;
-    border-radius: 8px;
+  display: none;
+  position: absolute;
+  align-items: center;
+  background-color: #f9f9f9;
+  min-width: 88px;
+  z-index: 1;
+  border-radius: 8px;
 }
 
 .dropdown-content a {
-    color: black;
-    padding: 10px 20px;
-    text-decoration: none;
-    display: block;
-    height: 28px;
-    font-family: "Montserrat", sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    border: 2px;
-    border-color: rgba(232, 231, 231, 1);
-
+  color: black;
+  padding: 10px 20px;
+  text-decoration: none;
+  display: block;
+  height: 28px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  border: 2px;
+  border-color: rgba(232, 231, 231, 1);
 }
 
 .dropdown-content a:hover {
-   background-color: rgb(123, 26, 198);
-   border-radius: 8px;
+  background-color: rgb(123, 26, 198);
+  border-radius: 8px;
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
 }
 
 .dropdown:hover .dropbtn {
-    background-color: rgb(123, 26, 198);
+  background-color: rgb(123, 26, 198);
 }
 
-
-.diagram_wrapper{
-    display: flex;
+.diagram_wrapper {
+  display: flex;
 }
 
-.diagram_doughnut{
-    width: 400px;
-    margin-top: 20px;
-    margin-left: -50px;
-   
+.diagram_doughnut {
+  width: 400px;
+  margin-top: 20px;
+  margin-left: -50px;
 }
-.diagram_text{
-    margin-left: -60px;
-    margin-top: 20px;
-    
+.diagram_text {
+  margin-left: -60px;
+  margin-top: 20px;
 }
 
-.text_diagram{
-    font-family: "Montserrat", sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    color: rgba(113, 113, 113, 1);
-margin-top: 40px;
-}
-.text_diagram span{
-    font-weight: 600;
-    color: black;
+.text_diagram {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(113, 113, 113, 1);
+  margin-top: 40px;
 }
 
-h4{
-    font-family: "Montserrat", sans-serif;
+.text_diagram span {
+  font-weight: 600;
+  color: black;
+}
+
+h4 {
+  font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: 300;
   color: rgba(113, 113, 113, 1);
   margin-top: 120px;
   margin-left: 80px;
-  }
+}

@@ -42,6 +42,10 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
+a {
+  text-decoration: none;
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -56,16 +60,14 @@ button,
 textarea,
 select {
   font: inherit;
+  cursor: pointer;
+
 }
 
 body,
 html {
   height: 100%;
   width: 100%;
-}
-
-button:hover {
-  cursor: pointer;
 }
 
 .wrapper {
@@ -190,24 +192,6 @@ header h2 {
   font-size: 30px;
 }
 
-.notification {
-  height: 52px;
-  width: 52px;
-  border-radius: 50%;
-  background-color: rgb(123, 26, 198);
-  border: none;
-  margin-top: 15px;
-  margin-left: 70%;
-}
-
-.notification img {
-  font-weight: 400;
-  filter: invert(100%);
-  height: 32px;
-  width: 32px;
-  margin: auto;
-}
-
 .comparison_chart {
   display: block;
   width: 930px;
@@ -241,15 +225,15 @@ hr {
   width: 260px;
   height: 40px;
   margin-right: 20px;
+  padding-left: 5px;
+  margin-top: 10px;
   display: flex;
   font-size: 16px;
-  font-weight: 100;
-  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
   background-color: rgb(123, 26, 198);
   border-radius: 8px;
   border: none;
-  color: rgb(232, 231, 231);
-  margin-top: 10px;
+  color: #f9f9f9;
 }
 
 .calendar img {
@@ -258,7 +242,7 @@ hr {
   font-weight: 400;
   filter: invert(100%);
   margin-top: 3px;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .calendar span {
@@ -311,11 +295,17 @@ hr {
   display: flex;
   flex-direction: column;
 }
-
 .financial_and_category {
   border-radius: 8px;
-  margin-top: 30px;
-  margin-left: 50px;
+  min-width: 438px;
+  max-height: 391px;
+  margin-top: 50px;
+  background-color: rgba(232, 231, 231, 1);
+}
+
+.header_financeal_and_category {
+  display: flex;
+  justify-content: space-between;
 }
 
 .right {
@@ -331,6 +321,7 @@ hr {
   margin-top: 10px;
 }
 
+
 .dropbtn {
   font-family: "Montserrat", sans-serif;
   font-size: 12px;
@@ -344,7 +335,6 @@ hr {
   justify-content: center;
   color: rgba(217, 217, 217, 1);
   margin-top: 20px;
-  margin-right: 20px;
   position: relative;
 }
 
@@ -356,6 +346,7 @@ hr {
   margin-top: 5px;
   text-align: center;
 }
+
 
 .button_content img {
   width: 20px;
@@ -369,7 +360,9 @@ hr {
 .dropdown {
   position: relative;
   display: inline-block;
+  margin-right: 10px;
 }
+
 
 .dropdown-content {
   display: none;
@@ -416,6 +409,7 @@ hr {
   margin-top: 20px;
   margin-left: -50px;
 }
+
 .diagram_text {
   margin-left: -60px;
   margin-top: 20px;
@@ -428,6 +422,7 @@ hr {
   color: rgba(113, 113, 113, 1);
   margin-top: 40px;
 }
+
 .text_diagram span {
   font-weight: 600;
   color: black;

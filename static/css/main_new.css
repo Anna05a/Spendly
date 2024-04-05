@@ -61,6 +61,7 @@ button,
 textarea,
 select {
   font: inherit;
+  cursor: pointer;
 }
 
 body,
@@ -69,9 +70,6 @@ html {
   width: 100%;
 }
 
-button:hover {
-  cursor: pointer;
-}
 .wrapper {
   display: flex;
   height: 100%;
@@ -137,6 +135,7 @@ h1 {
   justify-content: flex-start;
   align-items: center;
 }
+
 .active {
   background-color: rgb(123, 26, 198);
 }
@@ -189,23 +188,6 @@ header h2 {
   font-weight: 500;
   font-size: 30px;
 }
-.notification {
-  height: 52px;
-  width: 52px;
-  border-radius: 50%;
-  background-color: rgb(123, 26, 198);
-  border: none;
-  margin-top: 15px;
-  margin-left: 60%;
-}
-
-.notification img {
-  font-weight: 400;
-  filter: invert(100%);
-  height: 32px;
-  width: 32px;
-  margin: auto;
-}
 
 .accounts_cards {
   display: block;
@@ -234,6 +216,7 @@ hr {
 .plus {
   display: flex;
 }
+
 .button_plus {
   height: 100px;
   width: 58px;
@@ -241,7 +224,8 @@ hr {
   color: rgba(232, 231, 231, 1);
   border: none;
   border-radius: 8px;
-  font-size: 32px;
+  font-size: 52px;
+  font-weight: 100;
   margin-left: 30px;
   margin-top: 10px;
 }
@@ -282,25 +266,31 @@ hr {
 .mini_plus {
   width: 40px;
   height: 40px;
-  font-size: 40px;
-  font-weight: 200;
+  font-size: 52px;
+  font-weight: 100;
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .calendar {
   width: 260px;
   height: 40px;
   margin-right: 20px;
+  padding-left: 5px;
   display: flex;
   font-size: 16px;
-  font-weight: 100;
+  font-weight: 300;
 }
+
 .calendar img {
   width: 32px;
   height: 32px;
   font-weight: 400;
   filter: invert(100%);
   margin-top: 3px;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .calendar span {
