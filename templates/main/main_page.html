@@ -24,17 +24,19 @@
                 <h1>Spendly</h1>
             </div>
             <div class="top">
-                <a href={% url 'home' %}></a>
-                <button class=" button_menu active">
-                    <img src={% static "img/main_page.png" %} alt="">
-                    <span>Main page</span>
-                </button>
-
-                <a href={% url 'statistics' %}></a>
-                <button class="button_menu pasive">
-                     <img src={% static "img/statistics.png" %} alt="">
-                    <span>Statistic</span>
-                </button>
+                <a href={% url 'home' %}>
+                    <button class=" button_menu active">
+                        <img src={% static "img/main_page.png" %} alt="">
+                        <span>Main page</span>
+                    </button>
+                </a>
+                
+                <a href={% url 'statistics_page' %}>
+                    <button class="button_menu pasive">
+                        <img src={% static "img/statistics.png" %} alt="">
+                        <span>Statistic</span>
+                    </button>
+                </a>
             </div>
 
             <div class="bottom">
@@ -66,25 +68,36 @@
                 
                 <h3>Accounts & Cards</h3>
                 <hr>
+            {% for card_info in cards %}
+                 {% for card1 in card_info %}
                 <div class="wrapper_cards">
                     <div class="card">
                         <div class="card_top">
-                            <h2>Universal card</h2>
+                            <h2>{{ card }}</h2>
+                            {% if card1.type == 'Visa' %}
                             <img src={%  static "img/visa.png" %} alt="">
+                            {% else %}
+                            <h2>mastercard</h2>
+                            {% endif %}
                         </div>
-
+                   
                         <div class="balance">
-                            <h2>UAH {{balance}}</h2>
+                            <h2>UAH {{ card1.balance }}</h2>
                         </div>
 
                         <div class="bank_account_number">
-                            <p>{{ number }}</p>
+                            <p>{{ card1.number }}</p>
                         </div>
                     </div>
+                     {% endfor %}
+            {% endfor %}
                     {% comment %}<div class="card">
                         <div class="card_top">
                             <h2>Universal card</h2>
                             <img src={%  static "img/visa.png" %} alt="">
+                            {% else %}
+                                <h2>mastercard</h2>
+                            {% endif %}
                         </div>
 
                         <div class="balance">
@@ -124,13 +137,17 @@
                     <div class="diagram">
                         <canvas id="myChart"></canvas>
                     </div>
-
+                    {% for expence in expenses %}
+                        {% for i in expence %}
                     <div class="categories_inf">
                         <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
-                            <span>{{ category }}</span>
-                            <h6>- {{ amounts }}</h6>
+                                <span>{{ i.category }}</span>
+                                <h6> {{ i.amount }} </h6>
                         </div>
+                            {% endfor %}
+                        {% endfor %}
                     </div>
+                   
                     {% comment %}<div class="categories_inf">
                         <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
                             <img src={% static "img/shopping.svg" %} alt="">
@@ -276,14 +293,10 @@
     <script>
         //diagram
         const data = {
-            labels: [
-                'Red',
-                'Blue',
-                'Yellow'
-            ],
+            labels: {{ labels | safe }},
             datasets: [{
                 label: 'My First Dataset',
-                data: [300, 50, 100],
+                data: {{ data }},
                 backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',
