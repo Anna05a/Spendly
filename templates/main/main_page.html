@@ -69,8 +69,9 @@
                 <h3>Accounts & Cards</h3>
                 <hr>
             {% for card_info in cards %}
-                 {% for card1 in card_info %}
-                <div class="wrapper_cards">
+              {% for card1 in card_info %}
+                <a href= {% url 'get_payments' card1.id %}>
+                  <div class="wrapper_cards">
                     <div class="card">
                         <div class="card_top">
                             <h2>{{ card }}</h2>
@@ -89,7 +90,9 @@
                             <p>{{ card1.number }}</p>
                         </div>
                     </div>
-                     {% endfor %}
+                </div>
+              </a>
+                 {% endfor %}
             {% endfor %}
                     {% comment %}<div class="card">
                         <div class="card_top">
@@ -137,14 +140,14 @@
                     <div class="diagram">
                         <canvas id="myChart"></canvas>
                     </div>
-                    {% for expence in expenses %}
-                        {% for i in expence %}
+                    {% for expence in expences %}
+                        
                     <div class="categories_inf">
                         <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
-                                <span>{{ i.category }}</span>
-                                <h6> {{ i.amount }} </h6>
+                                <span>{{ expence.category }}</span>
+                                <h6> {{ expence.amount }} </h6>
                         </div>
-                            {% endfor %}
+                            
                         {% endfor %}
                     </div>
                    
