@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from monobank import Client
 from datetime import datetime, date, timezone
 import time
-from API.models import Card
+from .models import Card
 
 
 
@@ -73,16 +73,18 @@ def add_card(request):
                     data.append(originAmount)
 
             if not Card.objects.filter(card_number=card_number).exists():
-                card_obj = Card(id=card_ids,balance=card_balance, card_number=card_number, token=token)
-                card_obj.save()
+                    card_obj = Card(id=card_ids, balance=card_balance, card_number=card_number, token=token)
+                    card_obj.save()
+
 
         context = {'cards': cards, 'expenses':all_payments, 'labels': labels, 'data': data}
         return render(request, 'main/main_page.html', context)
 
     except monobank.Error as e:
-             #сторінка для помилки ту мач реквест
+        # сторінка для помилки ту мач реквест
         print("Помилка у функції get_cards:", e)
         return render(request, 'main/main_new.html')
+
 
 def statistics_page(request):
     return render(request, 'main/statistic_page.html')

@@ -79,7 +79,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'finances.wsgi.application'
-
+AUTH_USER_MODEL = 'authentication.CustomUser'
 AUTHENTICATION_BACKENDS = [
      'allauth.account.auth_backends.AuthenticationBackend',
 ]
