@@ -68,6 +68,7 @@
                 
                 <h3>Accounts & Cards</h3>
                 <hr>
+                <div class="card-container">
             {% for card_info in cards %}
               {% for card1 in card_info %}
                 <a href= {% url 'get_payments' card1.id %}>
@@ -92,9 +93,10 @@
                     </div>
                 </div>
               </a>
-                 {% endfor %}
-            {% endfor %}
-                    {% comment %}<div class="card">
+              {% endfor %}
+              {% endfor %}
+            </div>
+                    <!-- {% comment %}<div class="card">
                         <div class="card_top">
                             <h2>Universal card</h2>
                             <img src={%  static "img/visa.png" %} alt="">
@@ -116,10 +118,10 @@
                     <div class="plus">
                         <button class="button_plus">+</button>
                     </div>
-                </div>
+                </div> -->
 
 
-            </div>
+            
 
             <div class="categories">
 
@@ -131,7 +133,7 @@
                     <button id="openDialog" class="mini_plus">+</button>
 
                     <button class="calendar" id="datepicker">
-                        <span>January - February, 2024</span>
+                        January - February, 2024
                         <img src={% static "img/calendar.svg.png" %} alt="">
                     </button>
 

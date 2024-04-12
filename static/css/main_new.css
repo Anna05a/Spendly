@@ -43,7 +43,7 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
-a {
+a{
   text-decoration: none;
 }
 
@@ -76,12 +76,12 @@ html {
   width: 100%;
 }
 .menu {
-  width: 30%;
+  width: 40%;
   height: 100%;
   background-color: black;
 }
 .main {
-  width: 70%;
+  width: 100%;
   height: 100%;
   background-color: rgba(217, 217, 217, 1);
 }
@@ -107,7 +107,7 @@ h1 {
   font-weight: 700;
   line-height: 64px;
   color: rgba(217, 217, 217, 1);
-  margin-top: 2vw;
+  margin-top: 4vw;
   margin-left: 4vw;
   position: relative;
 }
@@ -183,7 +183,7 @@ h1 {
 }
 
 .main {
-  width: 1100px;
+  width: 100%;
   height: 100%;
 }
 
@@ -298,6 +298,8 @@ hr {
   margin-right: 20px;
   padding-left: 5px;
   display: flex;
+  align-items: center;
+  padding: 10px;
   font-size: 16px;
   font-weight: 300;
 }
@@ -457,6 +459,7 @@ h5 {
   font-size: 20px;
   border: 1px solid red;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .deleteAcount {
@@ -465,6 +468,7 @@ h5 {
   font-size: 20px;
   border: 1px solid red;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .logOut {
@@ -473,6 +477,7 @@ h5 {
   font-size: 20px;
   border: 1px solid red;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .addCard1 {
@@ -482,6 +487,7 @@ h5 {
   padding-bottom: 30px;
   border-radius: 8px;
   border: none;
+  overflow: hidden;
 }
 
 .addCard2 {
@@ -491,6 +497,7 @@ h5 {
   padding-bottom: 30px;
   border-radius: 8px;
   border: none;
+  overflow: hidden;
 
 }
 

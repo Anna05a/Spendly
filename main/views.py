@@ -6,7 +6,7 @@ from monobank import Client
 from datetime import datetime, date, timezone
 import time
 from .models import Card
-
+import uuid
 
 
 @login_required(login_url='/login')
@@ -38,15 +38,17 @@ def add_card(request):
         client = Client(token)
         user_info = client.get_client_info()
         request.session['token'] = token
+        # Отримання поточного користувача
+        user = request.user
         #додавання карти
         if user_info:
-            for user in user_info['accounts']:
-                originBalance = user['balance'] // 100
+            for user_account in user_info['accounts']:
+                originBalance = user_account['balance'] // 100
                 card_balance=originBalance
-                card_number=user['maskedPan'][0]
-                card_id = user['id']
-                temp = user['maskedPan'][0]
-                type = user['type']
+                card_number=user_account['maskedPan'][0]
+                card_id = user_account['id']
+                temp = user_account['maskedPan'][0]
+                type = user_account['type']
                 if temp[0] == '4':
                     card_type='Visa'
                 elif temp[0] == '5':
@@ -55,9 +57,8 @@ def add_card(request):
                 card_info.append({'number': card_number, 'id': card_id, 'balance': card_balance,'color': type, 'type': card_type})
                 cards.append(card_info)
             #відображення витрат
-            if not Card.objects.filter(card_number=card_number).exists():
-                card_obj = Card(id=card_id, balance=card_balance, card_number=card_number, token=token)
-                card_obj.save()
+        if not Card.objects.filter(card_id=card_id).exists():  # Перевіряємо, чи ідентифікатор уже існує
+            card_obj = Card.objects.create(id=uuid.uuid4(), card_id=card_id, balance=card_balance, card_number=card_number, user=user, token=token)
 
         context = {'cards': cards, 'labels': labels, 'data': data}
         return render(request, 'main/main_page.html', context)
@@ -66,6 +67,7 @@ def add_card(request):
         # сторінка для помилки ту мач реквест
         print("Помилка у функції get_cards:", e)
         return render(request, 'main/main_new.html')
+
 
 def get_payments(request, card_id):
     try:
