@@ -74,10 +74,11 @@
                 <h3>Accounts & Cards</h3>
                 <hr>
             <a href={% url 'home' %}>
-            <button class="refresh" >
-                Refresh token
-            </button>
-            </a>
+{#            <button class="refresh" >#}
+{#                Refresh token#}
+{#            </button>#}
+{#            </a>#}
+            
                 <div class="card-container">
               {% for card1 in cards %}
                 <a href= {% url 'get_payments' card1.card_id %}>

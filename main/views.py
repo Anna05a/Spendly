@@ -27,6 +27,7 @@ def home_page(request):
     cards=Card.objects.filter(user=request.user)
     return render(request, 'main/main_page.html', {'cards':cards, 'user':request.user})
 
+
 def add_card(request):
     token = request.POST.get('token')
 
