@@ -44,16 +44,21 @@
                     <img src={% static "img/clear.svg" %} alt="">
                     <span>Clear history</span>
                 </button>
-
+                
+                <a href={% url 'delete_profile' %}>
                 <button class="button_menu pasive" id="openDialogDelete">
                     <img src={% static "img/delete.png" %} alt="">
                     <span>Delete account</span>
                 </button>
-
+                </a>
+                
+                <a href={% url 'logout' %}>
                 <button class="button_menu pasive" id="openLogOut">
                     <img src={% static "img/log_out.svg" %} alt="">
                     <span>Log out</span>
                 </button>
+                </a>
+                
             </div>
 
         </div>
@@ -68,18 +73,22 @@
                 
                 <h3>Accounts & Cards</h3>
                 <hr>
+            <a href={% url 'home' %}>
+            <button class="refresh" >
+                Refresh token
+            </button>
+            </a>
                 <div class="card-container">
-            {% for card_info in cards %}
-              {% for card1 in card_info %}
-                <a href= {% url 'get_payments' card1.id %}>
+              {% for card1 in cards %}
+                <a href= {% url 'get_payments' card1.card_id %}>
                   <div class="wrapper_cards">
                     <div class="card">
                         <div class="card_top">
                             <h2>{{ card }}</h2>
                             {% if card1.type == 'Visa' %}
-                            <img src={%  static "img/visa.png" %} alt="">
+                            <img src={%  static "img/icons-visa.png" %} alt="">
                             {% else %}
-                            <h2>mastercard</h2>
+                            <img src={%  static "img/icons-mastercard.png" %} alt="">
                             {% endif %}
                         </div>
                    
@@ -88,12 +97,11 @@
                         </div>
 
                         <div class="bank_account_number">
-                            <p>{{ card1.number }}</p>
+                            <p>{{ card1.card_number }}</p>
                         </div>
                     </div>
                 </div>
               </a>
-              {% endfor %}
               {% endfor %}
             </div>
                     <!-- {% comment %}<div class="card">

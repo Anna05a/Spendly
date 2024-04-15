@@ -216,7 +216,7 @@
                 </div>
             </dialog>
 
-            <!-- діалогове вікно "Додати карту 1 крок" -->
+<!-- діалогове вікно "Додати карту 1 крок" -->
             <dialog id="addCard1" class="addCard1">
                 <div class="dialog_header">
                     <button id="closeAddCard1" class="close">
@@ -258,7 +258,7 @@
                     </form>
                 </div>
             </dialog>
-
+            
             <!-- діалогове вікно "Додати карту 2 крок Incorrect Token" -->
             <dialog id="incorrect_token" class="addCard2">
                 <div class="dialog_header">
@@ -399,12 +399,10 @@
         }
 
          //діалогове вікно "Incorrect token"
-         document.querySelector('#open_incorrect_token').onclick = function () {
-            closeCurrentModal();
-            document.body.classList.add('dialog-open');
-            document.querySelector('.overlay').style.display = 'block';
-            document.getElementById('incorrect_token').showModal();
-        }
+         document.addEventListener('DOMContentLoaded', function() {
+        var dialog = document.getElementById('incorrect_token');
+        dialog.showModal();
+        });
 
         document.querySelector('#close_incorrect_token').onclick = function () {
             document.body.classList.remove('dialog-open');

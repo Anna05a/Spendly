@@ -4,7 +4,7 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=False)
     username = models.CharField(max_length=150, unique=True)
     groups = models.ManyToManyField('auth.Group', )
     user_permissions = models.ManyToManyField('auth.Permission', related_name='custom_user_permissions')

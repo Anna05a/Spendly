@@ -42,7 +42,7 @@ def login_user(request):
             user = CustomUser.objects.get(username=username)
             if user.check_password(password):
                 auth.login(request, user)
-                return redirect('home')
+                return redirect('home_page')
     return render(request, 'authentication/login.html', {'loginForm': form})
 
 
@@ -75,7 +75,7 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         messages.add_message(request, messages.SUCCESS, 'Email verified, you can now login')
-        return redirect(reverse('login'))
+        return redirect(reverse('home'))
     else:
         return render(request, 'authentication/activation_failed.html', {"user": user})
 
