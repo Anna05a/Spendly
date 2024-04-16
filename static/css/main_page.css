@@ -88,8 +88,8 @@ html {
   content: "";
   position: absolute;
   display: inline-block;
-  width: 140px;
-  height: 140px;
+  width: 10vw;
+  height: 10vw;
   background: radial-gradient(
     rgba(123, 26, 198, 1) 20%,
     rgba(16, 16, 16, 1) 70%
@@ -101,23 +101,22 @@ html {
 
 h1 {
   font-family: "Josefin Sans", sans-serif;
-  font-size: 64px;
+  font-size: 6vw;
   font-weight: 700;
   line-height: 64px;
   color: rgba(217, 217, 217, 1);
-  margin-top: 49px;
-  margin-left: 77px;
+  margin-top: 2vw;
+  margin-left: 4vw;
   position: relative;
 }
-
 .top {
-  margin-top: 100px;
-  margin-left: 50px;
+  margin-top: 5vw;
+  margin-left: 2.5vw;
 }
 
 .bottom {
-  margin-top: 180px;
-  margin-left: 50px;
+  margin-top: 10vw;
+  margin-left: 2.5vw;
 }
 
 .button_menu {
@@ -131,10 +130,28 @@ h1 {
   border-radius: 8px;
   color: rgb(232, 231, 231);
   display: flex;
+  justify-content: flex-start;
   align-items: center;
 }
 
-.active {
+@media screen and (max-width: 768px) {
+  .wrapper {
+    flex-direction: column; /* змінив напрямок виведення на вертикальний */
+  }
+
+  .menu,
+  .main {
+    width: 100%; /* змінив ширину на 100% */
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .button_menu {
+    font-size: 3vw; /* змінив розмір на відносну одиницю */
+    width: 60%; /* змінив ширину на відносну одиницю */
+  }
+  
+}.active {
   background-color: rgb(123, 26, 198);
 }
 
