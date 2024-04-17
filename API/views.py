@@ -62,17 +62,19 @@ def get_pay(user_ids, df):
             if payment['currencyCode'] == 978:
                 currency = 'EUR'
             mcc_descriptionTemp = get_mcc_description(str(payment.get('mcc', '')))
-            mcc_description = mcc_descriptionTemp.lower().replace('вђ“', '')
+            mcc_description = mcc_descriptionTemp.lower().replace ('â€“', '').replace('вђ“', '')
             if payment['mcc'] == 7832:
                 mcc_description = 'motion picture theatres'
+            if payment['mcc'] == 4816:
+                mcc_description = 'computer network/information services'
             #print('mcc', payment['mcc'])
             #print('TTTT',mcc_description )
             category = find_category(df, mcc_description)
-            if category.lower() == 'фінанси':
+            if category.lower() == 'Finance':
                 if str(originAmount).startswith('-'):
-                    category = 'переказ'
+                    category = 'Transfer'
                 else:
-                    category = 'зарахування'
+                    category = 'Enrollment'
             
             print('Час', new_time_str)
             print('Сума', originAmount) 
