@@ -55,7 +55,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
     "allauth.account.middleware.AccountMiddleware",
 ]
 
@@ -79,11 +78,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'finances.wsgi.application'
-AUTH_USER_MODEL = 'authentication.CustomUser'
 AUTHENTICATION_BACKENDS = [
      'allauth.account.auth_backends.AuthenticationBackend',
 ]
-
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 

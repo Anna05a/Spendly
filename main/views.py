@@ -1,6 +1,8 @@
+from django import forms
 import monobank
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from monobank import Client
 from datetime import datetime, date, timezone, timedelta
@@ -24,8 +26,8 @@ def statistics_page(request):
 
 @login_required(login_url='/login')
 def home_page(request):
-    cards=Card.objects.filter(user=request.user)
-    return render(request, 'main/main_page.html', {'cards':cards, 'user':request.user})
+    cards = Card.objects.filter(user=request.user)
+    return render(request, 'main/main_page.html', {'cards': cards, 'user': request.user})
 
 
 def add_card(request):
@@ -40,15 +42,14 @@ def add_card(request):
         # Отримання поточного користувача
         user = request.user
         print(user_info)
-        #додавання карти
+        # додавання карти
         if user_info:
             for user_account in user_info['accounts']:
                 originBalance = user_account['balance'] // 100
-                card_balance=originBalance
-                card_number=user_account['maskedPan'][0]
+                card_balance = originBalance
+                card_number = user_account['maskedPan'][0]
                 card_id = user_account['id']
                 card_ids.append(card_id)
-
 
                 # Додаємо card_id лише один раз до списку card_ids
                 if card_id not in card_ids:
@@ -57,16 +58,16 @@ def add_card(request):
                 temp = user_account['maskedPan'][0]
                 type = user_account['type']
                 if temp[0] == '4':
-                    card_type='Visa'
+                    card_type = 'Visa'
                 elif temp[0] == '5':
                     card_type = 'Master'
                 print(card_ids)
-                card_info=[]
+                card_info = []
                 card_info.append({'number': card_number, 'id': card_id, 'balance': card_balance,'color': type, 'type': card_type})
                 cards.append(card_info)
-            #відображення витрат
+            # відображення витрат
                 if not Card.objects.filter(card_id=card_id).exists():  # Перевіряємо, чи ідентифікатор уже існує
-                    card_obj = Card.objects.create(id=uuid.uuid4(), card_id=card_id, balance=card_balance, card_number=card_number, user=user, token=token)
+                    card_obj = Card.objects.create(id=uuid.uuid4(), card_id=card_id, balance=card_balance, card_number=card_number, user=user, token=token, type=type, system=card_type)
 
         context = {'cards': cards}
         return redirect('home_page')
@@ -79,7 +80,7 @@ def add_card(request):
 
 def get_payments(request, card_id):
     try:
-        cards=Card.objects.filter(user=request.user)
+        cards = Card.objects.filter(user=request.user)
         mono = monobank.Client(cards.first().token)
         labels = []
         data = []
@@ -101,7 +102,7 @@ def get_payments(request, card_id):
             if payment['currencyCode'] == 978:
                 currency = 'EUR'
             mcc_descriptionTemp = get_mcc_description(str(payment.get('mcc', '')))
-            mcc_description = mcc_descriptionTemp.lower().replace('вђ“', '')
+            mcc_description = mcc_descriptionTemp.lower().replace('â€“', '')
             if payment['mcc'] == 7832:
                 mcc_description = 'motion picture theatres'
             # print('mcc', payment['mcc'])
@@ -130,6 +131,3 @@ def get_payments(request, card_id):
     except Exception as e:
         print("Error in get_payments function:", e)
         return render(request, 'main/statistic_page.html')
-
-def statistics_page(request):
-    return render(request, 'main/statistic_page.html')

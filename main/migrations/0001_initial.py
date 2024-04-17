@@ -18,7 +18,10 @@ class Migration(migrations.Migration):
             name='Card',
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False)),
+                ('card_id', models.CharField(max_length=100, unique=True)),
                 ('balance', models.DecimalField(decimal_places=2, max_digits=10)),
+                ('type', models.CharField(max_length=30, blank=True, null=True)),
+                ('system', models.CharField(max_length=30, blank=True, null=True)),
                 ('card_number', models.CharField(max_length=16, unique=True)),
                 ('token', models.CharField(blank=True, max_length=100, null=True)),
             ],

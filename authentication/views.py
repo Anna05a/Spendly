@@ -8,13 +8,10 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.http import HttpResponseForbidden
 from django.contrib.auth import authenticate, logout
 from django.contrib import auth
-from .models import CustomUser
+from django.contrib.auth.models import User
 from .forms import RegistrationForm, LoginForm
 from .tokens import account_activation_token
 from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
 
 
 def sign_up(request):
@@ -31,7 +28,6 @@ def sign_up(request):
     return render(request, 'authentication/signUp.html', {'registerForm': form})
 
 
-
 def login_user(request):
     form = LoginForm()
     if request.method == 'POST':
@@ -39,24 +35,23 @@ def login_user(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = CustomUser.objects.get(username=username)
-            if user.check_password(password):
+            user = authenticate(username=username, password=password)
+            if user is not None:
                 auth.login(request, user)
                 return redirect('home_page')
     return render(request, 'authentication/login.html', {'loginForm': form})
 
 
-
-def logout(request):
+def logout_user(request):
     auth.logout(request)
     return redirect('login')
+
 
 
 def delete_user(request):
     user = request.user
     user.delete()
     return redirect('sign-up')
-
 
 
 def reset_password(request):
@@ -66,7 +61,7 @@ def reset_password(request):
 def activate(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
-        user = CustomUser.objects.get(pk=uid)
+        user = User.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, DjangoUnicodeDecodeError):
         user = None
 
