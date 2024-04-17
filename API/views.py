@@ -70,7 +70,7 @@ def get_pay(user_ids, df):
             #print('mcc', payment['mcc'])
             #print('TTTT',mcc_description )
             category = find_category(df, mcc_description)
-            if category.lower() == 'Finance':
+            if category.lower() == 'finance':
                 if str(originAmount).startswith('-'):
                     category = 'Transfer'
                 else:
