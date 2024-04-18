@@ -109,11 +109,11 @@ def get_payments(request, card_id):
             # print('TTTT',mcc_description )
             df = read_csv('category.csv')
             category = find_category(df, mcc_description)
-            if category.lower() == 'фінанси':
+            if category.lower() == 'finance':
                 if str(originAmount).startswith('-'):
-                    category = 'переказ'
+                    category = 'Transfer'
                 else:
-                    category = 'зарахування'
+                    category = 'Enrollment'
 
 
             payments.append({
