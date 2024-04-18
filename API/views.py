@@ -113,18 +113,18 @@ def get_category_earn_cost(originAmounts):
     except Exception as e:
         print("Помилка у функції get_category_earn_cost:", e)
 
-try:
-    file_path = 'category.csv'  # Шлях до файлу CSV
-    df = read_csv(file_path)
-    if df is not None:
-        card_ids = get_cards()
-        if card_ids:
-            time.sleep(61)
-            card_id = 'paste id'
-            originAmounts = get_pay(card_id, df) 
-            time.sleep(0)
-            #get_category_earn_cost(originAmounts)  
-except Exception as e:
-    print("Помилка у головній програмі:", e)
-
-
+# try:
+#     file_path = 'category.csv'  # Шлях до файлу CSV
+#     df = read_csv(file_path)
+#     if df is not None:
+#         card_ids = get_cards()
+#         if card_ids:
+#             time.sleep(61)
+#             card_id = 'paste id'
+#             originAmounts = get_pay(card_id, df)
+#             time.sleep(0)
+#             #get_category_earn_cost(originAmounts)
+# except Exception as e:
+#     print("Помилка у головній програмі:", e)
+#
+#

@@ -329,6 +329,16 @@ hr {
   margin-top: 30px;
   border-radius: 8px;
 }
+.category-detail{
+   width: 900px;
+  height: 50%;
+  display: block;
+  background-color: rgba(232, 231, 231, 1);
+  font-family: "Montserrat", sans-serif;
+  margin: auto;
+  margin-top: 0px;
+  border-radius: 8px;
+}
 
 .buttons {
   display: flex;

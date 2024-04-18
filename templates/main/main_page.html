@@ -73,7 +73,7 @@
                 
                 <h3>Accounts & Cards</h3>
                 <hr>
-            <a href={% url 'home' %}>
+{#            <a href={% url 'home' %}>#}
 {#            <button class="refresh" >#}
 {#                Refresh token#}
 {#            </button>#}
@@ -101,6 +101,7 @@
                             <p>{{ card1.card_number }}</p>
                         </div>
                     </div>
+                      <a href={% url 'delete_card' card1.card_id%}>delete card</a>
                 </div>
               </a>
               {% endfor %}
@@ -140,7 +141,7 @@
                 <div class="buttons">
 
                     <button id="openDialog" class="mini_plus">+</button>
-
+                    
                     <button class="calendar" id="datepicker">
                         January - February, 2024
                         <img src={% static "img/calendar.svg.png" %} alt="">
@@ -151,17 +152,23 @@
                     <div class="diagram">
                         <canvas id="myChart"></canvas>
                     </div>
-                    {% for expence in expences %}
-                        
-                    <div class="categories_inf">
-                        <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
-                                <span>{{ expence.category }}</span>
-                                <h6> {{ expence.amount }} </h6>
-                        </div>
-                            
+                  <div class="categories_inf">
+                        {% for expence in expences %}
+                            <div class="category" onclick="toggleInfo(this)" style="border: 2px solid rgba(16, 176, 80, 1);">
+                                <div class="category-summary">
+                                    <span>{{ expence.category }}</span>
+                                    <h6>{{ expence.amount }}</h6>
+                                </div>
+                            <div class="category-detail" style="display: none;">
+                                <span>{{ expence.description }}</span>
+                                <h6>{{ expence.time }}</h6>
+                                <h6>{{ expence.amount }}</h6>
+                            </div>
+                   </div>
                         {% endfor %}
-                    </div>
-                   
+                </div>
+
+                    
                     {% comment %}<div class="categories_inf">
                         <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
                             <img src={% static "img/shopping.svg" %} alt="">
@@ -177,14 +184,13 @@
                             <img src={% static "img/transport.png" %} alt="">
                             <span>Transport</span>
                             <h6>- UAH 20</h6>
-                        </div>
+                        </div>{% endcomment %}
                         <button class="scroll">
                             <img src={% static "img/next.png" %} alt="">
                         </button>
-                    </div>{% endcomment %}
+                    </div>
 
                 </div>
-
             </div>
 
             <!-- діалогове вікно вибір категорій -->
@@ -298,14 +304,20 @@
 
         </div>
     </div>
-
-
+    
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <!-- Fengyuan Chen's Datepicker -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
 
     <script>
         //diagram
+       
         const data = {
             labels: {{ labels | safe }},
             datasets: [{
@@ -316,6 +328,11 @@
                     'rgb(54, 162, 235)',
                     'rgb(255, 205, 86)'
                 ],
+                borderColor: [
+            'rgb(255, 99, 132)',   // Колір витрат для Категорії 1
+            'rgb(54, 162, 235)',    // Колір витрат для Категорії 2
+            'rgb(255, 205, 86)'     // Колір витрат для Категорії 3
+        ],
                 hoverOffset: 4
             }]
         };
@@ -389,9 +406,19 @@
                 element: document.getElementById('datepicker'),
                 singleMode: false,
                 autoApply: true,
+                
             });
         });
-
+      function toggleInfo(category) {
+        var detail = category.querySelector('.category-detail');
+        if (detail.style.display === 'none') {
+            detail.style.display = 'block';
+            category.querySelector('.category-summary').style.display = 'none';
+        } else {
+            detail.style.display = 'none';
+            category.querySelector('.category-summary').style.display = 'flex';
+        }
+    }
     </script>
 </body>
 

@@ -5,17 +5,23 @@ from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.http import HttpResponseForbidden
 from django.contrib.auth import authenticate, logout
 from django.contrib import auth
 from django.contrib.auth.models import User
+from django.views import View
+
+from main.models import Card
 from .forms import RegistrationForm, LoginForm
 from .tokens import account_activation_token
 from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
 
 
-def sign_up(request):
-    if request.method == 'POST':
+class SignUpView(View):
+    def get(self, request):
+        form = RegistrationForm()
+        return render(request, 'authentication/signUp.html', {'registerForm': form})
+
+    def post(self, request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
@@ -23,55 +29,9 @@ def sign_up(request):
             user.save()
             activate_email(request, user, form.cleaned_data.get('email'))
             return render(request, 'authentication/verification.html', {'email': request.POST.get('email')})
-    else:
-        form = RegistrationForm()
-    return render(request, 'authentication/signUp.html', {'registerForm': form})
+        return render(request, 'authentication/signUp.html', {'registerForm': form})
 
 
-def login_user(request):
-    form = LoginForm()
-    if request.method == 'POST':
-        form = LoginForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                auth.login(request, user)
-                return redirect('home_page')
-    return render(request, 'authentication/login.html', {'loginForm': form})
-
-
-def logout_user(request):
-    auth.logout(request)
-    return redirect('login')
-
-
-
-def delete_user(request):
-    user = request.user
-    user.delete()
-    return redirect('sign-up')
-
-
-def reset_password(request):
-    return render(request, 'authentication/reset_password.html')
-
-
-def activate(request, uidb64, token):
-    try:
-        uid = force_str(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, DjangoUnicodeDecodeError):
-        user = None
-
-    if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
-        user.save()
-        messages.add_message(request, messages.SUCCESS, 'Email verified, you can now login')
-        return redirect(reverse('home'))
-    else:
-        return render(request, 'authentication/activation_failed.html', {"user": user})
 
 
 def activate_email(request, user, to_email):
@@ -85,6 +45,65 @@ def activate_email(request, user, to_email):
     })
     email = EmailMessage(subject, message, to=[to_email])
     if email.send():
-        messages.success(request, f'Please, check your email {to_email} and click on link below to activate your accounts.')
+        messages.success(request,
+                         f'Please, check your email {to_email} and click on link below to activate your accounts.')
     else:
-        messages.error(request, f'There is a problem with sending an email. Please, check if you typed it correctly')
+        messages.error(request,
+                       f'There is a problem with sending an email. Please, check if you typed it correctly')
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, DjangoUnicodeDecodeError):
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        messages.add_message(request, messages.SUCCESS, 'Email verified, you can now login')
+        return redirect(reverse('home_page'))
+    else:
+        return render(request, 'authentication/activation_failed.html', {"user": user})
+
+
+
+class LoginView(View):
+    def get(self, request):
+        form = LoginForm()
+        return render(request, 'authentication/login.html', {'loginForm': form})
+
+    def post(self, request):
+        form = LoginForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                auth.login(request, user)
+                if Card.objects.filter(user=request.user).exists():
+                    return redirect('home_page')
+                else:
+                    return redirect('home')
+        return render(request, 'authentication/login.html', {'loginForm': form})
+
+
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('login')
+
+
+
+class DeleteUserView(View):
+    def get(self, request):
+        user = request.user
+        user.delete()
+        return redirect('sign-up')
+
+
+
+class ResetPasswordView(View):
+    def get(self, request):
+        return render(request, 'authentication/reset_password.html')

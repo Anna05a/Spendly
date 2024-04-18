@@ -1,5 +1,6 @@
 from django import forms
 import monobank
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -16,14 +17,35 @@ import uuid
 @login_required(login_url='/login')
 def home(request):
     return render(request,'main/main_new.html')
-
+@login_required(login_url='/login')
 def statistics(request):
     return render(request, 'main/statistic_new.html')
 
 @login_required(login_url='/login')
 def statistics_page(request):
-    return render(request, 'main/statistic_page.html')
+    try:
+        originAmounts = request.session['originAmounts']
+        print(originAmounts)
+        count_expence = 0
+        count_revenue = 0
+        data = []
+        finances = []
+        expences = 0
+        revenues = 0
+        for originAmount in originAmounts:
+            if str(originAmount).startswith('-'):
+                expences += 1
+            else:
+                revenues += 1
+        data.append(expences)
+        data.append(revenues)
 
+        context = {'finances': finances, 'data': data}
+        return render(request, 'main/statistic_page.html', context)
+
+    except Exception as e:
+        print("Помилка у функції get_category_earn_cost:", e)
+        return render(request, 'main/main_new.html')
 @login_required(login_url='/login')
 def home_page(request):
     cards = Card.objects.filter(user=request.user)
@@ -78,6 +100,15 @@ def add_card(request):
         return render(request, 'main/token_error.html')
 
 
+def delete_card(request, card_id):
+    card = Card.objects.filter(card_id=card_id)
+    card.delete()
+    if not card.exists():
+        return redirect('home')
+    else:
+        return redirect('home_page')
+
+
 def get_payments(request, card_id):
     try:
         cards = Card.objects.filter(user=request.user)
@@ -86,14 +117,25 @@ def get_payments(request, card_id):
         data = []
         originAmounts = []
         payments = []
+        current_datetime = datetime.now()
+        end_year = current_datetime.year
+        end_month = current_datetime.month
+        end_day = current_datetime.day
 
-        statements = mono.get_statements(card_id, date(2024, 4, 5), date(2024, 4, 9))
+        one_month_ago = current_datetime - timedelta(days=30)
+        start_year = one_month_ago.year
+        start_month = one_month_ago.month
+        start_day = one_month_ago.day
+
+        statements = mono.get_statements(card_id, date(start_year, start_month, start_day), date(end_year, end_month, end_day))
 
         for payment in statements:
             original_time = datetime.fromtimestamp(payment['time'], timezone.utc)
             new_time_str = (original_time + timedelta(hours=2)).strftime('%Y-%m-%d %H:%M:%S')
             originAmount = payment['amount'] // 100
+            id = payment['id']
             originAmounts.append(originAmount)
+            request.session['originAmounts'] = originAmounts
             currency = ''
             if payment['currencyCode'] == 980:
                 currency = 'UAH'
@@ -109,25 +151,33 @@ def get_payments(request, card_id):
             # print('TTTT',mcc_description )
             df = read_csv('category.csv')
             category = find_category(df, mcc_description)
-            if category.lower() == 'finance':
+            if category.lower() == 'фінанси':
                 if str(originAmount).startswith('-'):
-                    category = 'Transfer'
+                    category = 'переказ'
                 else:
-                    category = 'Enrollment'
-
+                    category = 'зарахування'
 
             payments.append({
+                'id': id,
                 'time': new_time_str,
                 'amount': originAmount,
                 'currency': currency,
                 'category': category,
                 'description': payment['description']
             })
+
             labels.append(category)
             data.append(originAmount)
-        context = {'expences': payments, 'cards': cards, 'labels': labels, 'data': data}
+            backgroundColor=[
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)'
+                ]
+
+        context = {'expences': payments, 'cards': cards, 'labels': labels, 'data': data, 'colors': backgroundColor}
         return render(request, 'main/main_page.html', context)
 
     except Exception as e:
         print("Error in get_payments function:", e)
         return render(request, 'main/statistic_page.html')
+

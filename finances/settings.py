@@ -83,6 +83,8 @@ AUTHENTICATION_BACKENDS = [
 ]
 SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -141,7 +143,9 @@ STATICFILES_DIRS=[
     BASE_DIR / 'static'
 ]
 
-LOGIN_REDIRECT_URL = 'home'
+#LOGIN_REDIRECT_URL = '/home_page'
+#SIGNUP_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL='home_page'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
