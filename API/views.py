@@ -67,6 +67,8 @@ def get_pay(user_ids, df):
                 mcc_description = 'motion picture theatres'
             if payment['mcc'] == 4816:
                 mcc_description = 'computer network/information services'
+            if payment['mcc'] == 5816:
+                mcc_description = 'digital goods – games'
             #print('mcc', payment['mcc'])
             #print('TTTT',mcc_description )
             category = find_category(df, mcc_description)
