@@ -36,10 +36,12 @@ body {
 ul[class],
 ol[class] {
   list-style: none;
+  text-decoration: none;
 }
 
 a:not([class]) {
   text-decoration-skip-ink: auto;
+  text-decoration: none;
 }
 
 img {
@@ -231,6 +233,7 @@ hr {
 .wrapper_cards {
   display: flex;
 }
+
 .refresh{
   width: 160px;
   height: 50px;
@@ -256,6 +259,7 @@ hr {
   border-radius: 8px;
   margin-top: 5px;
   margin-left: 30px;
+  color: black;
 }
 
 .card_top {
@@ -279,20 +283,30 @@ hr {
 
 .balance h2 {
   font-family: "Montserrat", sans-serif;
-  font-weight: 100;
+  font-weight: 500;
   font-size: 20px;
   margin-left: 15px;
   margin-top: 5px;
 }
 
 .bank_account_number {
-  margin-top: 30px;
-  margin-left: 15px;
+ margin-top: 10px;
+  margin-left: 5px;
   font-size: 20px;
   font-family: "Montserrat", sans-serif;
-  font-weight: 100;
+  font-weight: 500;
 }
 
+.wrapper_number_and_bin{
+  display: flex;
+  justify-content: space-around;
+}
+
+.delete_card{
+  background-color: rgba(255, 255, 255, 0.001);
+  border: none;
+
+}
 .plus {
   display: flex;
 }
@@ -332,7 +346,7 @@ hr {
 
 .buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
 }
 
 .buttons button {
@@ -392,46 +406,66 @@ hr {
 
 .categories_inf {
   width: 473px;
-  height: 230px;
+  height: 235px;
+  padding-right: 10px;
+  overflow-y: scroll;
   background-color: rgba(217, 217, 217, 1);
   margin-top: 20px;
   margin-right: 30px;
   border-radius: 8px;
   position: relative;
   align-items: center;
+  padding-bottom: 10px;
 }
 
-/* Стилізація діалогових вікон */
-.category {
+.block{
+  width: 420px;
+  height: 47px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.block:hover {
+  transform: rotateY(180deg);
+}
+
+.block:hover .front {
+  display: none;
+}
+
+.front{
   display: flex;
   align-items: center;
   position: relative;
-  width: 420px;
+  width: 100%;
   height: 47px;
   border-radius: 8px;
   border: 2px;
   background-color: rgba(232, 231, 231, 1);
-  margin-top: 10px;
-  margin-left: 20px;
+}
+.front:hover {
+  transform: rotateY(180deg);
 }
 
-.category img {
+/* .front img {
   width: 32px;
   height: 32px;
   margin-left: 20px;
   margin-top: 7px;
-}
+} */
 
-.category span {
+.front span {
+  width: 70%;
   font-family: "Montserrat", sans-serif;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 100;
-
   margin-left: 20px;
-  margin-top: 10px;
-  line-height: 2;
+  margin-top: 5px;
 }
-.category h6 {
+
+.front h6 {
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: 400;
@@ -439,6 +473,42 @@ hr {
   line-height: 2;
   position: absolute;
   right: 30px;
+}
+
+.back {
+  display: none;
+  background-color: rgba(196, 197, 196, 1);
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  align-items: center;
+  position: absolute;
+  border: none;
+  border-radius: 8px;
+  width: 100%; 
+  height: 100%; 
+}
+
+.block:hover .back {
+  display: flex;
+  transform: rotateY(-180deg);
+}
+
+.place {
+  margin-left: 10px;
+}
+
+.date{
+  position: relative;
+  margin-left: 50px;
+}
+
+.back h6 {
+  margin: 0;
+  line-height: 2;
+  position: absolute;
+  right: 30px;
+  font-size: 16px;
 }
 
 .scroll {

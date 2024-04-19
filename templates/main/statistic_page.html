@@ -10,10 +10,13 @@
     <link rel="stylesheet" href={% static "css/statistic_new.css" %}>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -25,31 +28,31 @@
             </div>
             <div class="top">
                 <a href="javascript:history.go(-1)">
-                <button class="button_menu pasive">
-                    <img src={% static "img/main_page.png"  %} alt="">
-                    <span>Main page</span>
-                </button>
+                    <button class="button_menu pasive">
+                        <img src={% static "img/main_page.png" %} alt="">
+                        <span>Main page</span>
+                    </button>
                 </a>
                 <button class="button_menu active">
-                    <img src={% static "img/statistics.png"  %}  alt="">
+                    <img src={% static "img/statistics.png" %} alt="">
                     <span>Statistic</span>
                 </button>
             </div>
 
-            
+
             <div class="bottom">
                 <button class="button_menu pasive" id="openDialogClear">
-                    <img src={% static "img/clear.svg"  %} alt="">
+                    <img src={% static "img/clear.svg" %} alt="">
                     <span>Clear history</span>
                 </button>
 
                 <button class="button_menu pasive" id="openDialogDelete">
-                    <img src={% static "img/delete.png"  %} alt="">
+                    <img src={% static "img/delete.png" %} alt="">
                     <span>Delete account</span>
                 </button>
 
                 <button class="button_menu pasive" id="openLogOut">
-                    <img src={% static "img/log_out.svg"  %} alt="">
+                    <img src={% static "img/log_out.svg" %} alt="">
                     <span>Log out</span>
                 </button>
             </div>
@@ -68,7 +71,7 @@
 
                     <button class="calendar" id="datepicker">
                         <span>January - February, 2024</span>
-                        <img src={% static "img/calendar.svg.png"  %} alt="">
+                        <img src={% static "img/calendar.svg.png" %} alt="">
                     </button>
                 </div>
 
@@ -81,7 +84,7 @@
             </div>
 
             <div class="financial_and_category_container">
-                <div class="wrapper">
+
 
                 <div class="financial_and_category left">
                     <div class="header_financeal_and_category">
@@ -90,14 +93,14 @@
                             <button class="dropbtn">
                                 <span class="button_content">
                                     <span class="button_text">Month</span>
-                                    <img class="button_img" src={% static "img/next.png"  %} alt="">
+                                    <img class="button_img" src={% static "img/next.png" %} alt="">
                                 </span>
                             </button>
                             <div class="dropdown-content">
                                 <a href="#">Day</a>
                                 <a href="#">Week</a>
                                 <a href="#">Month</a>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -135,101 +138,158 @@
                             <button class="dropbtn">
                                 <span class="button_content">
                                     <span class="button_text">Month</span>
-                                    <img class="button_img" src={% static "img/next.png"  %} alt="">
+                                    <img class="button_img" src={% static "img/next.png" %} alt="">
                                 </span>
                             </button>
                             <div class="dropdown-content">
                                 <a href="#">Day</a>
                                 <a href="#">Week</a>
                                 <a href="#">Month</a>
-                                
+
                             </div>
                         </div>
                     </div>
                     <hr>
-
                     <div class="categories_inf">
                         <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
-                            <img src={% static "img/shopping.svg" %} alt="">
+                            <img src="{% static 'img/shopping.svg' %}" alt="">
                             <span>Shopping</span>
                             <div class="expences"></div>
                             <h6>- UAH 5890</h6>
+
                         </div>
-                        <div class="category" style="border: 2px solid rgba(207, 211, 18, 1);">
-                            <img src={% static "img/cafe.svg" %} alt="">
-                            <span>Cafe</span>
-                            <h6>- UAH 3780</h6>
+                        <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
+                            <img src="{% static 'img/shopping.svg' %}" alt="">
+                            <span>Shopping</span>
+                            <div class="expences"></div>
+                            <h6>- UAH 5890</h6>
+
                         </div>
-                        <div class="category" style="border: 2px solid rgba(211, 18, 18, 1);">
-                            <img src={% static "img/utility_bils.png" %} alt="">
-                            <span>Utility bills</span>
-                            <h6>- UAH 2800</h6>
+                        <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
+                            <img src="{% static 'img/shopping.svg' %}" alt="">
+                            <span>Shopping</span>
+                            <div class="expences"></div>
+                            <h6>- UAH 5890</h6>
+
                         </div>
-                        <div class="category" style="border: 2px solid rgba(253, 74, 160, 1);">
-                            <img src={% static "img/food.png" %} alt="">
-                            <span>Food</span>
-                            <h6>- UAH 1900</h6>
+                        <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
+                            <img src="{% static 'img/shopping.svg' %}" alt="">
+                            <span>Shopping</span>
+                            <div class="expences"></div>
+                            <h6>- UAH 5890</h6>
+
                         </div>
-                        <button class="scroll">
-                            <img src={% static "img/next.png" %} alt="">
-                        </button>
+                    </div>
+                    <div class="additional-info">
+                        <h2>All expenses:</h2>
+                        <div class="wrapper_categories-info">
+
+                            <div class="back" style="border: 1px solid rgba(163, 163, 163, 1);" id="shopping-info">
+                                <span class="place">Simi</span>
+                                <span class="date">22.12.2024 19:43</span>
+                                <h6> {{ expence.amount }} </h6>
+                            </div>
+
+                        </div>
+                        <!-- Додайте інші блоки back тут для інших категорій -->
+                    </div>
+                </div>
+                <!-- Додайте інші елементи category тут для інших категорій -->
+
+
+                <!-- 
+                        <div class="category-info" id="additionalInfo">
+                            <h2>All expenses:</h2>
+                            <div class="wrapper_categories-info">
+
+                                <div class="back" style="border: 2px solid rgba(16, 176, 80, 1);" id="shopping-info">
+                                    <span class="place">Simi</span>
+                                    <span class="date">22.12.2024  19:43</span>
+                                    <h6> {{ expence.amount }} </h6>
+                                </div> 
+
+                                <div class="back" style="border: 2px solid rgba(16, 176, 80, 1);" id="shopping-info">
+                                    <span class="place">Simi</span>
+                                    <span class="date">22.12.2024  19:43</span>
+                                    <h6> {{ expence.amount }} </h6>
+                                </div> 
+
+                                <div class="back" style="border: 2px solid rgba(16, 176, 80, 1);" id="shopping-info">
+                                    <span class="place">Simi</span>
+                                    <span class="date">22.12.2024  19:43</span>
+                                    <h6> {{ expence.amount }} </h6>
+                                </div> 
+
+                                <div class="back" style="border: 2px solid rgba(16, 176, 80, 1);" id="shopping-info">
+                                    <span class="place">Simi</span>
+                                    <span class="date">22.12.2024  19:43</span>
+                                    <h6> {{ expence.amount }} </h6>
+                                </div> 
+
+                                <div class="back" style="border: 2px solid rgba(16, 176, 80, 1);" id="shopping-info">
+                                    <span class="place">Simi</span>
+                                    <span class="date">22.12.2024  19:43</span>
+                                    <h6> {{ expence.amount }} </h6>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
-                    </div>
+                     -->
 
             </div>
 
-            
- <!-- діалогове вікно "Очищення історії" -->
- <dialog id="clearHistory" class="clearHistory">
-    <div class="dialog_header">
-        <button id="closeDialogClear" class="close">
-            <img src={% static "img/pngwing.com.png" %} alt="">
-        </button>
-        <h4>Warning</h4>
-    </div>
-    <hr>
-    <div class="сontent">
-        <p>You really want to clear history?</p>
-        <button>Clear</button>
-    </div>
-</dialog>
 
-<!-- діалогове вікно "Видалення акаунту" -->
-<dialog id="deleteAcount" class="deleteAcount">
-    <div class="dialog_header">
-        <button id="closeDialogDelete" class="close">
-            <img src={% static "img/pngwing.com.png" %} alt="">
-        </button>
-        <h4>Warning</h4>
-    </div>
-    <hr>
-    <div class="сontent">
-        <p>You really want to delete your account?</p>
-        <button>Delete</button>
-    </div>
-</dialog>
+            <!-- діалогове вікно "Очищення історії" -->
+            <dialog id="clearHistory" class="clearHistory">
+                <div class="dialog_header">
+                    <button id="closeDialogClear" class="close">
+                        <img src={% static "img/pngwing.com.png" %} alt="">
+                    </button>
+                    <h4>Warning</h4>
+                </div>
+                <hr>
+                <div class="сontent">
+                    <p>You really want to clear history?</p>
+                    <button>Clear</button>
+                </div>
+            </dialog>
 
-<!-- діалогове вікно "Вихід з акаунту" -->
-<dialog id="logOut" class="logOut">
-    <div class="dialog_header">
-        <button id="closeDialogLogOut" class="close">
-            <img src={% static "img/pngwing.com.png" %} alt="">
-        </button>
-        <h4>Warning</h4>
-    </div>
-    <hr>
-    <div class="сontent">
-        <p>You really want to log out of your account?</p>
-        <button>Log out</button>
-    </div>
-</dialog>
+            <!-- діалогове вікно "Видалення акаунту" -->
+            <dialog id="deleteAcount" class="deleteAcount">
+                <div class="dialog_header">
+                    <button id="closeDialogDelete" class="close">
+                        <img src={% static "img/pngwing.com.png" %} alt="">
+                    </button>
+                    <h4>Warning</h4>
+                </div>
+                <hr>
+                <div class="сontent">
+                    <p>You really want to delete your account?</p>
+                    <button>Delete</button>
+                </div>
+            </dialog>
+
+            <!-- діалогове вікно "Вихід з акаунту" -->
+            <dialog id="logOut" class="logOut">
+                <div class="dialog_header">
+                    <button id="closeDialogLogOut" class="close">
+                        <img src={% static "img/pngwing.com.png" %} alt="">
+                    </button>
+                    <h4>Warning</h4>
+                </div>
+                <hr>
+                <div class="сontent">
+                    <p>You really want to log out of your account?</p>
+                    <button>Log out</button>
+                </div>
+            </dialog>
 
         </div>
 
     </div>
- 
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
@@ -254,46 +314,46 @@
 
 
         const data = {
-    labels: labels,
-    datasets: [{
-        label: 'Доходи',
-        data: [100, 50, 40, 70, 60, 30, 80], // дані для доходів
-        backgroundColor: 'rgba(153, 102, 255, 0.2)',
-        borderColor: 'rgba(153, 102, 255, 1)',
-        borderWidth: 1
-    },
-    {
-        label: 'Витрати',
-        data: [-50, -60, -70, -30, -40, -50, -20], // дані для витрат
-        backgroundColor: 'rgba(200, 120, 255, 0.2)',
-        borderColor: 'rgba(200, 120, 255)',
-        borderWidth: 1
-    }]
-};
+            labels: labels,
+            datasets: [{
+                label: 'Доходи',
+                data: [100, 50, 40, 70, 60, 30, 80], // дані для доходів
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Витрати',
+                data: [-50, -60, -70, -30, -40, -50, -20], // дані для витрат
+                backgroundColor: 'rgba(200, 120, 255, 0.2)',
+                borderColor: 'rgba(200, 120, 255)',
+                borderWidth: 1
+            }]
+        };
 
         const myChart = new Chart(ctx, {
             type: 'bar',
-  data: data,
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Chart.js Bar Chart'
-      }
-    }
-  },
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js Bar Chart'
+                    }
+                }
+            },
         });
 
         //donut diagram
-                const newdata = {
+        const newdata = {
             labels: [
                 'Revenue',
                 'Expense',
-                
+
             ],
             datasets: [{
                 label: 'My First Dataset',
@@ -313,16 +373,16 @@
 
 
         document.addEventListener('DOMContentLoaded', function () {
-            var ctx = document.getElementById('myDoughnutChart').getContext('2d'); 
+            var ctx = document.getElementById('myDoughnutChart').getContext('2d');
             new Chart(ctx, config);
         });
 
 
         //кнопка для обирання day/week/month/year
         document.addEventListener("DOMContentLoaded", function () {
-            var dropbtns = document.querySelectorAll(".dropbtn"); 
+            var dropbtns = document.querySelectorAll(".dropbtn");
 
-            dropbtns.forEach(function (dropbtn) { 
+            dropbtns.forEach(function (dropbtn) {
                 var dropdownContent = dropbtn.nextElementSibling;
 
                 dropbtn.addEventListener("click", function () {
@@ -332,16 +392,16 @@
                 var menuItems = dropdownContent.getElementsByTagName("a");
                 for (var i = 0; i < menuItems.length; i++) {
                     menuItems[i].addEventListener("click", function () {
-                        var buttonText = this.textContent; 
+                        var buttonText = this.textContent;
                         var buttonImg = this.querySelector("img");
                         var buttonImgSrc = buttonImg ? buttonImg.getAttribute("src") : null;
-                        dropbtn.querySelector(".button_text").textContent = buttonText; 
+                        dropbtn.querySelector(".button_text").textContent = buttonText;
                         var img = dropbtn.querySelector(".button_img");
                         if (buttonImgSrc) {
                             img.setAttribute("src", buttonImgSrc);
                             img.style.display = "inline";
                         } else {
-                            img.style.display = "none"; 
+                            img.style.display = "none";
                         }
                         dropdownContent.classList.remove("show");
                     });
@@ -388,6 +448,20 @@
             document.querySelector('.overlay').style.display = 'none';
             document.getElementById('logOut').close();
         }
+
+        //category-info
+        var categories = document.querySelectorAll(".category");
+
+        categories.forEach(function (category) {
+            category.addEventListener("click", function () {
+                var additionalInfo = document.querySelector(".additional-info");
+                if (additionalInfo.style.display === "none" || additionalInfo.style.display === "") {
+                    additionalInfo.style.display = "block";
+                } else {
+                    additionalInfo.style.display = "none";
+                }
+            });
+        });
 
 
     </script>
