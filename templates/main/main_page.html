@@ -6,13 +6,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main page</title>
-    <link rel="stylesheet" href="{%  static 'css/main_page.css' %}?{% now "U" %}">
+    <link rel="stylesheet" href="{%  static 'css/main_page.css' %}?{% now " U" %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 
 </head>
 
@@ -30,7 +33,7 @@
                         <span>Main page</span>
                     </button>
                 </a>
-                
+
                 <a href={% url 'statistics_page' %}>
                     <button class="button_menu pasive">
                         <img src={% static "img/statistics.png" %} alt="">
@@ -44,21 +47,21 @@
                     <img src={% static "img/clear.svg" %} alt="">
                     <span>Clear history</span>
                 </button>
-                
+
                 <a href={% url 'delete_profile' %}>
-                <button class="button_menu pasive" id="openDialogDelete">
-                    <img src={% static "img/delete.png" %} alt="">
-                    <span>Delete account</span>
-                </button>
+                    <button class="button_menu pasive" id="openDialogDelete">
+                        <img src={% static "img/delete.png" %} alt="">
+                        <span>Delete account</span>
+                    </button>
                 </a>
-                
+
                 <a href={% url 'logout' %}>
-                <button class="button_menu pasive" id="openLogOut">
-                    <img src={% static "img/log_out.svg" %} alt="">
-                    <span>Log out</span>
-                </button>
+                    <button class="button_menu pasive" id="openLogOut">
+                        <img src={% static "img/log_out.svg" %} alt="">
+                        <span>Log out</span>
+                    </button>
                 </a>
-                
+
             </div>
 
         </div>
@@ -70,43 +73,49 @@
             </header>
 
             <div class="accounts_cards">
-                
+
                 <h3>Accounts & Cards</h3>
                 <hr>
-{#            <a href={% url 'home' %}>#}
-{#            <button class="refresh" >#}
-{#                Refresh token#}
-{#            </button>#}
-{#            </a>#}
-            
-                <div class="card-container">
-              {% for card1 in cards %}
-                <a href= {% url 'get_payments' card1.card_id %}>
-                  <div class="wrapper_cards">
-                    <div class="card">
-                        <div class="card_top">
-                            <h2>{{ card }}</h2>
-                            {% if card1.type == 'Visa' %}
-                            <img src={%  static "img/icons-visa.png" %} alt="">
-                            {% else %}
-                            <img src={%  static "img/icons-mastercard.png" %} alt="">
-                            {% endif %}
-                        </div>
-                   
-                        <div class="balance">
-                            <h2>UAH {{ card1.balance }}</h2>
-                        </div>
+                <a href={% url 'home' %}>
+                    {# <button class="refresh">#}
+                        {# Refresh token#}
+                        {# </button>#}
+                    {# </a>#}
 
-                        <div class="bank_account_number">
-                            <p>{{ card1.card_number }}</p>
+                <div class="card-container">
+                    {% for card1 in cards %}
+                    <a href={% url 'get_payments' card1.card_id %}>
+                        <div class="wrapper_cards">
+                            <div class="card">
+                                <div class="card_top">
+                                    <h2>{{ card }}</h2>
+                                    {% if card1.type == 'Visa' %}
+                                    <img src={% static "img/visa.svg" %} alt="">
+                                    {% else %}
+                                    <img src={% static "img/mastercard.svg" %} alt="">
+                                    {% endif %}
+                                </div>
+
+                                <div class="balance">
+                                    <h2>UAH {{ card1.balance }}</h2>
+                                </div>
+
+                                <div class="wrapper_number_and_bin">
+                                    <div class="bank_account_number">
+                                        <p>{{ card1.card_number }}</p>
+                                    </div>
+                                    <button class="delete_card">
+                                        <img src={% static "img/delete_card.svg" %} alt="">
+                                    </button>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-                      <a href={% url 'delete_card' card1.card_id%}>delete card</a>
+                    </a>
+                    {% endfor %}
                 </div>
-              </a>
-              {% endfor %}
             </div>
-                    <!-- {% comment %}<div class="card">
+            <!-- {% comment %}<div class="card">
                         <div class="card_top">
                             <h2>Universal card</h2>
                             <img src={%  static "img/visa.png" %} alt="">
@@ -131,7 +140,7 @@
                 </div> -->
 
 
-            
+
 
             <div class="categories">
 
@@ -140,8 +149,8 @@
 
                 <div class="buttons">
 
-                    <button id="openDialog" class="mini_plus">+</button>
-                    
+                    <!-- <button id="openDialog" class="mini_plus">+</button> -->
+
                     <button class="calendar" id="datepicker">
                         January - February, 2024
                         <img src={% static "img/calendar.svg.png" %} alt="">
@@ -152,24 +161,26 @@
                     <div class="diagram">
                         <canvas id="myChart"></canvas>
                     </div>
-                  <div class="categories_inf">
-                        {% for expence in expences %}
-                            <div class="category" onclick="toggleInfo(this)" style="border: 2px solid rgba(16, 176, 80, 1);">
-                                <div class="category-summary">
-                                    <span>{{ expence.category }}</span>
-                                    <h6>{{ expence.amount }}</h6>
-                                </div>
-                            <div class="category-detail" style="display: none;">
-                                <span>{{ expence.description }}</span>
-                                <h6>{{ expence.time }}</h6>
-                                <h6>{{ expence.amount }}</h6>
-                            </div>
-                   </div>
-                        {% endfor %}
-                </div>
 
-                    
-                    {% comment %}<div class="categories_inf">
+
+                    <div class="categories_inf">
+                        {% for expence in expences %}
+                        <div class="block" id="block{{ forloop.counter }}">
+                            <div class="front" style="border: 2px solid rgba(16, 176, 80, 1);">
+                                <span>{{ expence.category }}</span>
+                                <h6> {{ expence.amount }} </h6>
+                            </div>
+                            <div class="back" style="border: 2px solid rgba(16, 176, 80, 1);">
+                                <span class="place">Simi</span>
+                                <span class="date">22.12.2024 19:43</span>
+                                <h6> {{ expence.amount }} </h6>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+
+                    <!-- <div class="categories_inf">
                         <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
                             <img src={% static "img/shopping.svg" %} alt="">
                             <span>Shopping</span>
@@ -184,16 +195,17 @@
                             <img src={% static "img/transport.png" %} alt="">
                             <span>Transport</span>
                             <h6>- UAH 20</h6>
-                        </div>{% endcomment %}
+                        </div>
                         <button class="scroll">
                             <img src={% static "img/next.png" %} alt="">
                         </button>
-                    </div>
+                    </div> -->
 
                 </div>
+
             </div>
 
-            <!-- діалогове вікно вибір категорій -->
+            <!-- діалогове вікно вибір категорій
             <dialog id="choseCategory" class="choseCategory">
 
                 <div class="dialog_header">
@@ -248,8 +260,9 @@
                 <button class="add">Add</button>
 
 
-            </dialog>
+            </dialog> -->
 
+            
             <!-- діалогове вікно "Очищення історії" -->
             <dialog id="clearHistory" class="clearHistory">
                 <div class="dialog_header">
@@ -276,10 +289,7 @@
                 <hr>
                 <div class="сontent">
                     <p>You really want to delete your account?</p>
-                    <form method="post" action="{% url "delete_profile" %}">
-                        {% csrf_token %}
                     <button>Delete</button>
-                    </form>
                 </div>
             </dialog>
 
@@ -294,58 +304,44 @@
                 <hr>
                 <div class="сontent">
                     <p>You really want to log out of your account?</p>
-                    <form method="post" action="{% url "logout" %}">
-                            {% csrf_token %}
-                        <button>Log out</button>  
-                    </form>
-      
+                    <button>Log out</button>
                 </div>
             </dialog>
 
         </div>
+
     </div>
-    
-    
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-  <!-- Fengyuan Chen's Datepicker -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
 
     <script>
         //diagram
-       
-        const data = {
-            labels: {{ labels | safe }},
-            datasets: [{
-                label: 'My First Dataset',
-                data: {{ data }},
-                backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)'
-                ],
-                borderColor: [
-            'rgb(255, 99, 132)',   // Колір витрат для Категорії 1
-            'rgb(54, 162, 235)',    // Колір витрат для Категорії 2
-            'rgb(255, 205, 86)'     // Колір витрат для Категорії 3
-        ],
-                hoverOffset: 4
-            }]
-        };
+        // const data = {
+        //     labels: {{ labels | safe }},
+        //     datasets: [{
+        //         label: 'My First Dataset',
+        //         data: {{ data }},
+        //         backgroundColor: [
+        //             'rgb(255, 99, 132)',
+        //             'rgb(54, 162, 235)',
+        //             'rgb(255, 205, 86)'
+        //         ],
+        //         hoverOffset: 4
+        //     }]
+        // };
 
-        const config = {
-            type: 'doughnut',
-            data: data,
-        };
+        // const config = {
+        //     type: 'doughnut',
+        //     data: data,
+        // };
 
-        document.addEventListener('DOMContentLoaded', function () {
-            var ctx = document.getElementById('myChart').getContext('2d');
-            new Chart(ctx, config);
-        });
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     var ctx = document.getElementById('myChart').getContext('2d');
+        //     new Chart(ctx, config);
+        // });
 
 
         //реалізація модального вікна з можливістю обрати категорії
@@ -361,6 +357,7 @@
         }
 
 
+       
         //діалогове вікно очищення історії
         document.querySelector('#openDialogClear').onclick = function () {
             document.body.classList.add('dialog-open');
@@ -399,26 +396,35 @@
             document.querySelector('.overlay').style.display = 'none';
             document.getElementById('logOut').close();
         }
-
+        
         //реалізація календаря
         document.addEventListener('DOMContentLoaded', function () {
             var picker = new Litepicker({
                 element: document.getElementById('datepicker'),
                 singleMode: false,
                 autoApply: true,
-                
             });
         });
-      function toggleInfo(category) {
-        var detail = category.querySelector('.category-detail');
-        if (detail.style.display === 'none') {
-            detail.style.display = 'block';
-            category.querySelector('.category-summary').style.display = 'none';
-        } else {
-            detail.style.display = 'none';
-            category.querySelector('.category-summary').style.display = 'flex';
-        }
-    }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const blocks = document.querySelectorAll('.block');
+
+            blocks.forEach(block => {
+                const blockBack = block.querySelector('.back');
+
+                block.addEventListener('mouseenter', function () {
+                    blockBack.style.display = 'flex';
+                });
+
+                block.addEventListener('mouseleave', function () {
+                    blockBack.style.display = 'none';
+                });
+            });
+        });
+
+
+
+
     </script>
 </body>
 

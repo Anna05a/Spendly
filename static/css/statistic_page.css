@@ -308,15 +308,19 @@ hr {
 }
 
 .financial_and_category_container {
+  min-width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
+
 .financial_and_category {
   border-radius: 8px;
-  min-width: 438px;
+  width: 40%;
   max-height: 391px;
   margin-top: 50px;
   background-color: rgba(232, 231, 231, 1);
+  margin-left: 50px;
 }
 
 .header_financeal_and_category {
@@ -325,12 +329,11 @@ hr {
 }
 
 .right {
-  margin-left: 50px;
+  margin-right: 50px;
 }
 
-.header_financeal_and_category {
-  display: flex;
-  justify-content: space-between;
+.left{
+  margin-left: 50px;
 }
 
 hr {
@@ -446,8 +449,7 @@ hr {
 
 .categories_inf {
   width: 473px;
-  height: 230px;
-  margin-top: 20px;
+  height: 270px;
   margin-right: 30px;
   border-radius: 8px;
   position: relative;
@@ -493,22 +495,56 @@ hr {
   right: 30px;
 }
 
-.scroll {
-  width: 50px;
-  height: 50px;
-  font-family: "Montserrat", sans-serif;
-  font-size: 20px;
-  background-color: rgba(232, 231, 231, 0);
-  border: none;
+.additional-info{
+  display: none; /* Початково блок з інформацією прихований */
+  position: relative;
+  top: -220px; /* Розмістити блок з інформацією відносно блоку .categories_inf */
+  left: 30px;
+  background-color:rgba(232, 231, 231, 1);
+  padding: 20px;
+  border: 1px solid rgba(113, 113, 113, 1);
   border-radius: 8px;
-  padding: 8px;
-  margin-top: 5px;
-  margin-left: 200px;
+  width: 380px;
+  height: 227px;
+  z-index: 1000; /* Задаємо високий рівень z-index для виведення блоку поверх інших елементів */
 }
 
-.scroll img {
-  width: 80px;
-  transform: rotate(90deg);
+
+.additional-info h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(113, 113, 113, 1);
+}
+
+.back {
+  background-color: rgba(196, 197, 196, 1);
+  font-family: "Montserrat", sans-serif;
+  height: 32px;
+  font-size: 16px;
+  font-weight: 400;
+  align-items: center;
+  position: absolute;
+  border: none;
+  border-radius: 8px;
+  width: 70%; 
+}
+
+.place {
+  margin-left: 10px;
+}
+
+.date{
+  position: relative;
+  margin-left: 50px;
+}
+
+.back h6 {
+  margin: 0;
+  line-height: 2;
+  position: absolute;
+  right: 30px;
+  font-size: 16px;
 }
 
 body.dialog-open::before {
@@ -524,6 +560,7 @@ body.dialog-open::before {
 
 .dialog_header {
   display: flex;
+  height: 30px;
 }
 
 .dialog_header h4 {
@@ -532,12 +569,14 @@ body.dialog-open::before {
   font-weight: 500;
   color: rgba(0, 0, 0, 1);
   margin-left: 10px;
+  margin-top: 0;
 }
 
 .close {
   background-color: rgba(232, 231, 231, 1);
   border: none;
   background-color: transparent;
+  height: 32px;
 }
 
 .close img {
@@ -547,7 +586,7 @@ body.dialog-open::before {
 
 .clearHistory {
   width: 476px;
-  height: 188px;
+  height: 200px;
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   border: 1px solid red;
