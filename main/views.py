@@ -13,6 +13,25 @@ from API.views import get_mcc_description, find_category, read_csv
 from .models import Card
 import uuid
 
+def caesar_cipher_encrypt(text, shift):
+    encrypted_text = ''
+    for char in text:
+        if char.isalpha():
+            shifted = ord(char) + shift
+            if char.islower():
+                if shifted > ord('z'):
+                    shifted -= 26
+                elif shifted < ord('a'):
+                    shifted += 26
+            elif char.isupper():
+                if shifted > ord('Z'):
+                    shifted -= 26
+                elif shifted < ord('A'):
+                    shifted += 26
+            encrypted_text += chr(shifted)
+        else:
+            encrypted_text += char
+    return encrypted_text
 
 @login_required(login_url='/login')
 def home(request):
@@ -142,6 +161,11 @@ def add_card(request):
                 card_number = user_account['maskedPan'][0]
                 card_id = user_account['id']
                 card_ids.append(card_id)
+                print(card_id)
+                # Зашифруємо айді карти методом Цезаря зі зсувом 3
+                encrypted_card_id = caesar_cipher_encrypt(card_id, 3)
+                
+                card_ids.append(encrypted_card_id)
 
                 # Додаємо card_id лише один раз до списку card_ids
                 if card_id not in card_ids:
@@ -155,8 +179,8 @@ def add_card(request):
                     card_type = 'Master'
                 print(card_ids)
 
-                if not Card.objects.filter(card_id=card_id).exists():  # Перевіряємо, чи ідентифікатор уже існує
-                    card_obj = Card.objects.create(id=uuid.uuid4(), card_id=card_id, balance=card_balance, card_number=card_number, user=user, token=token, type=type, system=card_type)
+                if not Card.objects.filter(card_id=encrypted_card_id).exists():  # Перевіряємо, чи ідентифікатор уже існує
+                    card_obj = Card.objects.create(id=uuid.uuid4(), card_id=encrypted_card_id, balance=card_balance, card_number=card_number, user=user, token=token, type=type, system=card_type)
 
         return redirect('home_page')
 
@@ -194,8 +218,11 @@ def get_payments(request, card_id):
         start_year = one_month_ago.year
         start_month = one_month_ago.month
         start_day = one_month_ago.day
+        print(card_id)
+        # Дешифруємо айді карти, яке прийшло з URL
+        decrypted_card_id = caesar_cipher_encrypt(card_id, -3)
 
-        statements = mono.get_statements(card_id, date(start_year, start_month, start_day), date(end_year, end_month, end_day))
+        statements = mono.get_statements(decrypted_card_id, date(start_year, start_month, start_day), date(end_year, end_month, end_day))
 
         for payment in statements:
             original_time = datetime.fromtimestamp(payment['time'], timezone.utc)
@@ -280,22 +307,21 @@ def get_payments(request, card_id):
 def refresh_card(request):
     try:
         card = Card.objects.filter(user=request.user).first()
-        token=card.token
+        token = card.token
         client = Client(token)
         user_info = client.get_client_info()
         if user_info:
             for user_account in user_info['accounts']:
                 originBalance = user_account['balance'] // 100
                 card_id = user_account['id']
+                encrypted_card_id = caesar_cipher_encrypt(card_id, 3)  # Шифруємо ідентифікатор карти
                 temp = user_account['maskedPan'][0]
                 if temp[0] == '4':
                     card_type = 'Visa'
                 elif temp[0] == '5':
                     card_type = 'Master'
-                if not Card.objects.filter(card_id=card_id).exists():  # Перевіряємо, чи ідентифікатор уже існує
-                    Card.objects.create(id=uuid.uuid4(), card_id=card_id, balance=originBalance, card_number=originBalance,user=request.user, token=token, type=user_account['type'], system=card_type)
-                else:
-                    Card.objects.filter(user=request.user).update(balance=originBalance)
+                if not Card.objects.filter(card_id=encrypted_card_id).exists():  # Перевіряємо зашифрований ідентифікатор
+                    Card.objects.create(id=uuid.uuid4(), card_id=encrypted_card_id, balance=originBalance, card_number=originBalance, user=request.user, token=token, type=user_account['type'], system=card_type)
 
         return redirect('home_page')
     except monobank.Error as e:
