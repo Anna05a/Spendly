@@ -255,34 +255,38 @@ def get_payments(request, card_id):
                     category = 'Enrollment'
 
             if category == 'Transfer':
-                border=''
+                border='rgba(15, 110, 198, 1)'
             elif category == 'Enrollment':
                 border='rgba(135, 16, 176, 1)'
             elif category == 'Utility payments':
-                border=''
+                border='rgba(180, 16, 16, 1)'
             elif category == 'Transportation':
-                border=''
+                border='rgba(213, 229, 25, 1)'
                 imq='<'
             elif category == 'Health and beauty':
-                border=''
+                border='rgba(233, 54, 183, 1)'
             elif category == 'Groceries':
-                border=''
+                border='rgba(16, 176, 80, 1)'
             elif category == 'Caffe/restaurant':
-                border=''
+                border='rgba(100, 13, 141, 1)'
             elif category == 'Services':
-                border=''
+                border='rgba(57, 17, 171, 1)'
             elif category == 'Entertainment':
-                border=''
+                border='rgba(170, 16, 173, 1)'
             elif category == 'Travel':
-                border=''
+                border='rgba(132, 193, 3, 1)'
             elif category == 'Household':
-                border=''
+                border='rgba(176, 141, 16, 1)'
             elif category == 'Car service':
-                border=''
+                border='rgba(12, 204, 170, 1)'
             elif category == 'Education':
-                border=''
+                border='rgba(243, 220, 12, 1)'
             elif category == 'Mobile recharge':
                 border='rgba(17, 198, 210, 1)'
+            elif category == 'Other':
+                border = 'rgba(214, 115, 24, 1)'
+            elif category == 'Shopping':
+                border = 'rgba(0, 115, 46, 1)'
 
             payments.append({
                 'id': id,
