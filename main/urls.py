@@ -10,6 +10,6 @@ urlpatterns = [
     path('home_page', views.home_page, name='home_page'), #головна сторінка після того як додали карти
     path('add_card/', views.add_card, name='add_card'),
     path('get_payments/<str:card_id>/', views.get_payments, name='get_payments'),
-    path('delete_card/<str:card_id>/', views.delete_card, name='delete_card')
-    #path('get_pay', views.get_pay, name='get_pay')
+    path('delete_card/<str:card_id>/', views.delete_card, name='delete_card'),
+    path('refresh', views.refresh_card, name='refresh_card_data')
 ]

@@ -62,7 +62,7 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         messages.add_message(request, messages.SUCCESS, 'Email verified, you can now login')
-        return redirect(reverse('home_page'))
+        return redirect(reverse('home'))
     else:
         return render(request, 'authentication/activation_failed.html', {"user": user})
 

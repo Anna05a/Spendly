@@ -76,11 +76,11 @@
 
                 <h3>Accounts & Cards</h3>
                 <hr>
-                <a href={% url 'home' %}>
-                    {# <button class="refresh">#}
-                        {# Refresh token#}
-                        {# </button>#}
-                    {# </a>#}
+                <a href={% url 'refresh_card_data' %}>
+                     <button class="refresh">
+                         Refresh token
+                         </button>
+                    </a>
 
                 <div class="card-container">
                     {% for card1 in cards %}
@@ -88,11 +88,11 @@
                         <div class="wrapper_cards">
                             <div class="card">
                                 <div class="card_top">
-                                    <h2>{{ card }}</h2>
-                                    {% if card1.type == 'Visa' %}
+                                    <h2>{{ card1.type }}</h2>
+                                    {% if card1.system == 'Visa' %}
                                     <img src={% static "img/visa.svg" %} alt="">
                                     {% else %}
-                                    <img src={% static "img/mastercard.svg" %} alt="">
+                                    <img src={% static "img/icons-mastercard.svg" %} alt="">
                                     {% endif %}
                                 </div>
 
@@ -105,7 +105,9 @@
                                         <p>{{ card1.card_number }}</p>
                                     </div>
                                     <button class="delete_card">
-                                        <img src={% static "img/delete_card.svg" %} alt="">
+                                        <a href={% url 'delete_card' card1.card_id%}>
+                                            <img src={% static "img/delete_card.svg" %} alt="">
+                                        </a>
                                     </button>
                                 </div>
 
@@ -166,14 +168,14 @@
                     <div class="categories_inf">
                         {% for expence in expences %}
                         <div class="block" id="block{{ forloop.counter }}">
-                            <div class="front" style="border: 2px solid rgba(16, 176, 80, 1);">
+                            <div class="front" style="border: 2px solid {{ expence.border }};">
                                 <span>{{ expence.category }}</span>
                                 <h6> {{ expence.amount }} </h6>
                             </div>
                             <div class="back" style="border: 2px solid rgba(16, 176, 80, 1);">
-                                <span class="place">Simi</span>
-                                <span class="date">22.12.2024 19:43</span>
-                                <h6> {{ expence.amount }} </h6>
+                                <span class="place">{{ expence.description }}</span>
+                                <span class="date">{{ expence.time }}</span>
+                                
                             </div>
                         </div>
                         {% endfor %}
@@ -262,7 +264,7 @@
 
             </dialog> -->
 
-            
+
             <!-- діалогове вікно "Очищення історії" -->
             <dialog id="clearHistory" class="clearHistory">
                 <div class="dialog_header">
@@ -319,29 +321,29 @@
 
     <script>
         //diagram
-        // const data = {
-        //     labels: {{ labels | safe }},
-        //     datasets: [{
-        //         label: 'My First Dataset',
-        //         data: {{ data }},
-        //         backgroundColor: [
-        //             'rgb(255, 99, 132)',
-        //             'rgb(54, 162, 235)',
-        //             'rgb(255, 205, 86)'
-        //         ],
-        //         hoverOffset: 4
-        //     }]
-        // };
+         const data = {
+             labels: {{ labels | safe }},
+             datasets: [{
+                 label: 'My First Dataset',
+                 data: {{ data }},
+                 backgroundColor: [
+                     'rgb(255, 99, 132)',
+                     'rgb(54, 162, 235)',
+                     'rgb(255, 205, 86)'
+                 ],
+                 hoverOffset: 4
+             }]
+         };
 
-        // const config = {
-        //     type: 'doughnut',
-        //     data: data,
-        // };
+         const config = {
+             type: 'doughnut',
+             data: data,
+         };
 
-        // document.addEventListener('DOMContentLoaded', function () {
-        //     var ctx = document.getElementById('myChart').getContext('2d');
-        //     new Chart(ctx, config);
-        // });
+         document.addEventListener('DOMContentLoaded', function () {
+             var ctx = document.getElementById('myChart').getContext('2d');
+             new Chart(ctx, config);
+         });
 
 
         //реалізація модального вікна з можливістю обрати категорії
@@ -357,7 +359,7 @@
         }
 
 
-       
+
         //діалогове вікно очищення історії
         document.querySelector('#openDialogClear').onclick = function () {
             document.body.classList.add('dialog-open');
@@ -396,7 +398,7 @@
             document.querySelector('.overlay').style.display = 'none';
             document.getElementById('logOut').close();
         }
-        
+
         //реалізація календаря
         document.addEventListener('DOMContentLoaded', function () {
             var picker = new Litepicker({

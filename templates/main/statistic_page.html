@@ -96,11 +96,10 @@
                                     <img class="button_img" src={% static "img/next.png" %} alt="">
                                 </span>
                             </button>
-                            <div class="dropdown-content">
-                                <a href="#">Day</a>
-                                <a href="#">Week</a>
-                                <a href="#">Month</a>
-
+                            <div class="dropdown-content" >
+                                <a href="#" >Day</a>
+                                <a href="#" >Week</a>
+                                <a href="#" >Month</a>
                             </div>
                         </div>
                     </div>
@@ -114,13 +113,13 @@
                         <div class="diagram_text">
                             <div class="text_diagram">
                                 <p>Total Revenue <br>
-                                    <span>UAH 0</span> %
+                                    <span>UAH {{ revenue_persent }}</span> %
                                 </p>
                             </div>
 
                             <div class="text_diagram">
                                 <p>Total Expense <br>
-                                    <span>UAH 0</span> %
+                                    <span>UAH {{ expence_persent }}</span> %
                                 </p>
                             </div>
 
@@ -142,54 +141,60 @@
                                 </span>
                             </button>
                             <div class="dropdown-content">
-                                <a href="#">Day</a>
-                                <a href="#">Week</a>
-                                <a href="#">Month</a>
+                                <a href="#" >Day</a>
+                                <a href="#" >Week</a>
+                                <a href="#" >Month</a>
 
                             </div>
                         </div>
                     </div>
                     <hr>
                     <div class="categories_inf">
+                        {% for category, amount in expences.items %}
                         <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
                             <img src="{% static 'img/shopping.svg' %}" alt="">
-                            <span>Shopping</span>
+                            <span>{{ category }}</span>
                             <div class="expences"></div>
-                            <h6>- UAH 5890</h6>
-
+                            <h6>UAH {{ amount }}</h6>
+                        
                         </div>
-                        <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
-                            <img src="{% static 'img/shopping.svg' %}" alt="">
-                            <span>Shopping</span>
-                            <div class="expences"></div>
-                            <h6>- UAH 5890</h6>
-
-                        </div>
-                        <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
-                            <img src="{% static 'img/shopping.svg' %}" alt="">
-                            <span>Shopping</span>
-                            <div class="expences"></div>
-                            <h6>- UAH 5890</h6>
-
-                        </div>
-                        <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">
-                            <img src="{% static 'img/shopping.svg' %}" alt="">
-                            <span>Shopping</span>
-                            <div class="expences"></div>
-                            <h6>- UAH 5890</h6>
-
-                        </div>
+                        {% endfor %}
+{#                        <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">#}
+{#                            <img src="{% static 'img/shopping.svg' %}" alt="">#}
+{#                            <span>Shopping</span>#}
+{#                            <div class="expences"></div>#}
+{#                            <h6>- UAH 5890</h6>#}
+{##}
+{#                        </div>#}
+{#                        <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">#}
+{#                            <img src="{% static 'img/shopping.svg' %}" alt="">#}
+{#                            <span>Shopping</span>#}
+{#                            <div class="expences"></div>#}
+{#                            <h6>- UAH 5890</h6>#}
+{##}
+{#                        </div>#}
+{#                        <div class="category" style="border: 2px solid rgba(16, 176, 80, 1);">#}
+{#                            <img src="{% static 'img/shopping.svg' %}" alt="">#}
+{#                            <span>Shopping</span>#}
+{#                            <div class="expences"></div>#}
+{#                            <h6>- UAH 5890</h6>#}
+{##}
+{#                        </div>#}
                     </div>
                     <div class="additional-info">
                         <h2>All expenses:</h2>
+                        
                         <div class="wrapper_categories-info">
-
+                            {% for payment in payments.items %}
                             <div class="back" style="border: 1px solid rgba(163, 163, 163, 1);" id="shopping-info">
-                                <span class="place">Simi</span>
-                                <span class="date">22.12.2024 19:43</span>
-                                <h6> {{ expence.amount }} </h6>
+                                
+                                    {% for i in payments %}
+                                <span class="place">{{ i.description }}</span>
+                                <span class="date">{{ i.time }}</span>
+                                <h6>{{ i.amount }}</h6>
                             </div>
-
+                                        {% endfor %}
+                                {% endfor %}
                         </div>
                         <!-- Додайте інші блоки back тут для інших категорій -->
                     </div>
@@ -295,7 +300,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         //реалізація календаря
         document.addEventListener('DOMContentLoaded', function () {
@@ -317,7 +323,7 @@
             labels: labels,
             datasets: [{
                 label: 'Доходи',
-                data: [100, 50, 40, 70, 60, 30, 80], // дані для доходів
+                data: [100, 5, 40, 70, 60, 30, 80], // дані для доходів
                 backgroundColor: 'rgba(153, 102, 255, 0.2)',
                 borderColor: 'rgba(153, 102, 255, 1)',
                 borderWidth: 1
@@ -357,7 +363,7 @@
             ],
             datasets: [{
                 label: 'My First Dataset',
-                data: [300, 100],
+                data:  {{ data }},
                 backgroundColor: [
                     'rgb(138, 43, 226)',
                     'rgb(200, 120, 255)'
@@ -392,6 +398,7 @@
                 var menuItems = dropdownContent.getElementsByTagName("a");
                 for (var i = 0; i < menuItems.length; i++) {
                     menuItems[i].addEventListener("click", function () {
+                        
                         var buttonText = this.textContent;
                         var buttonImg = this.querySelector("img");
                         var buttonImgSrc = buttonImg ? buttonImg.getAttribute("src") : null;
@@ -408,7 +415,7 @@
                 }
             });
         });
-
+       
 
         //діалогове вікно очищення історії
         document.querySelector('#openDialogClear').onclick = function () {
@@ -450,6 +457,16 @@
         }
 
         //category-info
+           function toggleInfo(category) {
+        var detail = category.querySelector('.category-detail');
+        if (detail.style.display === 'none') {
+            detail.style.display = 'block';
+            category.querySelector('.category-summary').style.display = 'none';
+        } else {
+            detail.style.display = 'none';
+            category.querySelector('.category-summary').style.display = 'flex';
+        }
+    }
         var categories = document.querySelectorAll(".category");
 
         categories.forEach(function (category) {
@@ -462,8 +479,8 @@
                 }
             });
         });
-
-
+        
+       
     </script>
 </body>
 
