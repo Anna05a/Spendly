@@ -168,7 +168,10 @@
                     <div class="categories_inf">
                         {% for expence in expences %}
                         <div class="block" id="block{{ forloop.counter }}">
-                        {{ expence.img }}
+                        
+                        {% if expence.category == 'Enrollment' %}
+                        <img src={% static 'img/transfer.svg'%} alt="">
+                        {% endif %}
                             <div class="front" style="border: 2px solid {{ expence.border }};">
                                 <span>{{ expence.category }}</span>
                                 <h6> {{ expence.amount }} </h6>

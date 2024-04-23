@@ -58,6 +58,7 @@ def statistics_page(request):
         payments = []
         total_e=[]
         total_r=[]
+
         current_datetime = datetime.now()
         end_year = current_datetime.year
         end_month = current_datetime.month
@@ -69,7 +70,10 @@ def statistics_page(request):
         start_day = one_month_ago.day
         statements = mono.get_statements(request.session['card_id'], date(start_year, start_month, start_day),
                                          date(end_year, end_month, end_day))
+
         for payment in statements:
+            border=''
+            img=''
             original_time = datetime.fromtimestamp(payment['time'], timezone.utc)
             new_time_str = (original_time + timedelta(hours=2)).strftime('%Y-%m-%d %H:%M:%S')
             originAmount = payment['amount'] // 100
@@ -108,6 +112,56 @@ def statistics_page(request):
                 else:
                     category = 'Enrollment'
                     total_e.append(originAmount)
+
+            if category == 'Transfer':
+                border = 'rgba(15, 110, 198, 1)'
+                img = 'img/transfer.svg'
+            elif category == 'Enrollment':
+                border = 'rgba(135, 16, 176, 1)'
+                img = 'img/lets-icons--transfer-down-light.png'
+            elif category == 'Utility payments':
+                border = 'rgba(180, 16, 16, 1)'
+                img = "{ % static'img/utility.svg' %}"
+            elif category == 'Transportation':
+                border = 'rgba(213, 229, 25, 1)'
+                img = 'img/transportation.svg'
+            elif category == 'Health and beauty':
+                border = 'rgba(233, 54, 183, 1)'
+                img = 'img/health-and-beauty-outline.svg'
+            elif category == 'Groceries':
+                border = 'rgba(16, 176, 80, 1)'
+                img = 'img/groceries.svg'
+            elif category == 'Caffe/restaurant':
+                border = 'rgba(100, 13, 141, 1)'
+                img = 'img/cafe.svg'
+            elif category == 'Services':
+                border = 'rgba(57, 17, 171, 1)'
+                img = 'img/services.svg'
+            elif category == 'Entertainment':
+                border = 'rgba(170, 16, 173, 1)'
+                img = 'img/entertainment.svg'
+            elif category == 'Travel':
+                border = 'rgba(132, 193, 3, 1)'
+                img = 'img/travel.svg'
+            elif category == 'Household':
+                border = 'rgba(176, 141, 16, 1)'
+                img = 'img/household.svg'
+            elif category == 'Car service':
+                border = 'rgba(12, 204, 170, 1)'
+                img = 'img/car-service.svg'
+            elif category == 'Education':
+                border = 'rgba(243, 220, 12, 1)'
+                img = 'img/education.svg'
+            elif category == 'Mobile recharge':
+                border = 'rgba(17, 198, 210, 1)'
+                img = 'img/mobile.svg'
+            elif category == 'Other':
+                border = 'rgba(214, 115, 24, 1)'
+                img = 'img/other.svg'
+            elif category == 'Shopping':
+                border = 'rgba(0, 115, 46, 1)'
+                img = 'img/shopping.svg'
+
             payments.append({
                 'id': id,
                 'time': new_time_str,
@@ -115,7 +169,8 @@ def statistics_page(request):
                 'currency': currency,
                 'category': category,
                 'description': payment['description'],
-                #'border': border
+                'border': border,
+                'img':img
             })
         for originAmount in originAmounts:
             if str(originAmount).startswith('-'):
@@ -131,18 +186,22 @@ def statistics_page(request):
         total_spending = []
         total_payments = []
 
+
         for payment in payments:
             category = payment['category']
             amount = payment['amount']
             currency = payment['currency']
             description = payment['description']
             time = payment['time']
-
+            border1 = payment['border']
+            img= payment['img']
             category_exists = False
             for item in total_spending:
                 if item['category'] == category:
                     item['data'].append({
                         'amount': amount,
+                        'border': border1,
+                        'img': img,
                         'currency': currency,
                         'description': description,
                         'time': time
@@ -154,6 +213,8 @@ def statistics_page(request):
             if not category_exists:
                 total_spending.append({
                     'category': category,
+                    'border': border1,
+                    'img': img,
                     'amount': amount,
                     'data': [{
                         'amount': amount,
@@ -163,8 +224,8 @@ def statistics_page(request):
                     }]
                 })
 
-            print(total_spending)
-            #print(payment)
+            #print(total_spending)
+            print(payment)
             #print(total_payments)
         context = { 'finances': finances, 'data': data, 'expence_persent': expence_percent, 'revenue_persent': revenue_percent, 'expences': total_spending, 'payments': total_payments,'revenue_data':total_r,'expense_data':total_e}
         return render(request, 'main/statistic_page.html', context)
@@ -293,38 +354,52 @@ def get_payments(request, card_id):
 
             if category == 'Transfer':
                 border='rgba(15, 110, 198, 1)'
-                img = "<img src={ % static'img/transfer.svg' %} alt="">"
+                img =  'img/transfer.svg'
             elif category == 'Enrollment':
                 border='rgba(135, 16, 176, 1)'
+                img = 'img/enrollment.svg'
             elif category == 'Utility payments':
                 border='rgba(180, 16, 16, 1)'
+                img = "{ % static'img/utility.svg' %}"
             elif category == 'Transportation':
                 border='rgba(213, 229, 25, 1)'
-                img="<img src={% static 'img/transportation.svg' %} alt="">"
+                img='img/transportation.svg'
             elif category == 'Health and beauty':
                 border='rgba(233, 54, 183, 1)'
+                img ='img/health-and-beauty-outline.svg'
             elif category == 'Groceries':
                 border='rgba(16, 176, 80, 1)'
+                img = 'img/groceries.svg'
             elif category == 'Caffe/restaurant':
                 border='rgba(100, 13, 141, 1)'
+                img = 'img/cafe.svg'
             elif category == 'Services':
                 border='rgba(57, 17, 171, 1)'
+                img = 'img/services.svg'
             elif category == 'Entertainment':
                 border='rgba(170, 16, 173, 1)'
+                img = 'img/entertainment.svg'
             elif category == 'Travel':
                 border='rgba(132, 193, 3, 1)'
+                img = 'img/travel.svg'
             elif category == 'Household':
                 border='rgba(176, 141, 16, 1)'
+                img = 'img/household.svg'
             elif category == 'Car service':
                 border='rgba(12, 204, 170, 1)'
+                img = 'img/car-service.svg'
             elif category == 'Education':
                 border='rgba(243, 220, 12, 1)'
+                img = 'img/education.svg'
             elif category == 'Mobile recharge':
                 border='rgba(17, 198, 210, 1)'
+                img = 'img/mobile.svg'
             elif category == 'Other':
                 border = 'rgba(214, 115, 24, 1)'
+                img = 'img/other.svg'
             elif category == 'Shopping':
                 border = 'rgba(0, 115, 46, 1)'
+                img = 'img/shopping.svg'
 
             payments.append({
                 'id': id,

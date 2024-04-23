@@ -151,8 +151,8 @@
                     <hr>
             <div class="categories_inf">
     {% for i in expences %}
-<div class="category" onclick="toggleAdditionalInfo(this);" style="border: 2px solid rgba(16, 176, 80, 1);">
-    <img src="{% static 'img/shopping.svg' %}" alt="">
+<div class="category" onclick="toggleAdditionalInfo(this);" style="border: 2px solid {{ i.border }};">
+    <img src="{% static i.img %}" alt="">
     <span>{{ i.category }}</span>
     <div class="expences"></div>
     <h6>UAH {{ i.amount }}</h6>
