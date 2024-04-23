@@ -431,6 +431,8 @@ def refresh_card(request):
         if user_info:
             for user_account in user_info['accounts']:
                 originBalance = user_account['balance'] // 100
+                card_balance = originBalance
+                card_number = user_account['maskedPan'][0]
                 card_id = user_account['id']
                 encrypted_card_id = caesar_cipher_encrypt(card_id, 3)  # Шифруємо ідентифікатор карти
                 temp = user_account['maskedPan'][0]
@@ -439,7 +441,7 @@ def refresh_card(request):
                 elif temp[0] == '5':
                     card_type = 'Master'
                 if not Card.objects.filter(card_id=encrypted_card_id).exists():  # Перевіряємо зашифрований ідентифікатор
-                    Card.objects.create(id=uuid.uuid4(), card_id=encrypted_card_id, balance=originBalance, card_number=originBalance, user=request.user, token=token, type=user_account['type'], system=card_type)
+                    card_obj = Card.objects.create(id=uuid.uuid4(), card_id=encrypted_card_id, balance=originBalance, card_number=card_number, user=request.user, token=token, type=type, system=card_type)
 
         return redirect('home_page')
     except monobank.Error as e:
