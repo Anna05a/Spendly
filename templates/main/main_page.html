@@ -84,7 +84,7 @@
 
                 <div class="card-container">
                     {% for card1 in cards %}
-                    <a href={% url 'get_payments' card1.card_id %}>
+                    <a href="{% url 'get_payments' card1.card_id %}">
                         <div class="wrapper_cards">
                             <div class="card">
                                 <div class="card_top">
@@ -168,6 +168,7 @@
                     <div class="categories_inf">
                         {% for expence in expences %}
                         <div class="block" id="block{{ forloop.counter }}">
+                        {{ expence.img }}
                             <div class="front" style="border: 2px solid {{ expence.border }};">
                                 <span>{{ expence.category }}</span>
                                 <h6> {{ expence.amount }} </h6>

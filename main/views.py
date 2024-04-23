@@ -54,17 +54,35 @@ def statistics_page(request):
         revenues = 0
         count_e=0
         count_r=0
-
+        card_ids=[]
         payments = []
+        total_e=[]
+        total_r=[]
+        current_datetime = datetime.now()
+        end_year = current_datetime.year
+        end_month = current_datetime.month
+        end_day = current_datetime.day
 
-
-        statements = mono.get_statements(request.session['card_id'], date(2024, 3, 28),
-                                         date(2024, 4, 20))
+        one_month_ago = current_datetime - timedelta(days=30)
+        start_year = one_month_ago.year
+        start_month = one_month_ago.month
+        start_day = one_month_ago.day
+        statements = mono.get_statements(request.session['card_id'], date(start_year, start_month, start_day),
+                                         date(end_year, end_month, end_day))
         for payment in statements:
             original_time = datetime.fromtimestamp(payment['time'], timezone.utc)
             new_time_str = (original_time + timedelta(hours=2)).strftime('%Y-%m-%d %H:%M:%S')
             originAmount = payment['amount'] // 100
-            id = payment['id']
+            card_id = payment['id']
+            # Зашифруємо айді карти методом Цезаря зі зсувом 3
+            encrypted_card_id = caesar_cipher_encrypt(card_id, 3)
+
+            card_ids.append(encrypted_card_id)
+
+            # Додаємо card_id лише один раз до списку card_ids
+            if card_id not in card_ids:
+                card_ids.append(card_id)
+
             originAmounts.append(originAmount)
             currency = ''
             if payment['currencyCode'] == 980:
@@ -86,8 +104,10 @@ def statistics_page(request):
             if category.lower() == 'finance':
                 if str(originAmount).startswith('-'):
                     category = 'Transfer'
+                    total_e.append(abs(originAmount))
                 else:
                     category = 'Enrollment'
+                    total_e.append(originAmount)
             payments.append({
                 'id': id,
                 'time': new_time_str,
@@ -108,8 +128,8 @@ def statistics_page(request):
         expence_percent = round((100*revenues)/(expences+revenues),1)
         data.append(expences)
         data.append(revenues)
-        total_spending = {}
-        total_payments = {}
+        total_spending = []
+        total_payments = []
 
         for payment in payments:
             category = payment['category']
@@ -117,26 +137,41 @@ def statistics_page(request):
             currency = payment['currency']
             description = payment['description']
             time = payment['time']
-            if category not in total_spending:
-                total_spending[category] = 0
-            total_spending[category] += amount
-            if category not in total_payments:
-                total_payments[category] = []
 
-            total_payments[category].append({
-                'amount': amount,
-                'currency': currency,
-                'description': description,
-                'time': time
-            })
-            print(payment)
-            print(total_payments)
-        context = { 'finances': finances, 'data': data, 'expence_persent': expence_percent, 'revenue_persent': revenue_percent, 'expences': total_spending, 'payments': total_payments}
+            category_exists = False
+            for item in total_spending:
+                if item['category'] == category:
+                    item['data'].append({
+                        'amount': amount,
+                        'currency': currency,
+                        'description': description,
+                        'time': time
+                    })
+                    item['amount'] += amount
+                    category_exists = True
+                    break
+
+            if not category_exists:
+                total_spending.append({
+                    'category': category,
+                    'amount': amount,
+                    'data': [{
+                        'amount': amount,
+                        'currency': currency,
+                        'description': description,
+                        'time': time
+                    }]
+                })
+
+            print(total_spending)
+            #print(payment)
+            #print(total_payments)
+        context = { 'finances': finances, 'data': data, 'expence_persent': expence_percent, 'revenue_persent': revenue_percent, 'expences': total_spending, 'payments': total_payments,'revenue_data':total_r,'expense_data':total_e}
         return render(request, 'main/statistic_page.html', context)
 
     except Exception as e:
         print("Помилка у функції get_category_earn_cost:", e)
-        return render(request, 'main/main_new.html')
+        return redirect('statistics')
 @login_required(login_url='/login')
 def home_page(request):
     cards = Card.objects.filter(user=request.user)
@@ -160,13 +195,14 @@ def add_card(request):
                 card_balance = originBalance
                 card_number = user_account['maskedPan'][0]
                 card_id = user_account['id']
+
                 card_ids.append(card_id)
-                print(card_id)
+
                 # Зашифруємо айді карти методом Цезаря зі зсувом 3
                 encrypted_card_id = caesar_cipher_encrypt(card_id, 3)
                 
                 card_ids.append(encrypted_card_id)
-
+                print(encrypted_card_id)
                 # Додаємо card_id лише один раз до списку card_ids
                 if card_id not in card_ids:
                     card_ids.append(card_id)
@@ -201,7 +237,6 @@ def delete_card(request, card_id):
 
 def get_payments(request, card_id):
     try:
-
         cards = Card.objects.filter(user=request.user)
         mono = monobank.Client(cards.first().token)
         labels = []
@@ -209,6 +244,7 @@ def get_payments(request, card_id):
         originAmounts = []
         payments = []
         border=''
+        img=''
         current_datetime = datetime.now()
         end_year = current_datetime.year
         end_month = current_datetime.month
@@ -219,11 +255,12 @@ def get_payments(request, card_id):
         start_month = one_month_ago.month
         start_day = one_month_ago.day
         print(card_id)
+
         # Дешифруємо айді карти, яке прийшло з URL
         decrypted_card_id = caesar_cipher_encrypt(card_id, -3)
-
+        request.session['card_id'] = decrypted_card_id
         statements = mono.get_statements(decrypted_card_id, date(start_year, start_month, start_day), date(end_year, end_month, end_day))
-
+        print(decrypted_card_id)
         for payment in statements:
             original_time = datetime.fromtimestamp(payment['time'], timezone.utc)
             new_time_str = (original_time + timedelta(hours=2)).strftime('%Y-%m-%d %H:%M:%S')
@@ -256,13 +293,14 @@ def get_payments(request, card_id):
 
             if category == 'Transfer':
                 border='rgba(15, 110, 198, 1)'
+                img = "<img src={ % static'img/transfer.svg' %} alt="">"
             elif category == 'Enrollment':
                 border='rgba(135, 16, 176, 1)'
             elif category == 'Utility payments':
                 border='rgba(180, 16, 16, 1)'
             elif category == 'Transportation':
                 border='rgba(213, 229, 25, 1)'
-                imq='<'
+                img="<img src={% static 'img/transportation.svg' %} alt="">"
             elif category == 'Health and beauty':
                 border='rgba(233, 54, 183, 1)'
             elif category == 'Groceries':
@@ -295,10 +333,11 @@ def get_payments(request, card_id):
                 'currency': currency,
                 'category': category,
                 'description': payment['description'],
-                'border': border
+                'border': border,
+                'img': img
             })
             labels.append(category)
-            request.session['card_id'] = card_id
+
             data.append(originAmount)
         context = {'expences': payments, 'cards': cards, 'labels': labels, 'data': data}
         return render(request, 'main/main_page.html', context)
