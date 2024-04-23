@@ -432,11 +432,11 @@ def refresh_card(request):
             for user_account in user_info['accounts']:
                 originBalance = user_account['balance'] // 100
                 card_balance = originBalance
-                type = user_account['type']
                 card_number = user_account['maskedPan'][0]
                 card_id = user_account['id']
                 encrypted_card_id = caesar_cipher_encrypt(card_id, 3)  # Шифруємо ідентифікатор карти
                 temp = user_account['maskedPan'][0]
+                type = user_account['type']
                 if temp[0] == '4':
                     card_type = 'Visa'
                 elif temp[0] == '5':
