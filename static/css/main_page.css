@@ -77,6 +77,8 @@ html {
   width: 40%;
   height: 100%;
   background-color: black;
+  padding: 10px;
+  padding-top: 40px;
 }
 
 .main {
@@ -209,12 +211,13 @@ header h2 {
 .accounts_cards {
   display: block;
   width: 900px;
-  height: 230px;
+  height: 250px;
   background-color: rgba(232, 231, 231, 1);
   font-family: "Montserrat", sans-serif;
   margin: auto;
   margin-top: 30px;
   border-radius: 8px;
+  padding: 5px;
 }
 
 h3 {
@@ -234,22 +237,23 @@ hr {
   display: flex;
 }
 
-.refresh{
-  width: 160px;
-  height: 50px;
-  margin-right: 20px;
-  margin-left: 660px;
-  padding-left: 5px;
+.header_acounts_cards{
   display: flex;
-  align-items: center;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: 300;
-  background-color: rgb(123, 26, 198);
-  color: rgba(232, 231, 231, 1);
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: 100;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.refresh{
+  width: 50px;
+  height: 50px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.001);
+  margin-right: 5px;
+
+}
+
+.acounts_cards hr{
+  margin-top: 0;
 }
 
 .card {
@@ -260,38 +264,40 @@ hr {
   margin-top: 5px;
   margin-left: 30px;
   color: black;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 
 .card_top {
   display: flex;
+  justify-content: space-between;
 }
 
 .card_top h2 {
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
+  font-weight: 300;
   font-weight: lighter;
   color: rgba(0, 0, 0, 1);
-  margin-top: 10px;
-  margin-left: 15px;
+  margin-left: 10px;
+  margin-top: 5px;
 }
 
 .card_top img {
   width: 46px;
-  margin-left: 50px;
-  margin-top: 20px;
+  margin-right: 20px;
 }
 
 .balance h2 {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 20px;
-  margin-left: 15px;
+  margin-left: 10px;
   margin-top: 5px;
 }
 
 .bank_account_number {
  margin-top: 10px;
-  margin-left: 5px;
   font-size: 20px;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
@@ -305,8 +311,8 @@ hr {
 .delete_card{
   background-color: rgba(255, 255, 255, 0.001);
   border: none;
-
 }
+
 .plus {
   display: flex;
 }
@@ -691,4 +697,8 @@ h5 {
   margin-top: 10px;
   margin-left: 100px;
 }
-.card-container{display: flex;}
+.card-container{
+  display: flex;
+  width: 880px;
+  overflow: scroll;
+}
