@@ -467,7 +467,6 @@ def refresh_card(request):
                                         user=request.user, token=token, type=type, system=card_type)
                 else:
                     Card.objects.filter(user=request.user, card_id=encrypted_card_id).update(balance=originBalance)
-        # uxMi_DnkkUewgg7jJKO9InCFBfexUTenEYuLqFDyfdyk
 
         return redirect('home_page')
     except monobank.Error as e:
