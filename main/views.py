@@ -379,7 +379,7 @@ def get_payments(request, card_id):
                 img = 'img/enrollment.svg'
             elif category == 'Utility payments':
                 border = 'rgba(180, 16, 16, 1)'
-                img = "{ % static'img/utility.svg' %}"
+                img = 'img/utility.svg'
             elif category == 'Transportation':
                 border = 'rgba(213, 229, 25, 1)'
                 img = 'img/transportation.svg'
@@ -461,8 +461,7 @@ def refresh_card(request):
                     card_type = 'Visa'
                 elif temp[0] == '5':
                     card_type = 'Master'
-                if not Card.objects.filter(
-                        card_id=encrypted_card_id).exists():  # Перевіряємо зашифрований ідентифікатор
+                if not Card.objects.filter(user=request.user).exists():  # Перевіряємо зашифрований ідентифікатор
                     Card.objects.create(id=uuid.uuid4(), card_id=card_id, balance=card_balance, card_number=card_number,
                                         user=request.user, token=token, type=type, system=card_type)
                 else:

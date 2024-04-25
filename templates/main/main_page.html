@@ -55,12 +55,11 @@
                     </button>
                 </a>
 
-                <a href={% url 'logout' %}>
+               
                     <button class="button_menu pasive" id="openLogOut">
                         <img src={% static "img/log_out.svg" %} alt="">
                         <span>Log out</span>
                     </button>
-                </a>
 
             </div>
 
@@ -169,10 +168,10 @@
                         {% for expence in expences %}
                         <div class="block" id="block{{ forloop.counter }}">
                         
-                        {% if expence.category == 'Enrollment' %}
-                        <img src={% static 'img/transfer.svg'%} alt="">
-                        {% endif %}
+                       
+                        
                             <div class="front" style="border: 2px solid {{ expence.border }};">
+                                <img src={% static expence.img %} alt="">
                                 <span>{{ expence.category }}</span>
                                 <h6> {{ expence.amount }} </h6>
                             </div>
