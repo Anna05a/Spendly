@@ -73,14 +73,15 @@
 
             <div class="accounts_cards">
 
-                <h3>Accounts & Cards</h3>
-                <hr>
-                <a href={% url 'refresh_card_data' %}>
-                     <button class="refresh">
-                         Refresh token
-                         </button>
+                <div class="header_acounts_cards">
+                    <h3>Accounts & Cards</h3>
+                    <a href={% url 'refresh_card_data' %}>
+                        <button class="refresh">
+                            <img src="/static/img/refresh.svg" alt="">
+                        </button>
                     </a>
-
+                </div>
+                <hr>
                 <div class="card-container">
                     {% for card1 in cards %}
                     <a href="{% url 'get_payments' card1.card_id %}">
@@ -91,7 +92,7 @@
                                     {% if card1.system == 'Visa' %}
                                     <img src={% static "img/visa.svg" %} alt="">
                                     {% else %}
-                                    <img src={% static "img/icons-mastercard.svg" %} alt="">
+                                    <img src={% static "img/mastercard.svg" %} alt="">
                                     {% endif %}
                                 </div>
 
