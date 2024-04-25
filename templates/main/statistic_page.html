@@ -11,176 +11,177 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+          rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet">
 </head>
 
 <body>
-    <div class="overlay"></div>
-    <div class="wrapper">
-        <div class="menu">
-            <div class="circle">
-                <h1>Spendly</h1>
-            </div>
-            <div class="top">
-                <a href="javascript:history.go(-1)">
-                    <button class="button_menu pasive">
-                        <img src={% static "img/main_page.png" %} alt="">
-                        <span>Main page</span>
-                    </button>
-                </a>
-                <button class="button_menu active">
-                    <img src={% static "img/statistics.png" %} alt="">
-                    <span>Statistic</span>
+<div class="overlay"></div>
+<div class="wrapper">
+    <div class="menu">
+        <div class="circle">
+            <h1>Spendly</h1>
+        </div>
+        <div class="top">
+            <a href="javascript:history.go(-1)">
+                <button class="button_menu pasive">
+                    <img src={% static "img/main_page.png" %} alt="">
+                    <span>Main page</span>
+                </button>
+            </a>
+            <button class="button_menu active">
+                <img src={% static "img/statistics.png" %} alt="">
+                <span>Statistic</span>
+            </button>
+        </div>
+
+
+        <div class="bottom">
+            <button class="button_menu pasive" id="openDialogClear">
+                <img src={% static "img/clear.svg" %} alt="">
+                <span>Clear history</span>
+            </button>
+
+            <button class="button_menu pasive" id="openDialogDelete">
+                <img src={% static "img/delete.png" %} alt="">
+                <span>Delete account</span>
+            </button>
+
+            <button class="button_menu pasive" id="openLogOut">
+                <img src={% static "img/log_out.svg" %} alt="">
+                <span>Log out</span>
+            </button>
+        </div>
+
+    </div>
+
+    <div class="main">
+
+        <header>
+            <h2>Statistic</h2>
+        </header>
+
+        <div class="comparison_chart">
+            <div class="header_chart">
+                <h3>Comparison Chart</h3>
+
+                <button class="calendar" id="datepicker">
+                    <span>January - February, 2024</span>
+                    <img src={% static "img/calendar.svg.png" %} alt="">
                 </button>
             </div>
 
+            <hr>
 
-            <div class="bottom">
-                <button class="button_menu pasive" id="openDialogClear">
-                    <img src={% static "img/clear.svg" %} alt="">
-                    <span>Clear history</span>
-                </button>
-
-                <button class="button_menu pasive" id="openDialogDelete">
-                    <img src={% static "img/delete.png" %} alt="">
-                    <span>Delete account</span>
-                </button>
-
-                <button class="button_menu pasive" id="openLogOut">
-                    <img src={% static "img/log_out.svg" %} alt="">
-                    <span>Log out</span>
-                </button>
+            <div class="diagram">
+                <canvas id="myChart"></canvas>
             </div>
 
         </div>
 
-        <div class="main">
+        <div class="financial_and_category_container">
 
-            <header>
-                <h2>Statistic</h2>
-            </header>
 
-            <div class="comparison_chart">
-                <div class="header_chart">
-                    <h3>Comparison Chart</h3>
-
-                    <button class="calendar" id="datepicker">
-                        <span>January - February, 2024</span>
-                        <img src={% static "img/calendar.svg.png" %} alt="">
-                    </button>
+            <div class="financial_and_category left">
+                <div class="header_financeal_and_category">
+                    <h3>Financial Breakdown</h3>
+                    <div class="dropdown">
+                        <button class="dropbtn">
+                                <span class="button_content">
+                                    <span class="button_text">Month</span>
+                                    <img class="button_img" src={% static "img/next.png" %} alt="">
+                                </span>
+                        </button>
+                        <div class="dropdown-content" id="drop1">
+                            <a href="#" id="day" onclick=sendOptionToBackend(2)>Day</a>
+                            <a href="#" id="week" data-option="week">Week</a>
+                            <a href="#" id="month" data-option="month">Month</a>
+                        </div>
+                    </div>
                 </div>
 
                 <hr>
+                <div class="diagram_wrapper">
 
-                <div class="diagram">
-                    <canvas id="myChart"></canvas>
+                    <div class="diagram_doughnut">
+                        <canvas id="myDoughnutChart"></canvas>
+                    </div>
+                    <div class="diagram_text">
+                        <div class="text_diagram">
+                            <p>Total Revenue <br>
+                                <span>UAH {{ revenue_persent }}</span> %
+                            </p>
+                        </div>
+
+                        <div class="text_diagram">
+                            <p>Total Expense <br>
+                                <span>UAH {{ expence_persent }}</span> %
+                            </p>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
 
-            <div class="financial_and_category_container">
 
+            <div class="financial_and_category right">
+                <div class="header_financeal_and_category">
+                    <h3>Category rating</h3>
 
-                <div class="financial_and_category left">
-                    <div class="header_financeal_and_category">
-                        <h3>Financial Breakdown</h3>
-                        <div class="dropdown">
-                            <button class="dropbtn">
+                    <div class="dropdown">
+                        <button class="dropbtn">
                                 <span class="button_content">
                                     <span class="button_text">Month</span>
                                     <img class="button_img" src={% static "img/next.png" %} alt="">
                                 </span>
-                            </button>
-                            <div class="dropdown-content" >
-                                <a href="#" >Day</a>
-                                <a href="#" >Week</a>
-                                <a href="#" >Month</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr>
-                    <div class="diagram_wrapper">
-
-                        <div class="diagram_doughnut">
-                            <canvas id="myDoughnutChart"></canvas>
-                        </div>
-                        <div class="diagram_text">
-                            <div class="text_diagram">
-                                <p>Total Revenue <br>
-                                    <span>UAH {{ revenue_persent }}</span> %
-                                </p>
-                            </div>
-
-                            <div class="text_diagram">
-                                <p>Total Expense <br>
-                                    <span>UAH {{ expence_persent }}</span> %
-                                </p>
-                            </div>
+                        </button>
+                        <div class="dropdown-content" id="drop">
+                            <a href="#">Day</a>
+                            <a href="#">Week</a>
+                            <a href="#">Month</a>
 
                         </div>
                     </div>
-
                 </div>
-
-
-                <div class="financial_and_category right">
-                    <div class="header_financeal_and_category">
-                        <h3>Category rating</h3>
-
-                        <div class="dropdown">
-                            <button class="dropbtn">
-                                <span class="button_content">
-                                    <span class="button_text">Month</span>
-                                    <img class="button_img" src={% static "img/next.png" %} alt="">
-                                </span>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="#" >Day</a>
-                                <a href="#" >Week</a>
-                                <a href="#" >Month</a>
-
+                <hr>
+                <div class="categories_inf">
+                    {% for i in expences %}
+                        <div class="category" onclick="toggleAdditionalInfo(this);"
+                             style="border: 2px solid {{ i.border }};">
+                            <img src="{% static i.img %}" alt="">
+                            <span>{{ i.category }}</span>
+                            <div class="expences"></div>
+                            <h6>UAH {{ i.amount }}</h6>
+                            <div class="additional-info" style="display: none;">
+                                <h2>All expenses:</h2>
+                                <div class="wrapper_categories-info">
+                                    {% for expense in i.data %}
+                                        <div class="back" style="border: 1px solid rgba(163, 163, 163, 1);">
+                                            <span class="place">{{ expense.description }}</span>
+                                            <span class="date">{{ expense.time }}</span>
+                                            <h6>{{ expense.amount }}</h6>
+                                        </div>
+                                        <br>
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <hr>
-            <div class="categories_inf">
-    {% for i in expences %}
-<div class="category" onclick="toggleAdditionalInfo(this);" style="border: 2px solid {{ i.border }};">
-    <img src="{% static i.img %}" alt="">
-    <span>{{ i.category }}</span>
-    <div class="expences"></div>
-    <h6>UAH {{ i.amount }}</h6>
-    <div class="additional-info" style="display: none;">
-        <h2>All expenses:</h2>
-        <div class="wrapper_categories-info">
-            {% for expense in i.data %}
-            <div class="back" style="border: 1px solid rgba(163, 163, 163, 1);">
-                <span class="place">{{ expense.description }}</span>
-                <span class="date">{{ expense.time }}</span>
-                <h6>{{ expense.amount }}</h6>
+                    {% endfor %}
+
+
+
+                    <!-- Додайте інші блоки back тут для інших категорій -->
+                </div>
             </div>
-            <br>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-{% endfor %}
+            <!-- Додайте інші елементи category тут для інших категорій -->
 
 
-
-                        <!-- Додайте інші блоки back тут для інших категорій -->
-                    </div>
-                </div>
-                <!-- Додайте інші елементи category тут для інших категорій -->
-
-
-                <!-- 
+            <!-- 
                         <div class="category-info" id="additionalInfo">
                             <h2>All expenses:</h2>
                             <div class="wrapper_categories-info">
@@ -221,232 +222,269 @@
                 </div>
                      -->
 
-            </div>
-
-
-            <!-- діалогове вікно "Очищення історії" -->
-            <dialog id="clearHistory" class="clearHistory">
-                <div class="dialog_header">
-                    <button id="closeDialogClear" class="close">
-                        <img src={% static "img/pngwing.com.png" %} alt="">
-                    </button>
-                    <h4>Warning</h4>
-                </div>
-                <hr>
-                <div class="сontent">
-                    <p>You really want to clear history?</p>
-                    <button>Clear</button>
-                </div>
-            </dialog>
-
-            <!-- діалогове вікно "Видалення акаунту" -->
-            <dialog id="deleteAcount" class="deleteAcount">
-                <div class="dialog_header">
-                    <button id="closeDialogDelete" class="close">
-                        <img src={% static "img/pngwing.com.png" %} alt="">
-                    </button>
-                    <h4>Warning</h4>
-                </div>
-                <hr>
-                <div class="сontent">
-                    <p>You really want to delete your account?</p>
-                    <button>Delete</button>
-                </div>
-            </dialog>
-
-            <!-- діалогове вікно "Вихід з акаунту" -->
-            <dialog id="logOut" class="logOut">
-                <div class="dialog_header">
-                    <button id="closeDialogLogOut" class="close">
-                        <img src={% static "img/pngwing.com.png" %} alt="">
-                    </button>
-                    <h4>Warning</h4>
-                </div>
-                <hr>
-                <div class="сontent">
-                    <p>You really want to log out of your account?</p>
-                    <button>Log out</button>
-                </div>
-            </dialog>
-
         </div>
+
+
+        <!-- діалогове вікно "Очищення історії" -->
+        <dialog id="clearHistory" class="clearHistory">
+            <div class="dialog_header">
+                <button id="closeDialogClear" class="close">
+                    <img src={% static "img/pngwing.com.png" %} alt="">
+                </button>
+                <h4>Warning</h4>
+            </div>
+            <hr>
+            <div class="сontent">
+                <p>You really want to clear history?</p>
+                <button>Clear</button>
+            </div>
+        </dialog>
+
+        <!-- діалогове вікно "Видалення акаунту" -->
+        <dialog id="deleteAcount" class="deleteAcount">
+            <div class="dialog_header">
+                <button id="closeDialogDelete" class="close">
+                    <img src={% static "img/pngwing.com.png" %} alt="">
+                </button>
+                <h4>Warning</h4>
+            </div>
+            <hr>
+            <div class="сontent">
+                <p>You really want to delete your account?</p>
+                <a href={% url 'delete_profile' %}>
+                <button>Delete</button>
+                </a>
+            </div>
+        </dialog>
+
+        <!-- діалогове вікно "Вихід з акаунту" -->
+        <dialog id="logOut" class="logOut">
+            <div class="dialog_header">
+              
+                <button id="closeDialogLogOut"  class="close" onclick={% url 'logout' %}>
+                    <img src={% static "img/pngwing.com.png" %} alt="">
+                </button>
+                
+                <h4>Warning</h4>
+            </div>
+            <hr>
+            <div class="сontent">
+                <p>You really want to log out of your account?</p>
+                <a href={% url 'logout' %}>
+                    <button>Log out</button>
+                </a>
+            </div>
+        </dialog>
 
     </div>
 
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        
-        //реалізація календаря
-        document.addEventListener('DOMContentLoaded', function () {
-            var picker = new Litepicker({
-                element: document.getElementById('datepicker'),
-                singleMode: false,
-                autoApply: true,
-            });
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    //реалізація календаря
+    document.addEventListener('DOMContentLoaded', function () {
+        var picker = new Litepicker({
+            element: document.getElementById('datepicker'),
+            singleMode: false,
+            autoApply: true,
         });
+    });
 
 
-        //diagram
-        
-        
-        const ctx = document.getElementById('myChart').getContext('2d');
-        
-        const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-        
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'Доходи',
-                data: {{ revenue_data }}, // дані для доходів
+    //diagram
+
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Revenue',
+            data: {{ revenue_data | safe }}, // дані для доходів
+            backgroundColor: 'rgba(200, 120, 255, 0.2)',
+            borderColor: 'rgba(200, 120, 255)',
+           
+            borderWidth: 1
+        },
+            {
+                label: 'Expense',
+                data: {{ expense_data | safe }}, // дані для витрат
                 backgroundColor: 'rgba(153, 102, 255, 0.2)',
                 borderColor: 'rgba(153, 102, 255, 1)',
                 borderWidth: 1
-            },
-            {
-                label: 'Витрати',
-                data: {{ expense_data }}, // дані для витрат
-                backgroundColor: 'rgba(200, 120, 255, 0.2)',
-                borderColor: 'rgba(200, 120, 255)',
-                borderWidth: 1
             }]
-        };
+    };
 
-        const myChart = new Chart(ctx, {
-            type: 'bar',
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Chart.js Bar Chart'
-                    }
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Bar Chart'
                 }
-            },
-        });
+            }
+        },
+    });
 
-        //donut diagram
-        const newdata = {
-            labels: [
-                'Revenue',
-                'Expense',
-
+    //donut diagram
+    const newdata = {
+        labels: [
+            'Expense','Revenue',
+        ],
+        datasets: [{
+            label: 'My First Dataset',
+            data: {{ data }},
+            backgroundColor: [
+                'rgb(138, 43, 226)',
+                'rgb(200, 120, 255)'
             ],
-            datasets: [{
-                label: 'My First Dataset',
-                data:  {{ data }},
-                backgroundColor: [
-                    'rgb(138, 43, 226)',
-                    'rgb(200, 120, 255)'
-                ],
-                hoverOffset: 4
-            }]
-        };
+            hoverOffset: 4
+        }]
+    };
 
-        const config = {
-            type: 'doughnut',
-            data: newdata,
-        };
+    const config = {
+        type: 'doughnut',
+        data: newdata,
+    };
 
 
-        document.addEventListener('DOMContentLoaded', function () {
-            var ctx = document.getElementById('myDoughnutChart').getContext('2d');
-            new Chart(ctx, config);
-        });
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('myDoughnutChart').getContext('2d');
+        new Chart(ctx, config);
+    });
 
 
-        //кнопка для обирання day/week/month/year
-        document.addEventListener("DOMContentLoaded", function () {
-            var dropbtns = document.querySelectorAll(".dropbtn");
+    //кнопка для обирання day/week/month/year
+    document.addEventListener("DOMContentLoaded", function () {
+        var dropbtns = document.querySelectorAll(".dropbtn");
 
-            dropbtns.forEach(function (dropbtn) {
-                var dropdownContent = dropbtn.nextElementSibling;
+        dropbtns.forEach(function (dropbtn) {
+            var dropdownContent = dropbtn.nextElementSibling;
 
-                dropbtn.addEventListener("click", function () {
-                    dropdownContent.classList.toggle("show");
-                });
-
-                var menuItems = dropdownContent.getElementsByTagName("a");
-                for (var i = 0; i < menuItems.length; i++) {
-                    menuItems[i].addEventListener("click", function () {
-                        
-                        var buttonText = this.textContent;
-                        var buttonImg = this.querySelector("img");
-                        var buttonImgSrc = buttonImg ? buttonImg.getAttribute("src") : null;
-                        dropbtn.querySelector(".button_text").textContent = buttonText;
-                        var img = dropbtn.querySelector(".button_img");
-                        if (buttonImgSrc) {
-                            img.setAttribute("src", buttonImgSrc);
-                            img.style.display = "inline";
-                        } else {
-                            img.style.display = "none";
-                        }
-                        dropdownContent.classList.remove("show");
-                    });
-                }
+            dropbtn.addEventListener("click", function () {
+                dropdownContent.classList.toggle("show");
             });
+
+            var menuItems = dropdownContent.getElementsByTagName("a");
+            for (var i = 0; i < menuItems.length; i++) {
+                menuItems[i].addEventListener("click", function () {
+
+                    var buttonText = this.textContent;
+                    var buttonImg = this.querySelector("img");
+                    var buttonImgSrc = buttonImg ? buttonImg.getAttribute("src") : null;
+                    dropbtn.querySelector(".button_text").textContent = buttonText;
+                    var img = dropbtn.querySelector(".button_img");
+                    if (buttonImgSrc) {
+                        img.setAttribute("src", buttonImgSrc);
+                        img.style.display = "inline";
+                    } else {
+                        img.style.display = "none";
+                    }
+                    dropdownContent.classList.remove("show");
+                });
+            }
         });
-       
+    });
 
-        //діалогове вікно очищення історії
-        document.querySelector('#openDialogClear').onclick = function () {
-            document.body.classList.add('dialog-open');
-            document.querySelector('.overlay').style.display = 'block';
-            document.getElementById('clearHistory').showModal();
-        }
 
-        document.querySelector('#closeDialogClear').onclick = function () {
-            document.body.classList.remove('dialog-open');
-            document.querySelector('.overlay').style.display = 'none';
-            document.getElementById('clearHistory').close();
-        }
-
-        //діалогове вікно видалення акаунта
-        document.querySelector('#openDialogDelete').onclick = function () {
-            document.body.classList.add('dialog-open');
-            document.querySelector('.overlay').style.display = 'block';
-            document.getElementById('deleteAcount').showModal();
-        }
-
-        document.querySelector('#closeDialogDelete').onclick = function () {
-            document.body.classList.remove('dialog-open');
-            document.querySelector('.overlay').style.display = 'none';
-            document.getElementById('deleteAcount').close();
-        }
-
-        //діалогове вікно "вийти з акаунта"
-        document.querySelector('#openLogOut').onclick = function () {
-            document.body.classList.add('dialog-open');
-            document.querySelector('.overlay').style.display = 'block';
-            document.getElementById('logOut').showModal();
-        }
-
-        document.querySelector('#closeDialogLogOut').onclick = function () {
-            document.body.classList.remove('dialog-open');
-            document.querySelector('.overlay').style.display = 'none';
-            document.getElementById('logOut').close();
-        }
-
-        
-        //category-info
-function toggleAdditionalInfo(category) {
-    var additionalInfo = category.querySelector(".additional-info");
-    if (additionalInfo.style.display === "none" || additionalInfo.style.display === "") {
-        additionalInfo.style.display = "block";
-    } else {
-        additionalInfo.style.display = "none";
+    //діалогове вікно очищення історії
+    document.querySelector('#openDialogClear').onclick = function () {
+        document.body.classList.add('dialog-open');
+        document.querySelector('.overlay').style.display = 'block';
+        document.getElementById('clearHistory').showModal();
     }
-}
-       
-    </script>
+
+    document.querySelector('#closeDialogClear').onclick = function () {
+        document.body.classList.remove('dialog-open');
+        document.querySelector('.overlay').style.display = 'none';
+        document.getElementById('clearHistory').close();
+    }
+
+    //діалогове вікно видалення акаунта
+    document.querySelector('#openDialogDelete').onclick = function () {
+        document.body.classList.add('dialog-open');
+        document.querySelector('.overlay').style.display = 'block';
+        document.getElementById('deleteAcount').showModal();
+    }
+
+    document.querySelector('#closeDialogDelete').onclick = function () {
+        document.body.classList.remove('dialog-open');
+        document.querySelector('.overlay').style.display = 'none';
+        document.getElementById('deleteAcount').close();
+    }
+
+    //діалогове вікно "вийти з акаунта"
+    document.querySelector('#openLogOut').onclick = function () {
+        document.body.classList.add('dialog-open');
+        document.querySelector('.overlay').style.display = 'block';
+        document.getElementById('logOut').showModal();
+    }
+
+    document.querySelector('#closeDialogLogOut').onclick = function () {
+        document.body.classList.remove('dialog-open');
+        document.querySelector('.overlay').style.display = 'none';
+        document.getElementById('logOut').close();
+    }
+
+
+    //category-info
+    function toggleAdditionalInfo(category) {
+        var additionalInfo = category.querySelector(".additional-info");
+        if (additionalInfo.style.display === "none" || additionalInfo.style.display === "") {
+            additionalInfo.style.display = "block";
+        } else {
+            additionalInfo.style.display = "none";
+        }
+    }
+
+    const options = document.querySelectorAll('.dropdown-content a');
+
+    // Обробка кліків на посиланнях
+    options.forEach(option => {
+        option.addEventListener('click', function (event) {
+            event.preventDefault();
+            const selectedOption = this.dataset.option; // Отримуємо значення атрибуту data-option
+            sendOptionToBackend(selectedOption); // Відправляємо вибрану опцію на бекенд
+        });
+    });
+
+    function sendOptionToBackend(option) {
+        // Отримання CSRF-токена з мета-тега у шаблоні Django
+        const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+        // Виконуємо POST-запит на сервер з вибраною опцією та CSRF-токеном
+        axios.post('/statistics_page', {option: option}, {
+            headers: {
+                'X-CSRFToken': csrfToken // Додаємо CSRF-токен у заголовок запиту
+            }
+        })
+            .then(response => {
+                console.log('Вибрана опція успішно відправлена на бекенд');
+                // Додаткові дії в разі успішного відправлення
+            })
+            .catch(error => {
+                console.error('Сталася помилка при відправці вибраної опції на бекенд:', error);
+                // Обробка помилки
+            });
+    }
+
+</script>
 </body>
 
 </html>
