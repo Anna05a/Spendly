@@ -70,34 +70,34 @@ def statistics_page(request):
         payments = []
         total_e = []
         total_r = []
-        current_datetime = datetime.now()
-        end_year = current_datetime.year
-        end_month = current_datetime.month
-        end_day = current_datetime.day
-        selected_value = request.GET.get('selected_value')
-        print(selected_value)
-        if selected_value == None or selected_value == 'month':
+
+        start_date = request.GET.get('start_date')
+        end_date = request.GET.get('end_date')
+        print(start_date, end_date)
+        if start_date is None or end_date is None:
+            current_datetime = datetime.now()
             one_month_ago = current_datetime - timedelta(days=30)
             start_year = one_month_ago.year
             start_month = one_month_ago.month
             start_day = one_month_ago.day
-            statements = mono.get_statements(request.session['card_id'], date(start_year, start_month, start_day),
-                                             date(end_year, end_month, end_day))
-        if selected_value == 'week':
-            one_month_ago = current_datetime - timedelta(days=8)
-            start_year = one_month_ago.year
-            start_month = one_month_ago.month
-            start_day = one_month_ago.day
-            print(request.session['card_id'])
-            statements = mono.get_statements(request.session['card_id'], date(start_year, start_month, start_day),
-                                         date(end_year, end_month, end_day))
-        if selected_value == 'day':
-            one_month_ago = current_datetime - timedelta(days=1)
-            start_year = one_month_ago.year
-            start_month = one_month_ago.month
-            start_day = one_month_ago.day
-            print(request.session['card_id'])
-            statements = mono.get_statements(request.session['card_id'], date(start_year, start_month, start_day),
+
+            current_datetime = datetime.now()
+            end_year = current_datetime.year
+            end_month = current_datetime.month
+            end_day = current_datetime.day
+        else:
+            start_date_parts = start_date.split('.')
+            end_date_parts = end_date.split('.')
+            print(start_date_parts)
+            start_day=int(start_date_parts[0])
+            start_month= int(start_date_parts[1])
+            start_year= int(start_date_parts[2])
+            print(start_year, start_month, start_day)
+            end_day = int(end_date_parts[0])
+            end_month = int(end_date_parts[1])
+            end_year = int(end_date_parts[2])
+
+        statements = mono.get_statements(request.session['card_id'], date(start_year, start_month, start_day),
                                          date(end_year, end_month, end_day))
         for payment in statements:
             print(payment)
@@ -223,7 +223,6 @@ def statistics_page(request):
         total_payments = []
 
         for payment in payments:
-            time.sleep(30)
             amount = payment['amount']
             if amount < 0:
                 category = payment['category']
@@ -262,7 +261,7 @@ def statistics_page(request):
                     })
             total_spending.sort(key=lambda x: x['amount'])
             #print(payment)
-        time.sleep(20)
+
         context = {'finances': finances, 'data': data, 'expence_persent': expence_percent,
                        'revenue_persent': revenue_percent, 'expences': total_spending,
                        'payments': total_payments,
@@ -270,7 +269,10 @@ def statistics_page(request):
         return render(request, 'main/statistic_page.html', context)
     else:
         selected_value = request.POST.get('selected_value')
-        return HttpResponseRedirect('statistics_page?selected_value={}'.format(selected_value))
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+        # print(start_date, '------', end_date)
+        return HttpResponseRedirect(f'statistics_page?start_date={start_date}&end_date={end_date}')
 
 @login_required(login_url='/login')
 def home_page(request):
@@ -336,9 +338,15 @@ def delete_card(request, card_id):
     else:
         return redirect('home_page')
 
+def clear_cards(request):
+    cards=Card.objects.filter(user=request.user)
+    cards.delete()
+    return redirect('home')
 
 def get_payments(request, card_id):
-    try:
+    if request.method == 'GET':
+        sv=request.GET.get('selected_value')
+        print(sv)
         cards = Card.objects.filter(user=request.user)
         mono = monobank.Client(cards.first().token)
         labels = []
@@ -360,9 +368,9 @@ def get_payments(request, card_id):
 
         # Дешифруємо айді карти, яке прийшло з URL
         decrypted_card_id = caesar_cipher_encrypt(card_id, -3)
-        request.session['card_id'] = card_id
+        request.session['card_id'] = decrypted_card_id
         print(decrypted_card_id)
-        statements = mono.get_statements(card_id, date(start_year, start_month, start_day),
+        statements = mono.get_statements(decrypted_card_id, date(start_year, start_month, start_day),
                                          date(end_year, end_month, end_day))
         print(decrypted_card_id)
         for payment in statements:
@@ -455,14 +463,17 @@ def get_payments(request, card_id):
                 'img': img
             })
             labels.append(category)
-
             data.append(originAmount)
+
+
         context = {'expences': payments, 'cards': cards, 'labels': labels, 'data': data}
         return render(request, 'main/main_page.html', context)
-
-    except Exception as e:
-        print("Error in get_payments function:", e)
-        return render(request, 'main/statistic_page.html')
+    else:
+        selected_value = request.POST.get('selected_value')
+        return HttpResponseRedirect('statistics_page?selected_value={}'.format(selected_value))
+    # except Exception as e:
+    #     print("Error in get_payments function:", e)
+    #     return render(request, 'main/statistic_page.html')
 
 
 def refresh_card(request):
@@ -495,3 +506,4 @@ def refresh_card(request):
     except monobank.Error as e:
         print("Помилка у функції refresh_card:", e)
         return render(request, 'main/token_error.html')
+

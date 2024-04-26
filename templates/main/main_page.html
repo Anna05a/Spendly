@@ -48,13 +48,11 @@
                     <span>Clear history</span>
                 </button>
 
-                <a href={% url 'delete_profile' %}>
+                
                     <button class="button_menu pasive" id="openDialogDelete">
                         <img src={% static "img/delete.png" %} alt="">
                         <span>Delete account</span>
                     </button>
-                </a>
-
                
                     <button class="button_menu pasive" id="openLogOut">
                         <img src={% static "img/log_out.svg" %} alt="">
@@ -123,11 +121,11 @@
                 <h3>Categories</h3>
                 <hr>
 
-                <div class="buttons">
+                <div class="buttons" id="datepicker">
 
                     <!-- <button id="openDialog" class="mini_plus">+</button> -->
 
-                    <button class="calendar" id="datepicker">
+                    <button class="calendar" id="datepicker1">
                         January - February, 2024
                         <img src={% static "img/calendar.svg.png" %} alt="">
                     </button>
@@ -174,7 +172,9 @@
                 <hr>
                 <div class="сontent">
                     <p>You really want to clear history?</p>
+                    <a href={% url 'clear_history' %}>
                     <button>Clear</button>
+                    </a>
                 </div>
             </dialog>
 
@@ -189,7 +189,9 @@
                 <hr>
                 <div class="сontent">
                     <p>You really want to delete your account?</p>
-                    <button>Delete</button>
+                    <a href={% url 'delete_profile' %}>
+                        <button>Delete</button>
+                    </a>
                 </div>
             </dialog>
 
@@ -204,7 +206,9 @@
                 <hr>
                 <div class="сontent">
                     <p>You really want to log out of your account?</p>
+                    <a href={% url 'logout' %}>
                     <button>Log out</button>
+                    </a>
                 </div>
             </dialog>
 
@@ -216,11 +220,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
 
     <script>
         //diagram
          const data = {
-             labels: {{ labels | safe }},
              datasets: [{
                  label: 'My First Dataset',
                  data: {{ data }},
@@ -299,12 +303,13 @@
 
         //реалізація календаря
         document.addEventListener('DOMContentLoaded', function () {
-            var picker = new Litepicker({
+            const picker = new Litepicker({
                 element: document.getElementById('datepicker'),
                 singleMode: false,
                 autoApply: true,
-            });
+                
         });
+    });
 
         document.addEventListener('DOMContentLoaded', function () {
             const blocks = document.querySelectorAll('.block');

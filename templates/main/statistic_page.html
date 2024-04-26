@@ -250,13 +250,36 @@
 <script>
 
     //реалізація календаря
+    
     document.addEventListener('DOMContentLoaded', function () {
-        var picker = new Litepicker({
-            element: document.getElementById('datepicker'),
-            singleMode: false,
-            autoApply: true,
-        });
+    var picker = new Litepicker({
+        element: document.getElementById('datepicker'),
+        singleMode: false,
+        autoApply: true,
+        onSelect: function (date1, date2) {
+            var selectedValue1 = date1.toLocaleDateString();
+             var selectedValue2 = date2.toLocaleDateString();
+            var dataToSend = {
+                'start_date': selectedValue1,
+                'end_date': selectedValue2,
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val() 
+            };
+
+            $.ajax({
+                url: 'statistics_page',
+                type: 'POST',
+                data: dataToSend,
+                success: function(response) {
+                    console.log(response);
+                    window.location.href = 'statistics_page?start_date=' + selectedValue1+ '&end_date=' + selectedValue2
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
     });
+});
 
 
     //diagram
@@ -265,7 +288,7 @@
     const ctx = document.getElementById('myChart').getContext('2d');
 
     const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-
+    
     const data = {
         labels: labels,
         datasets: [{
@@ -331,36 +354,36 @@
 
 
     //кнопка для обирання day/week/month/year
-    document.addEventListener("DOMContentLoaded", function () {
-        var dropbtns = document.querySelectorAll(".dropbtn");
-
-        dropbtns.forEach(function (dropbtn) {
-            var dropdownContent = dropbtn.nextElementSibling;
-
-            dropbtn.addEventListener("click", function () {
-                dropdownContent.classList.toggle("show");
-            });
-
-            var menuItems = dropdownContent.getElementsByTagName("a");
-            for (var i = 0; i < menuItems.length; i++) {
-                menuItems[i].addEventListener("click", function () {
-
-                    var buttonText = this.textContent;
-                    var buttonImg = this.querySelector("img");
-                    var buttonImgSrc = buttonImg ? buttonImg.getAttribute("src") : null;
-                    dropbtn.querySelector(".button_text").textContent = buttonText;
-                    var img = dropbtn.querySelector(".button_img");
-                    if (buttonImgSrc) {
-                        img.setAttribute("src", buttonImgSrc);
-                        img.style.display = "inline";
-                    } else {
-                        img.style.display = "none";
-                    }
-                    dropdownContent.classList.remove("show");
-                });
-            }
-        });
-    });
+    {#document.addEventListener("DOMContentLoaded", function () {#}
+    {#    var dropbtns = document.querySelectorAll(".dropbtn");#}
+    {##}
+    {#    dropbtns.forEach(function (dropbtn) {#}
+    {#        var dropdownContent = dropbtn.nextElementSibling;#}
+    {##}
+    {#        dropbtn.addEventListener("click", function () {#}
+    {#            dropdownContent.classList.toggle("show");#}
+    {#        });#}
+    {##}
+    {#        var menuItems = dropdownContent.getElementsByTagName("a");#}
+    {#        for (var i = 0; i < menuItems.length; i++) {#}
+    {#            menuItems[i].addEventListener("click", function () {#}
+    {##}
+    {#                var buttonText = this.textContent;#}
+    {#                var buttonImg = this.querySelector("img");#}
+    {#                var buttonImgSrc = buttonImg ? buttonImg.getAttribute("src") : null;#}
+    {#                dropbtn.querySelector(".button_text").textContent = buttonText;#}
+    {#                var img = dropbtn.querySelector(".button_img");#}
+    {#                if (buttonImgSrc) {#}
+    {#                    img.setAttribute("src", buttonImgSrc);#}
+    {#                    img.style.display = "inline";#}
+    {#                } else {#}
+    {#                    img.style.display = "none";#}
+    {#                }#}
+    {#                dropdownContent.classList.remove("show");#}
+    {#            });#}
+    {#        }#}
+    {#    });#}
+    {#);#}
 
 
     //діалогове вікно очищення історії

@@ -12,5 +12,6 @@ urlpatterns = [
     path('add_card/', views.add_card, name='add_card'),
     path('get_payments/<str:card_id>/', views.get_payments, name='get_payments'),
     path('delete_card/<str:card_id>/', views.delete_card, name='delete_card'),
-    path('refresh', views.refresh_card, name='refresh_card_data')
+    path('refresh', views.refresh_card, name='refresh_card_data'),
+    path('clear_history', views.clear_cards, name='clear_history')
 ]
