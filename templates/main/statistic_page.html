@@ -96,11 +96,18 @@
                                     <img class="button_img" src={% static "img/next.png" %} alt="">
                                 </span>
                         </button>
-                        <div class="dropdown-content" id="drop1">
-                            <a href="#" id="day" onclick=sendOptionToBackend(2)>Day</a>
-                            <a href="#" id="week" data-option="week">Week</a>
-                            <a href="#" id="month" data-option="month">Month</a>
-                        </div>
+{#                        <div class="dropdown-content" id="drop1">#}
+{#                            <a href="#" id="day" onclick=sendOptionToBackend("day")>Day</a>#}
+{#                            <a href="#" id="week" data-option="week">Week</a>#}
+{#                            <a href="#" id="month" data-option="month">Month</a>#}
+{#                        </div>#}
+                        <select id="dropdown">
+  <option value="day">Day</option>
+  <option value="week">Week</option>
+  <option value="month">Month</option>
+</select>
+                        {% csrf_token %}
+<button id="submit-button">Submit</button>
                     </div>
                 </div>
 
@@ -455,34 +462,26 @@
 
     const options = document.querySelectorAll('.dropdown-content a');
 
-    // Обробка кліків на посиланнях
-    options.forEach(option => {
-        option.addEventListener('click', function (event) {
-            event.preventDefault();
-            const selectedOption = this.dataset.option; // Отримуємо значення атрибуту data-option
-            sendOptionToBackend(selectedOption); // Відправляємо вибрану опцію на бекенд
+  $(document).ready(function() {
+    $('#submit-button').click(function() {
+        var selectedValue = $('#dropdown').val(); // Get the selected value from the dropdown
+        var dataToSend = {
+            'selected_value': selectedValue,
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val() 
+        };
+
+        $.ajax({
+            url: 'statistics_page',
+            type: 'POST',
+            data: dataToSend,
+            success: function(response) {
+                console.log(response);
+                window.location.href = 'statistics_page?selected_value=' + selectedValue;
+            }
         });
     });
+});
 
-    function sendOptionToBackend(option) {
-        // Отримання CSRF-токена з мета-тега у шаблоні Django
-        const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
-
-        // Виконуємо POST-запит на сервер з вибраною опцією та CSRF-токеном
-        axios.post('/statistics_page', {option: option}, {
-            headers: {
-                'X-CSRFToken': csrfToken // Додаємо CSRF-токен у заголовок запиту
-            }
-        })
-            .then(response => {
-                console.log('Вибрана опція успішно відправлена на бекенд');
-                // Додаткові дії в разі успішного відправлення
-            })
-            .catch(error => {
-                console.error('Сталася помилка при відправці вибраної опції на бекенд:', error);
-                // Обробка помилки
-            });
-    }
 
 </script>
 </body>
