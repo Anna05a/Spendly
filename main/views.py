@@ -338,6 +338,7 @@ def delete_card(request, card_id):
     else:
         return redirect('home_page')
 
+
 def clear_cards(request):
     cards=Card.objects.filter(user=request.user)
     cards.delete()
