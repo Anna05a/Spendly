@@ -248,20 +248,6 @@
          });
 
 
-        //реалізація модального вікна з можливістю обрати категорії
-        document.querySelector('#openDialog').onclick = function () {
-            document.body.classList.add('dialog-open');
-            document.querySelector('.overlay').style.display = 'block';
-            document.getElementById('choseCategory').showModal();
-        }
-        document.querySelector('#closeDialogCategory').onclick = function () {
-            document.body.classList.remove('dialog-open');
-            document.querySelector('.overlay').style.display = 'none';
-            document.getElementById('choseCategory').close();
-        }
-
-
-
         //діалогове вікно очищення історії
         document.querySelector('#openDialogClear').onclick = function () {
             document.body.classList.add('dialog-open');
@@ -300,6 +286,7 @@
             document.querySelector('.overlay').style.display = 'none';
             document.getElementById('logOut').close();
         }
+        
 
         //реалізація календаря
         document.addEventListener('DOMContentLoaded', function () {

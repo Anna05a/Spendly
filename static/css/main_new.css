@@ -503,6 +503,14 @@ h5 {
 
 }
 
+.too_many_requests{
+  width: 476px;
+  height: 211px;
+  font-size: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
 .сontent {
   width: 400px;
   margin-left: 40px;

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statistic page</title>
     <link rel="stylesheet" href={% static "css/statistic_page.css" %}?{% now "U" %}>
-    <link rel="stylesheet" href={% static "css/statistic_new.css" %}>
+    <!-- <link rel="stylesheet" href={% static "css/statistic_new.css" %}> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
@@ -63,105 +63,74 @@
 
         <header>
             <h2>Statistic</h2>
+
+            <button class="calendar" id="datepicker">
+                <img src={% static "img/calendar.svg.png" %} alt="">
+            </button>
         </header>
 
-        <div class="comparison_chart">
-            <div class="header_chart">
-                <h3>Comparison Chart</h3>
-
-                <button class="calendar" id="datepicker">
-                    <span>January - February, 2024</span>
-                    <img src={% static "img/calendar.svg.png" %} alt="">
-                </button>
-            </div>
-
-            <hr>
-
-            <div class="diagram">
-                <canvas id="myChart"></canvas>
-            </div>
-
-        </div>
-
-        <div class="financial_and_category_container">
-
-
-            <div class="financial_and_category left">
-                <div class="header_financeal_and_category">
-                    <h3>Financial Breakdown</h3>
-                    <div class="dropdown">
-                        <button class="dropbtn">
-                                <span class="button_content">
-                                    <span class="button_text">Month</span>
-                                    <img class="button_img" src={% static "img/next.png" %} alt="">
-                                </span>
-                        </button>
-{#                        <div class="dropdown-content" id="drop1">#}
-{#                            <a href="#" id="day" onclick=sendOptionToBackend("day")>Day</a>#}
-{#                            <a href="#" id="week" data-option="week">Week</a>#}
-{#                            <a href="#" id="month" data-option="month">Month</a>#}
-{#                        </div>#}
-                        <select id="dropdown">
-  <option value="day">Day</option>
-  <option value="week">Week</option>
-  <option value="month">Month</option>
-</select>
-                        {% csrf_token %}
-<button id="submit-button">Submit</button>
+        
+        <div class="wrapper_content_main">
+            <div class="comparison_and_financial">
+                <div class="comparison_chart">
+                    <div class="header_chart">
+                        <h3>Comparison Chart</h3>
                     </div>
+        
+                    <hr>
+        
+                    <div class="diagram">
+                        <canvas id="myChart"></canvas>
+                    </div>
+        
                 </div>
 
-                <hr>
-                <div class="diagram_wrapper">
-
-                    <div class="diagram_doughnut">
-                        <canvas id="myDoughnutChart"></canvas>
+                <div class="financial">
+                    <div class="header_financeal_and_category">
+                        <h3>Financial Breakdown</h3>
                     </div>
-                    <div class="diagram_text">
-                        <div class="text_diagram">
-                            <p>Total Revenue <br>
-                                <span>UAH {{ revenue_persent }}</span> %
-                            </p>
+    
+                    <hr>
+                    <div class="diagram_wrapper">
+    
+                        <div class="diagram_doughnut">
+                            <canvas id="myDoughnutChart"></canvas>
                         </div>
-
-                        <div class="text_diagram">
-                            <p>Total Expense <br>
-                                <span>UAH {{ expence_persent }}</span> %
-                            </p>
+                        <div class="diagram_text">
+                            <div class="text_diagram">
+                                <p>Total Revenue <br>
+                                    <span>UAH {{ revenue_persent }}</span> %
+                                </p>
+                            </div>
+    
+                            <div class="text_diagram">
+                                <p>Total Expense <br>
+                                    <span>UAH {{ expence_persent }}</span> %
+                                </p>
+                            </div>
+    
                         </div>
-
                     </div>
+    
                 </div>
-
             </div>
 
 
-            <div class="financial_and_category right">
+            <div class="categories">
+
+                <div class="header_number1">
                 <div class="header_financeal_and_category">
                     <h3>Category rating</h3>
-
-                    <div class="dropdown">
-                        <button class="dropbtn">
-                                <span class="button_content">
-                                    <span class="button_text">Month</span>
-                                    <img class="button_img" src={% static "img/next.png" %} alt="">
-                                </span>
-                        </button>
-                        <div class="dropdown-content" id="drop">
-                            <a href="#">Day</a>
-                            <a href="#">Week</a>
-                            <a href="#">Month</a>
-
-                        </div>
-                    </div>
                 </div>
                 <hr>
+
+                </div>
                 <div class="categories_inf">
                     {% for i in expences %}
                         <div class="category" onclick="toggleAdditionalInfo(this);"
                              style="border: 2px solid {{ i.border }};">
                             <img src="{% static i.img %}" alt="">
-                            <span>{{ i.category }}</span>
+                            <span class="category_span">{{ i.category }}</span>
                             <div class="expences"></div>
                             <h6>UAH {{ i.amount }}</h6>
                             <div class="additional-info" style="display: none;">
@@ -169,9 +138,9 @@
                                 <div class="wrapper_categories-info">
                                     {% for expense in i.data %}
                                         <div class="back" style="border: 1px solid rgba(163, 163, 163, 1);">
-                                            <span class="place">{{ expense.description }}</span>
-                                            <span class="date">{{ expense.time }}</span>
-                                            <h6>{{ expense.amount }}</h6>
+                                            <span class="place block">{{ expense.description }}</span>
+                                            <span class="date block">{{ expense.time }}</span>
+                                            <h6 class="block">{{ expense.amount }}</h6>
                                         </div>
                                         <br>
                                     {% endfor %}
@@ -183,7 +152,6 @@
             </div>
 
         </div>
-
 
         <!-- діалогове вікно "Очищення історії" -->
         <dialog id="clearHistory" class="clearHistory">
@@ -356,26 +324,26 @@
 
 
     //кнопка для обирання day/week/month/year
-    {#document.addEventListener("DOMContentLoaded", function () {#}
-    {#    var dropbtns = document.querySelectorAll(".dropbtn");#}
-    {##}
-    {#    dropbtns.forEach(function (dropbtn) {#}
-    {#        var dropdownContent = dropbtn.nextElementSibling;#}
-    {##}
-    {#        dropbtn.addEventListener("click", function () {#}
-    {#            dropdownContent.classList.toggle("show");#}
-    {#        });#}
-    {##}
-    {#        var menuItems = dropdownContent.getElementsByTagName("a");#}
-    {#        for (var i = 0; i < menuItems.length; i++) {#}
-    {#            menuItems[i].addEventListener("click", function () {#}
-    {##}
-    {#                var buttonText = this.textContent;#}
-    {#                var buttonImg = this.querySelector("img");#}
-    {#                var buttonImgSrc = buttonImg ? buttonImg.getAttribute("src") : null;#}
-    {#                dropbtn.querySelector(".button_text").textContent = buttonText;#}
-    {#                var img = dropbtn.querySelector(".button_img");#}
-    {#                if (buttonImgSrc) {#}
+   // {#document.addEventListener("DOMContentLoaded", function () {#}
+// {#    var dropbtns = document.querySelectorAll(".dropbtn");#}
+  //  {##}
+    //{#    dropbtns.forEach(function (dropbtn) {#}
+    //{#        var dropdownContent = dropbtn.nextElementSibling;#}
+    //{##}
+    //{#        dropbtn.addEventListener("click", function () {#}
+    //{#            dropdownContent.classList.toggle("show");#}
+    //{#        });#}
+    //{##}
+    //{#        var menuItems = dropdownContent.getElementsByTagName("a");#}
+    //{#        for (var i = 0; i < menuItems.length; i++) {#}
+    //{#            menuItems[i].addEventListener("click", function () {#}
+    //{##}
+    //{#                var buttonText = this.textContent;#}
+    //{#                var buttonImg = this.querySelector("img");#}
+    //{#                var buttonImgSrc = buttonImg ? buttonImg.getAttribute("src") : null;#}
+    //{#                dropbtn.querySelector(".button_text").textContent = buttonText;#}
+    //{#                var img = dropbtn.querySelector(".button_img");#}
+   /* {#                if (buttonImgSrc) {#}
     {#                    img.setAttribute("src", buttonImgSrc);#}
     {#                    img.style.display = "inline";#}
     {#                } else {#}
@@ -385,7 +353,7 @@
     {#            });#}
     {#        }#}
     {#    });#}
-    {#);#}
+    {#);#} */
 
 
     //діалогове вікно очищення історії
@@ -427,6 +395,12 @@
         document.getElementById('logOut').close();
     }
 
+    function closeCurrentModal() {
+            var currentModal = document.querySelector('dialog[open]');
+            if (currentModal) {
+                currentModal.close();
+            }
+        }
 
     //category-info
     function toggleAdditionalInfo(category) {
