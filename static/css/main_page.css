@@ -465,12 +465,12 @@ hr {
   transform: rotateY(180deg);
 }
 
-/* .front img {
+.front img {
   width: 32px;
   height: 32px;
   margin-left: 20px;
-  margin-top: 7px;
-} */
+  margin-top: 5px;
+} 
 
 .front span {
   width: 70%;
@@ -503,6 +503,7 @@ hr {
   border-radius: 8px;
   width: 100%; 
   height: 100%; 
+  justify-content: space-between;
 }
 
 .block:hover .back {
@@ -516,7 +517,8 @@ hr {
 
 .date{
   position: relative;
-  margin-left: 50px;
+  margin-right: 20px;
+  white-space: nowrap;
 }
 
 .back h6 {

@@ -209,16 +209,28 @@ header h2 {
   font-size: 30px;
 }
 
+.wrapper_content_main{
+  display: flex;
+  justify-content: space-between;
+  padding: 50px;
+}
+
+.comparison_and_financial{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 30px;
+}
+
 .comparison_chart {
   display: block;
-  width: 930px;
-  height: 35%;
+  width: 438px;
+  height: 250px;
   background-color: rgba(232, 231, 231, 1);
   font-family: "Montserrat", sans-serif;
-  margin: auto;
-  margin-top: 30px;
   border-radius: 8px;
 }
+
 
 .header_chart {
   display: flex;
@@ -239,7 +251,7 @@ hr {
 }
 
 .calendar {
-  width: 260px;
+  width: 40px;
   height: 40px;
   margin-right: 20px;
   padding-left: 5px;
@@ -259,7 +271,6 @@ hr {
   font-weight: 400;
   filter: invert(100%);
   margin-top: 3px;
-  margin-left: 10px;
 }
 
 .calendar span {
@@ -269,17 +280,9 @@ hr {
 
 .diagram {
   display: flex;
-  margin-left: 30%;
   width: 350px;
-  margin-top: 20px;
-}
-
-.diagram_buttons {
-  display: flex;
-  width: 800px;
-  justify-content: space-between;
-  margin-top: -30px;
-  margin-left: 65px;
+  margin-top: 40px;
+  margin: auto;
 }
 
 .financial_and_category_container {
@@ -287,12 +290,22 @@ hr {
   flex-direction: inherit;
 }
 
-.financial_and_category {
+.financial {
+  border-radius: 8px;
+  width: 438px;
+  height: 328px;
+  background-color: rgba(232, 231, 231, 1);
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
   border-radius: 8px;
   min-width: 438px;
-  max-height: 391px;
-  margin-top: 50px;
+  max-height: 860px;
   background-color: rgba(232, 231, 231, 1);
+  justify-content: center;
+  align-items: center;
 }
 
 .header_financeal_and_category {
@@ -300,8 +313,8 @@ hr {
   justify-content: space-between;
 }
 
-.right {
-  margin-left: 50px;
+.header_number1 {
+  width: 100%;
 }
 
 hr {
@@ -416,6 +429,5 @@ h4 {
   font-size: 20px;
   font-weight: 300;
   color: rgba(113, 113, 113, 1);
-  margin-top: 120px;
-  margin-left: 80px;
+  margin: auto;
 }

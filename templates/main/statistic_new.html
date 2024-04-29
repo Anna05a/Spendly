@@ -67,97 +67,100 @@
                 <h2>Statistic</h2>
             </header>
 
-            <div class="comparison_chart">
-                <div class="header_chart">
-                    <h3>Comparison Chart</h3>
+            <div class="wrapper_content_main">
 
-                    
-                    <button class="calendar" id="datepicker">
-                        
-                        <img src={% static "img/calendar.svg.png"  %} alt="">
-                    </button>
-                </div>
+                <div class="comparison_and_financial">
 
-                <hr>
-                <div class="diagram">
-                    <canvas id="myChart"></canvas>
-                </div>
+                    <div class="comparison_chart">
+                        <div class="header_chart">
+                            <h3>Comparison Chart</h3>
 
-                
-            
 
-            <div class="financial_and_category_container">
+                            <button class="calendar" id="datepicker">
 
-                <div class="financial_and_category left">
-                    <div class="header_financeal_and_category">
-                        <h3>Financial Breakdown</h3>
-                        <div class="dropdown">
-                            <button class="dropbtn">
-                                <span class="button_content">
-                                    <span class="button_text">Month</span>
-                                    <img class="button_img" src={% static "img/next.png"  %} alt="">
-                                </span>
+                                <img src={% static "img/calendar.svg.png" %} alt="">
                             </button>
-                            <div class="dropdown-content">
-                                <a href="#">Day</a>
-                                <a href="#">Week</a>
-                                <a href="#">Month</a>
-                            </div>
                         </div>
+
+                        <hr>
+                        <div class="diagram">
+                            <canvas id="myChart"></canvas>
+                        </div>
+
+
                     </div>
 
-                    <hr>
-                    <div class="diagram_wrapper">
-
-                        <div class="diagram_doughnut">
-                            <canvas id="myDoughnutChart"></canvas>
-                        </div>
-                        <div class="diagram_text">
-                            <div class="text_diagram">
-                                <p>Total Revenue <br>
-                                    <span>UAH 0</span> %
-                                </p>
+                    <div class="financial">
+                        <div class="header_financeal_and_category">
+                            <h3>Financial Breakdown</h3>
+                            <div class="dropdown">
+                                <button class="dropbtn">
+                                    <span class="button_content">
+                                        <span class="button_text">Month</span>
+                                        <img class="button_img" src={% static "img/next.png" %} alt="">
+                                    </span>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#">Day</a>
+                                    <a href="#">Week</a>
+                                    <a href="#">Month</a>
+                                </div>
                             </div>
-
-                            <div class="text_diagram">
-                                <p>Total Expense <br>
-                                    <span>UAH 0</span> %
-                                </p>
-                            </div>
-
                         </div>
+
+                        <hr>
+                        <div class="diagram_wrapper">
+
+                            <div class="diagram_doughnut">
+                                <canvas id="myDoughnutChart"></canvas>
+                            </div>
+                            <div class="diagram_text">
+                                <div class="text_diagram">
+                                    <p>Total Revenue <br>
+                                        <span>UAH 0</span> %
+                                    </p>
+                                </div>
+
+                                <div class="text_diagram">
+                                    <p>Total Expense <br>
+                                        <span>UAH 0</span> %
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
-
                 </div>
 
+                <div class="category">
 
-                <div class="financial_and_category right">
-                    <div class="header_financeal_and_category">
-                        <h3>Category rating</h3>
+                    <div class="header_number1">
+                        <div class="header_financeal_and_category">
+                            <h3>Category rating</h3>
 
-                        <div class="dropdown">
-                            <button class="dropbtn">
-                                <span class="button_content">
-                                    <span class="button_text">Month</span>
-                                    <img class="button_img" src={% static "img/next.png"  %} alt="">
-                                </span>
-                            </button>
-                            <div class="dropdown-content">
-                                <a href="#">Day</a>
-                                <a href="#">Week</a>
-                                <a href="#">Month</a>
+                            <div class="dropdown">
+                                <button class="dropbtn">
+                                    <span class="button_content">
+                                        <span class="button_text">Month</span>
+                                        <img class="button_img" src={% static "img/next.png" %} alt="">
+                                    </span>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#">Day</a>
+                                    <a href="#">Week</a>
+                                    <a href="#">Month</a>
+                                </div>
                             </div>
                         </div>
+                        <hr>
                     </div>
-                    <hr>
 
                     <h4>You don't use any category yet</h4>
+                    
                 </div>
-
             </div>
-
         </div>
-
     </div>
     </div>
 

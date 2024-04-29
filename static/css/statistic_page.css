@@ -210,21 +210,35 @@ header h2 {
   font-size: 30px;
 }
 
+.wrapper_content_main{
+  display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    padding: 50px;
+}
+
+.comparison_and_financial{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 30px;
+}
+
 .comparison_chart {
   display: block;
-  width: 930px;
-  height: 35%;
+  width: 438px;
+  height: 250px;
   background-color: rgba(232, 231, 231, 1);
   font-family: "Montserrat", sans-serif;
-  margin: auto;
-  margin-top: 30px;
   border-radius: 8px;
 }
+
 
 .header_chart {
   display: flex;
   justify-content: space-between;
 }
+
 
 h3 {
   font-family: "Montserrat", sans-serif;
@@ -240,7 +254,7 @@ hr {
 }
 
 .calendar {
-  width: 260px;
+  width: 40px;
   height: 40px;
   margin-right: 20px;
   padding-left: 5px;
@@ -260,7 +274,6 @@ hr {
   font-weight: 400;
   filter: invert(100%);
   margin-top: 3px;
-  margin-left: 10px;
 }
 
 .calendar span {
@@ -270,59 +283,32 @@ hr {
 
 .diagram {
   display: flex;
-  margin-left: 30%;
   width: 350px;
-  margin-top: 20px;
-}
-
-.diagram_buttons {
-  display: flex;
-  width: 800px;
-  justify-content: space-between;
-  margin-top: -30px;
-  margin-left: 65px;
-}
-
-.prev {
-  width: 40px;
-  height: 40px;
-  font-family: "Montserrat", sans-serif;
-  background-color: rgba(113, 113, 113, 1);
-  border-radius: 8px;
-  border: none;
-  color: rgb(232, 231, 231);
-  filter: invert(100%);
-}
-
-.prev img {
-  transform: rotate(180deg);
-}
-
-.next {
-  width: 40px;
-  height: 40px;
-  font-family: "Montserrat", sans-serif;
-  background-color: rgba(113, 113, 113, 1);
-  border-radius: 8px;
-  border: none;
-  color: rgb(232, 231, 231);
-  filter: invert(100%);
+  margin-top: 40px;
+  margin: auto;
 }
 
 .financial_and_category_container {
-  min-width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  flex-direction: inherit;
 }
 
-.financial_and_category {
+.financial {
   border-radius: 8px;
-  width: 40%;
-  max-height: 391px;
-  margin-top: 50px;
+  width: 438px;
+  height: 328px;
   background-color: rgba(232, 231, 231, 1);
-  margin-left: 50px;
+}
+
+.categories {
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  border-radius: 8px;
+  max-width: 470px;
+  max-height: 860px;
+  background-color: rgba(232, 231, 231, 1);
+  align-items: center;
 }
 
 .header_financeal_and_category {
@@ -330,12 +316,8 @@ hr {
   justify-content: space-between;
 }
 
-.right {
-  margin-right: 50px;
-}
-
-.left{
-  margin-left: 50px;
+.header_number1{
+  width: 100%;
 }
 
 hr {
@@ -450,12 +432,14 @@ hr {
 }
 
 .categories_inf {
+  display: flex;
   width: 473px;
   height: 270px;
   margin-right: 30px;
   border-radius: 8px;
   position: relative;
   align-items: center;
+  flex-direction: column;
 }
 
 .category {
@@ -475,7 +459,6 @@ hr {
   width: 32px;
   height: 32px;
   margin-left: 20px;
-  margin-top: 7px;
 }
 
 .category span {
@@ -483,7 +466,6 @@ hr {
   font-size: 20px;
   font-weight: 100;
   margin-left: 20px;
-  margin-top: 10px;
   line-height: 2;
 }
 
@@ -498,9 +480,9 @@ hr {
 }
 
 .additional-info{
-  display: none; /* Початково блок з інформацією прихований */
+  display: none; 
   position: relative;
-  top: -220px; /* Розмістити блок з інформацією відносно блоку .categories_inf */
+  top: -220px; 
   left: 30px;
   background-color:rgba(232, 231, 231, 1);
   padding: 20px;
@@ -508,7 +490,7 @@ hr {
   border-radius: 8px;
   width: 380px;
   height: 227px;
-  z-index: 1000; /* Задаємо високий рівень z-index для виведення блоку поверх інших елементів */
+  z-index: 1000; 
 }
 
 
