@@ -485,7 +485,7 @@ def refresh(request):
                     card_type = 'Visa'
                 elif temp[0] == '5':
                     card_type = 'Master'
-                if not Card.objects.filter(user=user, card_id=encrypted_card_id).exists():
+                if not Card.objects.filter(user=user).exists():
                     # Перевіряємо зашифрований ідентифікатор
                     Card.objects.create(id=uuid.uuid4(), card_id=card_id, balance=card_balance,
                                         card_number=card_number, user=request.user, token=card.token, type=type,
@@ -494,6 +494,6 @@ def refresh(request):
                     Card.objects.filter(user=user, card_id=encrypted_card_id).update(balance=card_balance)
 
         return redirect('home_page')
-    except monobank.Error as e:
+    except Exception as e:
         print("Помилка у функції refresh_card:", e)
-        return render(request, 'main/token_error.html')
+        return render(request, 'main/too_many_requests.html')
