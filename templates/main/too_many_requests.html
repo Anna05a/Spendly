@@ -413,25 +413,13 @@
             document.getElementById('addCard2').close();
         }
 
-         //діалогове вікно "Incorrect token"
-         document.addEventListener('DOMContentLoaded', function() {
-        var dialog = document.getElementById('incorrect_token');
-        dialog.showModal();
-        });
-
-        document.querySelector('#close_incorrect_token').onclick = function () {
-            document.body.classList.remove('dialog-open');
-            document.querySelector('.overlay').style.display = 'none';
-            document.getElementById('incorrect_token').close();
-        }
+         
 
           //діалогове вікно "Забгато реквестів"
-          document.querySelector('#').onclick = function () {
-            closeCurrentModal();
-            document.body.classList.add('dialog-open');
-            document.querySelector('.overlay').style.display = 'block';
-            document.getElementById('too_many_requests').showModal();
-        }
+          document.addEventListener('DOMContentLoaded', function() {
+        var dialog = document.getElementById('too_many_requests');
+        dialog.showModal();
+        });
 
         document.querySelector('#closeDialogRequests').onclick = function () {
             document.body.classList.remove('dialog-open');

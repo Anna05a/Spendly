@@ -5,13 +5,13 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('statistics', views.statistics, name='statistics'),
-    path('statistics_page', views.statistics_page, name='statistics_page'), # cтатистика після того як з карти підтягнулися категорії
-    path('home_page', views.home_page, name='home_page'), #головна сторінка після того як додали карти
-    path('add_card/', views.add_card, name='add_card'),
-    path('get_payments/<str:card_id>/', views.get_payments, name='get_payments'),
-    path('delete_card/<str:card_id>/', views.delete_card, name='delete_card'),
-    path('refresh', views.refresh_card, name='refresh_card_data'),
-    path('clear_history', views.clear_cards, name='clear_history')
+    path('', views.HomeView.as_view(), name='home'),
+    path('statistics', views.StatisticsView.as_view(), name='statistics'),
+    path('statistics_page', views.StatisticsPageView.as_view(), name='statistics_page'),
+    path('home_page', views.HomePageView.as_view(), name='home_page'),
+    path('add_card/', views.AddCardView.as_view(), name='add_card'),
+    path('get_payments/<str:card_id>/', views.GetPaymentsView.as_view(), name='get_payments'),
+    path('delete_card/<str:card_id>/', views.DeleteCardView.as_view(), name='delete_card'),
+    path('refresh', views.RefreshCardView.as_view(), name='refresh_card_data'),
+    path('clear_history', views.ClearCardsView.as_view(), name='clear_history')
 ]
