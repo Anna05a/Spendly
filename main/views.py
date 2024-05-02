@@ -463,37 +463,37 @@ class GetPaymentsView(View):
             print("Error in get_payments function:", e)
             return render(request, 'main/statistic_page.html')
 
-class RefreshCardView(View):
-    @login_required
-    def get(self, request):
-        try:
-            card = Card.objects.filter(user=request.user).first()
-            token = card.token
-            client = monobank(token)
-            user_info = client.get_client_info()
-            if user_info:
-                for user_account in user_info['accounts']:
-                    originBalance = user_account['balance'] // 100
-                    card_balance = originBalance
-                    card_number = user_account['maskedPan'][0]
-                    card_id = user_account['id']
-                    encrypted_card_id = caesar_cipher_encrypt(card_id, 3)
 
-                    temp = user_account['maskedPan'][0]
-                    type = user_account['type']
-                    if temp[0] == '4':
-                        card_type = 'Visa'
-                    elif temp[0] == '5':
-                        card_type = 'Master'
-                    if not Card.objects.filter(user=request.user, card_id=encrypted_card_id).exists():
-                        # Перевіряємо зашифрований ідентифікатор
-                        Card.objects.create(id=uuid.uuid4(), card_id=card_id, balance=card_balance,
-                                            card_number=card_number, user=request.user, token=token, type=type,
-                                            system=card_type)
-                    else:
-                        Card.objects.filter(user=request.user, card_id=encrypted_card_id).update(balance=originBalance)
+def refresh(request):
+    try:
+        card = Card.objects.filter(user=request.user).first()
+        client = monobank.Client(card.token)
+        user_info = client.get_client_info()
+        user=request.user
+        print(user)
+        if user_info:
+            for user_account in user_info['accounts']:
+                originBalance = user_account['balance'] // 100
+                card_balance = originBalance
+                card_number = user_account['maskedPan'][0]
+                card_id = user_account['id']
+                encrypted_card_id = caesar_cipher_encrypt(card_id, 3)
 
-            return redirect('home_page')
-        except monobank.Error as e:
-            print("Помилка у функції refresh_card:", e)
-            return render(request, 'main/token_error.html')
+                temp = user_account['maskedPan'][0]
+                type = user_account['type']
+                if temp[0] == '4':
+                    card_type = 'Visa'
+                elif temp[0] == '5':
+                    card_type = 'Master'
+                if not Card.objects.filter(user=user, card_id=encrypted_card_id).exists():
+                    # Перевіряємо зашифрований ідентифікатор
+                    Card.objects.create(id=uuid.uuid4(), card_id=card_id, balance=card_balance,
+                                        card_number=card_number, user=request.user, token=card.token, type=type,
+                                        system=card_type)
+                else:
+                    Card.objects.filter(user=user, card_id=encrypted_card_id).update(balance=card_balance)
+
+        return redirect('home_page')
+    except monobank.Error as e:
+        print("Помилка у функції refresh_card:", e)
+        return render(request, 'main/token_error.html')
