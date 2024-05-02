@@ -470,7 +470,6 @@ def refresh(request):
         client = monobank.Client(card.token)
         user_info = client.get_client_info()
         user=request.user
-        print(user)
         if user_info:
             for user_account in user_info['accounts']:
                 originBalance = user_account['balance'] // 100
@@ -485,7 +484,7 @@ def refresh(request):
                     card_type = 'Visa'
                 elif temp[0] == '5':
                     card_type = 'Master'
-                if not Card.objects.filter(user=user).exists():
+                if not Card.objects.filter(user=user, card_id=encrypted_card_id).exists():
                     # Перевіряємо зашифрований ідентифікатор
                     Card.objects.create(id=uuid.uuid4(), card_id=card_id, balance=card_balance,
                                         card_number=card_number, user=request.user, token=card.token, type=type,
