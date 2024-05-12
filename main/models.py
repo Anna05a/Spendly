@@ -16,7 +16,7 @@ class Card(models.Model):
 
 class Category(models.Model):
     id = models.AutoField(primary_key=True)
-    card_id = models.CharField(max_length=100, unique=True)
+    card_id = models.CharField(max_length=100, unique=False)
     payment_id = models.CharField(max_length=100, unique=True)
     payment_desc = models.CharField(max_length=30, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -26,4 +26,4 @@ class Category(models.Model):
     category = models.CharField(max_length=100)
 
     def __str__(self):
-        return f"{self.card_id.card_number} - {self.time} - {self.amount} {self.currency} - {self.category}"
+        return f"{self.card_id} - {self.time} - {self.amount} {self.currency} - {self.category}"

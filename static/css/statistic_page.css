@@ -624,3 +624,11 @@ body.dialog-open::before {
   margin-top: 10px;
   margin-left: 100px;
 }
+
+h4 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  color: rgba(113, 113, 113, 1);
+  margin-top: 20px;
+}

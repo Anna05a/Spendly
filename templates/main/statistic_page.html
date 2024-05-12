@@ -27,7 +27,7 @@
             <h1>Spendly</h1>
         </div>
         <div class="top">
-            <a href="javascript:history.go(-1)">
+            <a href="{% url 'home_page' %}">
                 <button class="button_menu pasive">
                     <img src={% static "img/main_page.png" %} alt="">
                     <span>Main page</span>
@@ -64,6 +64,7 @@
         <header>
             <h2>Statistic</h2>
 
+            
             <button class="calendar" id="datepicker">
                 <img src={% static "img/calendar.svg.png" %} alt="">
             </button>
@@ -126,6 +127,7 @@
 
                 </div>
                 <div class="categories_inf">
+                {% if expences %}
                     {% for i in expences %}
                         <div class="category" onclick="toggleAdditionalInfo(this);"
                              style="border: 2px solid {{ i.border }};">
@@ -148,6 +150,9 @@
                             </div>
                         </div>
                     {% endfor %}
+                {% else %}
+                    <h4>You don't use any category yet</h4>
+                {% endif %}
                 </div>
             </div>
 
@@ -217,6 +222,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
 <script>
 
     //реалізація календаря
@@ -241,8 +248,10 @@
                 type: 'POST',
                 data: dataToSend,
                 success: function(response) {
+                    var formattedDateE = moment(selectedValue2, "DD.MM.YYYY").format("YYYY-MM-DD HH:mm:ss");
+                    var formattedDateS = moment(selectedValue1, "DD.MM.YYYY").format("YYYY-MM-DD HH:mm:ss");
                     console.log(response);
-                    window.location.href = 'statistics_page?start_date=' + selectedValue1+ '&end_date=' + selectedValue2
+                     window.location.href = 'statistics_page?start_date=' + encodeURIComponent(formattedDateS) + '&end_date=' + encodeURIComponent(formattedDateE);
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);

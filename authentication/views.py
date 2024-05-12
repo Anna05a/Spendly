@@ -33,7 +33,6 @@ class SignUpView(View):
 
 
 
-
 def activate_email(request, user, to_email):
     subject = 'Activate your accounts'
     message = render_to_string('authentication/account_activation.html', {
