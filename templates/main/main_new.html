@@ -67,7 +67,7 @@
 
             <div class="accounts_cards">
 
-                <h3>Accounts & <a href={% url 'home_page' %}>Cards</a></h3>
+                <h3>Accounts & Cards</h3>
                 <hr>
 
                 <div class="plus">
@@ -190,9 +190,9 @@
                 <hr>
                 <div class="сontent">
                     <p>You really want to delete your account?</p>
-                    <form method="post" action="{% url "delete_profile" %}">
-                        {% csrf_token %}
+                    <a href={% url "delete_profile" %}>
                         <button>Delete</button>
+                    </a>
                     </form>
                 </div>
             </dialog>
@@ -208,11 +208,9 @@
                 <hr>
                 <div class="сontent">
                     <p>You really want to log out of your account?</p>
-                    <form method="post" action="{% url "logout" %}">
-                        {% csrf_token %}
+                    <a href={% url 'logout' %}>
                         <button>Log out</button>
-                    </form>
-
+                    </a>
                 </div>
             </dialog>
 

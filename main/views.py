@@ -219,7 +219,7 @@ class AddCardView(View):
                     print(encrypted_card_id)
 
                     if not Card.objects.filter(card_id=encrypted_card_id).exists():
-                        card_obj = Card.objects.create(id=uuid.uuid4(), card_id=encrypted_card_id, balance=card_balance,
+                        Card.objects.create(id=uuid.uuid4(), card_id=encrypted_card_id, balance=card_balance,
                                                        card_number=card_number, user=request.user, token=token, type=card_type)
 
             return redirect('home_page')
@@ -233,6 +233,8 @@ class DeleteCardView(View):
     @login_required(login_url='/login')
     def get(request, card_id):
         card = Card.objects.filter(card_id=card_id)
+        payments = Category.objects.filter(card_id=card_id)
+        payments.delete()
         card.delete()
         if not card.exists():
             return redirect('home')
@@ -245,6 +247,8 @@ class ClearCardsView(View):
     def get(request):
         cards = Card.objects.filter(user=request.user)
         cards.delete()
+        payments= Category.objects.filter(user=request.user)
+        payments.delete()
         return redirect('home')
 
 class GetPaymentsView(View):
@@ -263,6 +267,7 @@ class GetPaymentsView(View):
                 payments = []
                 border = ''
                 img = ''
+                category_expenses ={}
                 current_datetime = datetime.now()
                 end_year = current_datetime.year
                 end_month = current_datetime.month
@@ -376,10 +381,15 @@ class GetPaymentsView(View):
                         'border': border,
                         'img': img
                     })
-                    request.session['payments'] = payments
-                    print(payments)
-                    labels.append(category)
-                    data.append(originAmount)
+                    if category in category_expenses:
+                        # Якщо так, додати суму витрат до існуючого значення
+                        category_expenses[category] += originAmount
+                    else:
+                        # Якщо ні, створити новий запис з відповідною сумою витрат
+                        category_expenses[category] = originAmount
+                    labels = list(category_expenses.keys())
+                    print(labels)
+                    data = list(category_expenses.values())
 
                     if not Category.objects.filter(payment_id=payment_id).exists():
                          Category.objects.create(card_id=decrypted_card_id, payment_id=payment_id, payment_desc=payment['description'], user=request.user, time=new_time_str, amount=originAmount, currency=currency, category=category)
