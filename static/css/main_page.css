@@ -656,3 +656,6 @@ body.dialog-open::before {
   overflow: scroll;
 }
 
+.selected {
+    border: 2px solid red; /* Обводка карти */
+}

@@ -6,91 +6,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main page</title>
-    <link rel="stylesheet" href="{%  static 'css/main_page.css' %}?{% now " U" %}">
+    <link rel="stylesheet" href="{% static 'css/main_page.css' %}?{% now " U" %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+          rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet">
 
 
 </head>
 
 <body>
-    <div class="overlay"></div>
-    <div class="wrapper">
-        <div class="menu">
-            <div class="circle">
-                <h1>Spendly</h1>
-            </div>
-            <div class="top">
-                <a href={% url 'home' %}>
-                    <button class=" button_menu active">
-                        <img src={% static "img/main_page.png" %} alt="">
-                        <span>Main page</span>
-                    </button>
-                </a>
-                
-                <a href={% url 'statistics_page' %}>
-                    <button class="button_menu pasive">
-                        <img src={% static "img/statistics.png" %} alt="">
-                        <span>Statistic</span>
-                    </button>
-                </a>
-            </div>
-
-            <div class="bottom">
-                <button class="button_menu pasive" id="openDialogClear">
-                    <img src={% static "img/clear.svg" %} alt="">
-                    <span>Clear history</span>
+<div class="overlay"></div>
+<div class="wrapper">
+    <div class="menu">
+        <div class="circle">
+            <h1>Spendly</h1>
+        </div>
+        <div class="top">
+            <a href={% url 'home' %}>
+                <button class=" button_menu active">
+                    <img src={% static "img/main_page.png" %} alt="">
+                    <span>Main page</span>
                 </button>
+            </a>
 
-                <button class="button_menu pasive" id="openDialogDelete">
-                    <img src={% static "img/delete.png" %} alt="">
-                    <span>Delete account</span>
+            <a href={% url 'statistics_page' %}>
+                <button class="button_menu pasive">
+                    <img src={% static "img/statistics.png" %} alt="">
+                    <span>Statistic</span>
                 </button>
-
-                <button class="button_menu pasive" id="openLogOut">
-                    <img src={% static "img/log_out.svg" %} alt="">
-                    <span>Log out</span>
-                </button>
-            </div>
-
+            </a>
         </div>
 
-        <div class="main">
+        <div class="bottom">
+            <button class="button_menu pasive" id="openDialogClear">
+                <img src={% static "img/clear.svg" %} alt="">
+                <span>Clear history</span>
+            </button>
 
-            <header>
-                <h2>Main page</h2>
-            </header>
+            <button class="button_menu pasive" id="openDialogDelete">
+                <img src={% static "img/delete.png" %} alt="">
+                <span>Delete account</span>
+            </button>
 
-            <div class="accounts_cards">
+            <button class="button_menu pasive" id="openLogOut">
+                <img src={% static "img/log_out.svg" %} alt="">
+                <span>Log out</span>
+            </button>
+        </div>
 
-                <div class="header_acounts_cards">
-                    <h3>Accounts & Cards</h3>
-                    <a href={% url 'refresh_card_data' %}>
-                        <button class="refresh">
-                            <img src="/static/img/refresh.svg" alt="">
-                        </button>
-                    </a>
-                </div>
-                <hr>
-                <div class="card-container">
-                    {% for card1 in cards %}
+    </div>
+
+    <div class="main">
+
+        <header>
+            <h2>Main page</h2>
+        </header>
+
+        <div class="accounts_cards">
+
+            <div class="header_acounts_cards">
+                <h3>Accounts & Cards</h3>
+                <a href={% url 'refresh_card_data' %}>
+                    <button class="refresh">
+                        <img src="/static/img/refresh.svg" alt="">
+                    </button>
+                </a>
+            </div>
+            <hr>
+            <div class="card-container">
+                {% for card1 in cards %}
                     <a href="{% url 'get_payments' card1.card_id %}">
                         <div class="wrapper_cards">
                             <div class="card">
                                 <div class="card_top">
                                     <h2>{{ card1.type }}</h2>
                                     {% if card1.system == 'Visa' %}
-                                    <img src={% static "img/visa.svg" %} alt="">
+                                        <img src={% static "img/visa.svg" %} alt="">
                                     {% else %}
-                                    <img src={% static "img/mastercard.svg" %} alt="">
+                                        <img src={% static "img/mastercard.svg" %} alt="">
                                     {% endif %}
                                 </div>
 
@@ -103,7 +102,7 @@
                                         <p>{{ card1.card_number }}</p>
                                     </div>
                                     <button class="delete_card">
-                                        <a href={% url 'delete_card' card1.card_id%}>
+                                        <a href={% url 'delete_card' card1.card_id %}>
                                             <img src={% static "img/delete_card.svg" %} alt="">
                                         </a>
                                     </button>
@@ -112,35 +111,34 @@
                             </div>
                         </div>
                     </a>
-                    {% endfor %}
-                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="categories">
+
+            <div class="header_chart">
+                <h3>Categories</h3>
+
+                <button class="calendar" id="datepicker">
+
+                    <img src={% static "img/calendar.svg.png" %} alt="">
+
+                </button>
             </div>
 
-            <div class="categories">
-
-                <div class="header_chart">
-                    <h3>Categories</h3>
-
-                    <button class="calendar" id="datepicker">
-               
-                        <img src={% static "img/calendar.svg.png" %} alt="">
-                       
-                    </button>
+            <hr>
+            <div class="diaram_and_inf">
+                <div class="diagram">
+                    <canvas id="myChart"></canvas>
                 </div>
 
-                <hr>
-                <div class="diaram_and_inf">
-                    <div class="diagram">
-                        <canvas id="myChart"></canvas>
-                    </div>
 
-
-                    <div class="categories_inf">
-                        {% for expence in expences %}
+                <div class="categories_inf">
+                    {% for expence in expences %}
                         <div class="block" id="block{{ forloop.counter }}">
-                        
-                       
-                        
+
+
                             <div class="front" style="border: 2px solid {{ expence.border }};">
                                 <img src={% static expence.img %} alt="">
                                 <span>{{ expence.category }}</span>
@@ -149,178 +147,205 @@
                             <div class="back" style="border: 2px solid rgba(16, 176, 80, 1);">
                                 <span class="place">{{ expence.description }}</span>
                                 <span class="date">{{ expence.time }}</span>
-                                
+
                             </div>
                         </div>
-                        {% endfor %}
-                    </div>
+                    {% endfor %}
                 </div>
-
             </div>
-
-
-            <!-- діалогове вікно "Очищення історії" -->
-            <dialog id="clearHistory" class="clearHistory">
-                <div class="dialog_header">
-                    <button id="closeDialogClear" class="close">
-                        <img src={% static "img/pngwing.com.png" %} alt="">
-                    </button>
-                    <h4>Warning</h4>
-                </div>
-                <hr>
-                <div class="сontent">
-                    <p>You really want to clear history?</p>
-                    <a href={% url 'clear_history' %}>
-                    <button>Clear</button>
-                    </a>
-                </div>
-            </dialog>
-
-            <!-- діалогове вікно "Видалення акаунту" -->
-            <dialog id="deleteAcount" class="deleteAcount">
-                <div class="dialog_header">
-                    <button id="closeDialogDelete" class="close">
-                        <img src={% static "img/pngwing.com.png" %} alt="">
-                    </button>
-                    <h4>Warning</h4>
-                </div>
-                <hr>
-                <div class="сontent">
-                    <p>You really want to delete your account?</p>
-                    <a href={% url 'delete_profile' %}>
-                        <button>Delete</button>
-                    </a>
-                </div>
-            </dialog>
-
-            <!-- діалогове вікно "Вихід з акаунту" -->
-            <dialog id="logOut" class="logOut">
-                <div class="dialog_header">
-                    <button id="closeDialogLogOut" class="close">
-                        <img src={% static "img/pngwing.com.png" %} alt="">
-                    </button>
-                    <h4>Warning</h4>
-                </div>
-                <hr>
-                <div class="сontent">
-                    <p>You really want to log out of your account?</p>
-                    <a href={% url 'logout' %}>
-                    <button>Log out</button>
-                    </a>
-                </div>
-            </dialog>
 
         </div>
 
+
+        <!-- діалогове вікно "Очищення історії" -->
+        <dialog id="clearHistory" class="clearHistory">
+            <div class="dialog_header">
+                <button id="closeDialogClear" class="close">
+                    <img src={% static "img/pngwing.com.png" %} alt="">
+                </button>
+                <h4>Warning</h4>
+            </div>
+            <hr>
+            <div class="сontent">
+                <p>You really want to clear history?</p>
+                <a href={% url 'clear_history' %}>
+                    <button>Clear</button>
+                </a>
+            </div>
+        </dialog>
+
+        <!-- діалогове вікно "Видалення акаунту" -->
+        <dialog id="deleteAcount" class="deleteAcount">
+            <div class="dialog_header">
+                <button id="closeDialogDelete" class="close">
+                    <img src={% static "img/pngwing.com.png" %} alt="">
+                </button>
+                <h4>Warning</h4>
+            </div>
+            <hr>
+            <div class="сontent">
+                <p>You really want to delete your account?</p>
+                <a href={% url 'delete_profile' %}>
+                    <button>Delete</button>
+                </a>
+            </div>
+        </dialog>
+
+        <!-- діалогове вікно "Вихід з акаунту" -->
+        <dialog id="logOut" class="logOut">
+            <div class="dialog_header">
+                <button id="closeDialogLogOut" class="close">
+                    <img src={% static "img/pngwing.com.png" %} alt="">
+                </button>
+                <h4>Warning</h4>
+            </div>
+            <hr>
+            <div class="сontent">
+                <p>You really want to log out of your account?</p>
+                <a href={% url 'logout' %}>
+                    <button>Log out</button>
+                </a>
+            </div>
+        </dialog>
+
     </div>
 
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script>
+    //diagram
+    const data = {
+        labels: [
+            {% for label in labels %}
+                '{{ label }}'{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ],
+        datasets: [{
+            label: 'My First Dataset',
+            data: {{ data|safe }},
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(52,190,14)'
+            ],
+            hoverOffset: 4
+        }]
+    };
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
-    <script>
-        //diagram
-         const data = {
-             labels: [
-                 {% for label in labels %}
-            '{{ label }}'{% if not forloop.last %},{% endif %}
-        {% endfor %}
-                ],
-             datasets: [{
-                 label: 'My First Dataset',
-                 data: {{ data|safe }},
-                 backgroundColor: [
-                     'rgb(255, 99, 132)',
-                     'rgb(54, 162, 235)',
-                     'rgb(255, 205, 86)',
-                     'rgb(52,190,14)'
-                 ],
-                 hoverOffset: 4
-             }]
-         };
+    const config = {
+        type: 'doughnut',
+        data: data,
+    };
 
-         const config = {
-             type: 'doughnut',
-             data: data,
-         };
-
-         document.addEventListener('DOMContentLoaded', function () {
-             var ctx = document.getElementById('myChart').getContext('2d');
-             new Chart(ctx, config);
-         });
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, config);
+    });
 
 
-        //діалогове вікно очищення історії
-        document.querySelector('#openDialogClear').onclick = function () {
-            document.body.classList.add('dialog-open');
-            document.querySelector('.overlay').style.display = 'block';
-            document.getElementById('clearHistory').showModal();
-        }
+    //діалогове вікно очищення історії
+    document.querySelector('#openDialogClear').onclick = function () {
+        document.body.classList.add('dialog-open');
+        document.querySelector('.overlay').style.display = 'block';
+        document.getElementById('clearHistory').showModal();
+    }
 
-        document.querySelector('#closeDialogClear').onclick = function () {
-            document.body.classList.remove('dialog-open');
-            document.querySelector('.overlay').style.display = 'none';
-            document.getElementById('clearHistory').close();
-        }
+    document.querySelector('#closeDialogClear').onclick = function () {
+        document.body.classList.remove('dialog-open');
+        document.querySelector('.overlay').style.display = 'none';
+        document.getElementById('clearHistory').close();
+    }
 
-        //діалогове вікно видалення акаунта
-        document.querySelector('#openDialogDelete').onclick = function () {
-            document.body.classList.add('dialog-open');
-            document.querySelector('.overlay').style.display = 'block';
-            document.getElementById('deleteAcount').showModal();
-        }
+    //діалогове вікно видалення акаунта
+    document.querySelector('#openDialogDelete').onclick = function () {
+        document.body.classList.add('dialog-open');
+        document.querySelector('.overlay').style.display = 'block';
+        document.getElementById('deleteAcount').showModal();
+    }
 
-        document.querySelector('#closeDialogDelete').onclick = function () {
-            document.body.classList.remove('dialog-open');
-            document.querySelector('.overlay').style.display = 'none';
-            document.getElementById('deleteAcount').close();
-        }
+    document.querySelector('#closeDialogDelete').onclick = function () {
+        document.body.classList.remove('dialog-open');
+        document.querySelector('.overlay').style.display = 'none';
+        document.getElementById('deleteAcount').close();
+    }
 
-        //діалогове вікно "вийти з акаунта"
-        document.querySelector('#openLogOut').onclick = function () {
-            document.body.classList.add('dialog-open');
-            document.querySelector('.overlay').style.display = 'block';
-            document.getElementById('logOut').showModal();
-        }
+    //діалогове вікно "вийти з акаунта"
+    document.querySelector('#openLogOut').onclick = function () {
+        document.body.classList.add('dialog-open');
+        document.querySelector('.overlay').style.display = 'block';
+        document.getElementById('logOut').showModal();
+    }
 
-        document.querySelector('#closeDialogLogOut').onclick = function () {
-            document.body.classList.remove('dialog-open');
-            document.querySelector('.overlay').style.display = 'none';
-            document.getElementById('logOut').close();
-        }
+    document.querySelector('#closeDialogLogOut').onclick = function () {
+        document.body.classList.remove('dialog-open');
+        document.querySelector('.overlay').style.display = 'none';
+        document.getElementById('logOut').close();
+    }
 
-       ʼ
-        
 
-        //реалізація календаря
-        document.addEventListener('DOMContentLoaded', function () {
-            var picker = new Litepicker({
-                element: document.getElementById('datepicker'),
-                singleMode: false,
-                autoApply: true,
+    //реалізація календаря
+    document.addEventListener('DOMContentLoaded', function () {
+        var picker = new Litepicker({
+            element: document.getElementById('datepicker'),
+            singleMode: false,
+            autoApply: true,
+            onSelect: function (date1, date2) {
+                // Код обробки події onSelect
+                var selectedValue1 = date1.toLocaleDateString();
+                var selectedValue2 = date2.toLocaleDateString();
+                var dataToSend = {
+                    'start_date': selectedValue1,
+                    'end_date': selectedValue2,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                };
+
+                $.ajax({
+
+                    type: 'POST',
+                    data: dataToSend,
+                    success: function (response) {
+
+                        var formattedDateS = moment(selectedValue1, "DD.MM.YYYY").format("YYYY-MM-DD HH:mm:ss");
+                        var formattedDateE = moment(selectedValue2, "DD.MM.YYYY").format("YYYY-MM-DD HH:mm:ss");
+                        window.location.href = '/home/get_payments/' + '{{ id }}' + '/?start_date=' + encodeURIComponent(formattedDateS) + '&end_date=' + encodeURIComponent(formattedDateE);
+                        console.log(response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const blocks = document.querySelectorAll('.block');
+
+        blocks.forEach(block => {
+            const blockBack = block.querySelector('.back');
+
+            block.addEventListener('mouseenter', function () {
+                blockBack.style.display = 'flex';
+            });
+
+            block.addEventListener('mouseleave', function () {
+                blockBack.style.display = 'none';
             });
         });
+    });
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const blocks = document.querySelectorAll('.block');
+    document.getElementById('calendarIcon').addEventListener('click', function () {
+        document.getElementById('datepicker1').click(); // Клік на кнопку календаря
+    });
 
-            blocks.forEach(block => {
-                const blockBack = block.querySelector('.back');
-
-                block.addEventListener('mouseenter', function () {
-                    blockBack.style.display = 'flex';
-                });
-
-                block.addEventListener('mouseleave', function () {
-                    blockBack.style.display = 'none';
-                });
-            });
-        });
-
-
-
-
-    </script>
+</script>
 </body>
 
 </html>

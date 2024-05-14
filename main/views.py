@@ -6,9 +6,10 @@ import pytz
 import requests
 
 import monobank
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 from django.views import View
 
@@ -87,8 +88,8 @@ class StatisticsPageView(View):
     @login_required(login_url='/login')
     def get(request):
         try:
-            ids=request.session['card_id']
-            print(ids)
+            card_id=request.session['card_id']
+            card=Card.objects.filter(card_id=card_id).first()
             originAmounts = []
             data = []
             finances = []
@@ -171,10 +172,8 @@ class StatisticsPageView(View):
             data.append(expences)
             data.append(revenues)
 
-            context = {'finances': finances, 'data': data, 'expence_persent': expence_percent,
-                           'revenue_persent': revenue_percent, 'expences': total_spending,
-                           'payments': total_payments,
-                           'revenue_data': total_r, 'expense_data': total_e, 'id':request.session['card_id']}
+            context = {'finances': finances, 'data': data, 'expence_persent': expence_percent,'revenue_persent': revenue_percent,
+                       'expences': total_spending,'payments': total_payments,'revenue_data': total_r, 'expense_data': total_e, 'card_number':card}
             return render(request, 'main/statistic_page.html', context)
         except Exception as e:
             print(e)
@@ -251,23 +250,25 @@ class ClearCardsView(View):
         payments.delete()
         return redirect('home')
 
+
 class GetPaymentsView(View):
     @staticmethod
     @login_required(login_url='/login')
     def get(request, card_id):
         try:
-            if request.method == 'GET':
-                sv = request.GET.get('selected_value')
-                print(sv)
-                cards = Card.objects.filter(user=request.user)
-                mono = monobank.Client(cards.first().token)
-                labels = []
-                data = []
-                originAmounts = []
-                payments = []
-                border = ''
-                img = ''
-                category_expenses ={}
+            sv = request.GET.get('selected_value')
+            print(sv)
+            cards = Card.objects.filter(user=request.user, card_id=card_id)
+            mono = monobank.Client(cards.first().token)
+            originAmounts = []
+            payments = []
+
+            start_date = request.GET.get('start_date')
+            end_date = request.GET.get('end_date')
+            category_expenses ={}
+            decrypted_card_id = caesar_cipher_encrypt(card_id, -3)
+            request.session['card_id'] = card_id
+            if start_date == None and end_date == None:
                 current_datetime = datetime.now()
                 end_year = current_datetime.year
                 end_month = current_datetime.month
@@ -278,21 +279,19 @@ class GetPaymentsView(View):
                 start_month = one_month_ago.month
                 start_day = one_month_ago.day
 
+                print(start_date)
 
-                # Дешифруємо айді карти, яке прийшло з URL
-                decrypted_card_id = caesar_cipher_encrypt(card_id, -3)
-                request.session['card_id'] = decrypted_card_id
+
                 #print(decrypted_card_id)
                 statements = mono.get_statements(decrypted_card_id, date(start_year, start_month, start_day),
                                                  date(end_year, end_month, end_day))
-                #print(decrypted_card_id)
                 for payment in statements:
-
                     original_time = datetime.fromtimestamp(payment['time'],  pytz.utc)
                     output_date_string = original_time.strftime("%Y.%m.%d")
                     new_time_str = (original_time + timedelta(hours=2)).strftime('%Y-%m-%d %H:%M:%S')
                     originAmount = payment['amount'] // 100
                     #
+                    description=payment['description']
                     payment_id = payment['id']
                     pa=[]
                     pa.append(payment_id)
@@ -321,7 +320,6 @@ class GetPaymentsView(View):
                             category = 'Transfer'
                         else:
                             category = 'Enrollment'
-
                     if category == 'Transfer':
                         border = 'rgba(15, 110, 198, 1)'
                         img = 'img/transfer.svg'
@@ -370,6 +368,35 @@ class GetPaymentsView(View):
                     elif category == 'Shopping':
                         border = 'rgba(0, 115, 46, 1)'
                         img = 'img/shopping.svg'
+                    payments.append({
+                        'id': payment_id,
+                        'time': new_time_str,
+                        'amount': originAmount,
+                        'currency': currency,
+                        'category': category,
+                        'description': description,
+
+                    })
+                    if category in category_expenses:
+                            # Якщо так, додати суму витрат до існуючого значення
+                        category_expenses[category] += originAmount
+                    else:
+                            # Якщо ні, створити новий запис з відповідною сумою витрат
+                        category_expenses[category] = originAmount
+                    labels = list(category_expenses.keys())
+                    data = list(category_expenses.values())
+                    if not Category.objects.filter(payment_id=payment_id).exists():
+                        Category.objects.create(card_id=decrypted_card_id, payment_id=payment_id, payment_desc=payment['description'], user=request.user, time=new_time_str, amount=originAmount, currency=currency, category=category)
+            else:
+                statements = Category.objects.filter(time__range=[start_date, end_date], user=request.user)
+                print(statements)
+                for payment in statements:
+                    originAmount=payment.amount
+                    category = payment.category
+                    payment_id = payment.payment_id
+                    new_time_str = payment.time
+                    currency = payment.currency
+                    description = payment.payment_desc
 
                     payments.append({
                         'id': payment_id,
@@ -377,30 +404,38 @@ class GetPaymentsView(View):
                         'amount': originAmount,
                         'currency': currency,
                         'category': category,
-                        'description': payment['description'],
-                        'border': border,
-                        'img': img
+                        'description': description,
+
                     })
+
+
                     if category in category_expenses:
-                        # Якщо так, додати суму витрат до існуючого значення
+                            # Якщо так, додати суму витрат до існуючого значення
                         category_expenses[category] += originAmount
                     else:
-                        # Якщо ні, створити новий запис з відповідною сумою витрат
+                            # Якщо ні, створити новий запис з відповідною сумою витрат
                         category_expenses[category] = originAmount
                     labels = list(category_expenses.keys())
-                    print(labels)
-                    data = list(category_expenses.values())
+                    #data = list(category_expenses.values())
+                    category_expenses_int = {key: int(value) for key, value in category_expenses.items()}
+                    data=list(category_expenses_int.values())
+                    print(labels, data)
+            context = {'id':card_id,'expences': payments, 'cards': cards, 'labels': labels, 'data': data}
+            return render(request, 'main/main_page.html', context)
 
-                    if not Category.objects.filter(payment_id=payment_id).exists():
-                         Category.objects.create(card_id=decrypted_card_id, payment_id=payment_id, payment_desc=payment['description'], user=request.user, time=new_time_str, amount=originAmount, currency=currency, category=category)
-                context = {'expences': payments, 'cards': cards, 'labels': labels, 'data': data}
-                return render(request, 'main/main_page.html', context)
-            else:
-                selected_value = request.POST.get('selected_value')
-                return HttpResponseRedirect('statistics_page?selected_value={}'.format(selected_value))
-        except requests.exceptions.RequestException as e:
+        except Exception as e:
             print(f"API request error: {e}")
             return render(request, 'main/too_many_requests.html')
+
+    def post(self, request, card_id):
+        try:
+
+            start_date = request.POST.get('start_date')
+            end_date = request.POST.get('end_date')
+            print(start_date, end_date)
+            return self.get(request, card_id)
+        except Exception as e:
+            print(e)
 
 
 def refresh(request):

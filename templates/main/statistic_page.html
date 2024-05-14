@@ -41,21 +41,21 @@
 
 
         <div class="bottom">
-            <button class="button_menu pasive" id="openDialogClear">
-                <img src={% static "img/clear.svg" %} alt="">
-                <span>Clear history</span>
-            </button>
+                <button class="button_menu pasive" id="openDialogClear">
+                    <img src={% static "img/clear.svg" %} alt="">
+                    <span>Clear history</span>
+                </button>
 
-            <button class="button_menu pasive" id="openDialogDelete">
-                <img src={% static "img/delete.png" %} alt="">
-                <span>Delete account</span>
-            </button>
+                <button class="button_menu pasive" id="openDialogDelete">
+                    <img src={% static "img/delete.png" %} alt="">
+                    <span>Delete account</span>
+                </button>
 
-            <button class="button_menu pasive" id="openLogOut">
-                <img src={% static "img/log_out.svg" %} alt="">
-                <span>Log out</span>
-            </button>
-        </div>
+                <button class="button_menu pasive" id="openLogOut">
+                    <img src={% static "img/log_out.svg" %} alt="">
+                    <span>Log out</span>
+                </button>
+            </div>
 
     </div>
 
@@ -63,14 +63,14 @@
 
         <header>
             <h2>Statistic</h2>
-
             
             <button class="calendar" id="datepicker">
-                <img src={% static "img/calendar.svg.png" %} alt="">
+                <img id="calendarIcon" src="{% static "img/calendar.svg.png" %}" alt="">
             </button>
+            <h3 class="number">{{ card_number }}</h3>
         </header>
 
-        
+
         <div class="wrapper_content_main">
             <div class="comparison_and_financial">
                 <div class="comparison_chart">
@@ -422,8 +422,31 @@
         }
     }
 
-   
+    const options = document.querySelectorAll('.dropdown-content a');
 
+  $(document).ready(function() {
+    $('#submit-button').click(function() {
+        var selectedValue = $('#dropdown').val(); // Get the selected value from the dropdown
+        var dataToSend = {
+            'selected_value': selectedValue,
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val() 
+        };
+
+        $.ajax({
+            url: 'statistics_page',
+            type: 'POST',
+            data: dataToSend,
+            success: function(response) {
+                console.log(response);
+                window.location.href = 'statistics_page?selected_value=' + selectedValue;
+            }
+        });
+    });
+});
+
+  document.getElementById('calendarIcon').addEventListener('click', function () {
+        document.getElementById('datepicker').click(); // Клік на кнопку календаря
+    });
 </script>
 </body>
 
