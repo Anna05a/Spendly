@@ -1,22 +1,14 @@
 import time
-
 import iso18245
 import pandas as pd
 import pytz
-import requests
-
 import monobank
-from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
-
 from django.views import View
-
 from monobank import Client
 from datetime import datetime, date, timedelta
 from django.utils import timezone
-
 from .models import Card, Category
 import uuid
 
