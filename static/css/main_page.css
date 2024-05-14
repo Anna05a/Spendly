@@ -85,7 +85,7 @@ html {
   width: 70%;
   height: 100%;
   background-color: rgba(217, 217, 217, 1);
-  position: relative; /* Додайте позицію relative */
+  position: relative; 
 }
 
 .circle::before {
@@ -373,27 +373,24 @@ hr {
   border-radius: 8px;
 }
 
-.mini_plus {
-  width: 40px;
-  height: 40px;
-  font-size: 52px;
-  font-weight: 100;
-  margin-left: 20px;
+.header_chart {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
 }
 
 .calendar {
-  width: 260px;
+  width: 40px;
   height: 40px;
   margin-right: 20px;
   padding-left: 5px;
+  margin-top: 10px;
   display: flex;
-  align-items: center;
-  padding: 10px;
   font-size: 16px;
   font-weight: 300;
+  background-color: rgb(123, 26, 198);
+  border-radius: 8px;
+  border: none;
+  color: #f9f9f9;
 }
 
 .calendar img {
@@ -402,13 +399,10 @@ hr {
   font-weight: 400;
   filter: invert(100%);
   margin-top: 3px;
-  margin-left: 10px;
+  pointer-events: none;
 }
 
-.calendar span {
-  margin-top: 7px;
-  margin-left: 10px;
-}
+
 
 .diaram_and_inf {
   display: flex;
@@ -563,6 +557,7 @@ hr {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
+
 body.dialog-open::before {
   content: "";
   position: fixed;
@@ -595,65 +590,12 @@ body.dialog-open::before {
 .close img {
   height: 13px;
   width: 16px;
-}
-
-h5 {
-  font-family: "Montserrat", sans-serif;
-  font-size: 13px;
-  font-weight: 100;
-  color: rgba(113, 113, 113, 1);
-}
-
-.buttons_category {
-  display: block;
-}
-
-.button_category {
-  width: 193px;
-  height: 47px;
-  border-radius: 8px;
-  display: flex;
-  margin: 10px;
-}
-
-.two_buttons {
-  display: flex;
-}
-
-.button_category img {
-  width: 32px;
-  height: 32px;
-  margin-top: 5px;
-}
-
-.button_category span {
-  margin-top: 10px;
-  margin-left: 10px;
-  font-family: "Montserrat", sans-serif;
-  font-size: 15px;
-  font-weight: 100;
-  color: rgba(113, 113, 113, 1);
-}
-
-.add {
-  font-family: "Montserrat", sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-  color: rgba(232, 231, 231, 1);
-  background-color: rgba(123, 26, 198, 1);
-  border-radius: 8px;
   border: none;
-  width: 124px;
-  height: 48px;
-  position: absolute;
-  margin-left: 150px;
-  margin-top: 30px;
 }
 
 .clearHistory {
   width: 476px;
-  height: 200px;
-  padding: 20px;
+  height: 188px;
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   border: 1px solid red;
@@ -664,25 +606,32 @@ h5 {
 .deleteAcount {
   width: 476px;
   height: 211px;
-  font-family: "Montserrat", sans-serif;
   font-size: 20px;
   border: 1px solid red;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .logOut {
   width: 476px;
   height: 211px;
-  font-family: "Montserrat", sans-serif;
   font-size: 20px;
   border: 1px solid red;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .сontent {
-  width: 300px;
-  margin-left: 50px;
+  width: 400px;
+  margin-left: 40px;
   position: relative;
+}
+
+
+.content_link {
+  color: rgba(9, 167, 217, 1);
+  font-size: 24px;
+  margin-left: 30px;
 }
 
 .сontent button {
@@ -699,8 +648,11 @@ h5 {
   margin-top: 10px;
   margin-left: 100px;
 }
+
+
 .card-container{
   display: flex;
   width: 880px;
   overflow: scroll;
 }
+

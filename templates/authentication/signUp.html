@@ -26,7 +26,7 @@
       {% csrf_token %}
       {{ registerForm.as_div }}
 
-      <a href={% url 'login' %}>already have an account?</a>
+      <a href={% url 'login' %}>Already have an account?</a>
       <br> <button class="action">Sign up</button>
       <p class="or">_________or_________</p>
       <a href="{% provider_login_url 'google' %}?next=/home">

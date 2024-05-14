@@ -274,6 +274,7 @@ hr {
   font-weight: 400;
   filter: invert(100%);
   margin-top: 3px;
+  pointer-events: none;
 }
 
 .calendar span {
@@ -446,7 +447,7 @@ hr {
 .category {
   display: flex;
   align-items: center;
-  position: relative;
+  /* position: relative; */
   width: 380px;
   height: 47px;
   border-radius: 8px;
@@ -454,6 +455,7 @@ hr {
   background-color: rgba(232, 231, 231, 1);
   margin-top: 10px;
   margin-left: 30px;
+  justify-content: space-between;
 }
 
 .category img {
@@ -464,26 +466,28 @@ hr {
 
 .category_span {
   font-family: "Montserrat", sans-serif;
-  font-size: 20px;
-  font-weight: 100;
-  margin-left: 20px;
-  line-height: 2;
+    font-size: 16px;
+    font-weight: 100;
+    margin-left: 20px;
+    /* line-height: 2; */
+    width: 180px;
+   
 }
 
 .category h6 {
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: 400;
-  margin: 0;
-  line-height: 2;
-  position: absolute;
-  right: 30px;
+  /* margin: 0; */
+  width: 180px;
+  /* line-height: 2; */
+ justify-content: end;
 }
 
 .additional-info{
   display: none;
   position: absolute;
-  top: 50px;
+  top: 75px;
   background-color: rgba(232, 231, 231, 1);
   padding: 20px;
   border: 1px solid rgba(113, 113, 113, 1);
@@ -507,37 +511,32 @@ hr {
 
 .back {
   background-color: rgba(196, 197, 196, 1);
-    font-family: "Montserrat", sans-serif;
-    display: flex;
-    font-size: 10px;
-    font-weight: 400;
-    align-items: center;
-    border: none;
-    border-radius: 8px;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  font-size: 10px;
+  font-weight: 400;
+  align-items: center;
+  border: none;
+  border-radius: 8px;
+  height: 36px;
+  margin-bottom: -10px;
 }
 
-.block {
-  flex: 1 1 300px; 
-  max-width: 200px; 
-  font-size: 12px;
- 
-}
 
 .place {
   white-space: normal;
   margin-left: 10px;
+  width: 200px;
 }
 
 .date{
-  margin-left: -40px;
+  width: 220px;
 }
 
 .back h6 {
-  margin-left: 15px;
-  line-height: 2;
-  position: absolute;
-  right: 30px;
-  font-size: 16px;
+    right: 30px;
+    font-size: 12px;
+    margin-right: -40px;
 }
 
 body.dialog-open::before {

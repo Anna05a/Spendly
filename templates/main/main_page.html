@@ -16,6 +16,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css" rel="stylesheet">
+
 
 </head>
 
@@ -48,17 +50,15 @@
                     <span>Clear history</span>
                 </button>
 
-                
-                    <button class="button_menu pasive" id="openDialogDelete">
-                        <img src={% static "img/delete.png" %} alt="">
-                        <span>Delete account</span>
-                    </button>
-               
-                    <button class="button_menu pasive" id="openLogOut">
-                        <img src={% static "img/log_out.svg" %} alt="">
-                        <span>Log out</span>
-                    </button>
+                <button class="button_menu pasive" id="openDialogDelete">
+                    <img src={% static "img/delete.png" %} alt="">
+                    <span>Delete account</span>
+                </button>
 
+                <button class="button_menu pasive" id="openLogOut">
+                    <img src={% static "img/log_out.svg" %} alt="">
+                    <span>Log out</span>
+                </button>
             </div>
 
         </div>
@@ -118,19 +118,17 @@
 
             <div class="categories">
 
-                <h3>Categories</h3>
-                <hr>
+                <div class="header_chart">
+                    <h3>Categories</h3>
 
-                <div class="buttons" id="datepicker">
-
-                    <!-- <button id="openDialog" class="mini_plus">+</button> -->
-
-                    <button class="calendar" id="datepicker1">
-                        January - February, 2024
+                    <button class="calendar" id="datepicker">
+               
                         <img src={% static "img/calendar.svg.png" %} alt="">
+                       
                     </button>
-
                 </div>
+
+                <hr>
                 <div class="diaram_and_inf">
                     <div class="diagram">
                         <canvas id="myChart"></canvas>
@@ -220,8 +218,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
-
     <script>
         //diagram
          const data = {
@@ -292,17 +288,18 @@
             document.querySelector('.overlay').style.display = 'none';
             document.getElementById('logOut').close();
         }
+
+       ʼ
         
 
         //реалізація календаря
         document.addEventListener('DOMContentLoaded', function () {
-            const picker = new Litepicker({
+            var picker = new Litepicker({
                 element: document.getElementById('datepicker'),
                 singleMode: false,
                 autoApply: true,
-                
+            });
         });
-    });
 
         document.addEventListener('DOMContentLoaded', function () {
             const blocks = document.querySelectorAll('.block');

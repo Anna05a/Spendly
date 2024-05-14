@@ -271,11 +271,7 @@ hr {
   font-weight: 400;
   filter: invert(100%);
   margin-top: 3px;
-}
-
-.calendar span {
-  margin-top: 7px;
-  margin-left: 10px;
+  pointer-events: none;
 }
 
 .diagram {
@@ -321,22 +317,6 @@ hr {
   margin-top: 10px;
 }
 
-.dropbtn {
-  font-family: "Montserrat", sans-serif;
-  font-size: 12px;
-  font-weight: 300;
-  width: 88px;
-  height: 28px;
-  background-color: rgb(123, 26, 198);
-  border: none;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  color: rgba(217, 217, 217, 1);
-  margin-top: 20px;
-  position: relative;
-}
-
 .button_content {
   display: flex;
 }
@@ -353,48 +333,6 @@ hr {
   transform: rotate(90deg);
   margin-left: 10px;
   margin-top: 5px;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  align-items: center;
-  background-color: #f9f9f9;
-  min-width: 88px;
-  z-index: 1;
-  border-radius: 8px;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 10px 20px;
-  text-decoration: none;
-  display: block;
-  height: 28px;
-  font-family: "Montserrat", sans-serif;
-  font-size: 12px;
-  font-weight: 300;
-  border: 2px;
-  border-color: rgba(232, 231, 231, 1);
-}
-
-.dropdown-content a:hover {
-  background-color: rgb(123, 26, 198);
-  border-radius: 8px;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown:hover .dropbtn {
-  background-color: rgb(123, 26, 198);
 }
 
 .diagram_wrapper {
@@ -430,4 +368,96 @@ h4 {
   font-weight: 300;
   color: rgba(113, 113, 113, 1);
   margin: auto;
+}
+
+
+body.dialog-open::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.dialog_header {
+  display: flex;
+}
+
+.dialog_header h4 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+  margin-left: 10px;
+}
+
+.close {
+  background-color: rgba(232, 231, 231, 1);
+  border: none;
+  background-color: transparent;
+}
+
+.close img {
+  height: 13px;
+  width: 16px;
+  border: none;
+}
+
+.clearHistory {
+  width: 476px;
+  height: 188px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  border: 1px solid red;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.deleteAcount {
+  width: 476px;
+  height: 211px;
+  font-size: 20px;
+  border: 1px solid red;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.logOut {
+  width: 476px;
+  height: 211px;
+  font-size: 20px;
+  border: 1px solid red;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.сontent {
+  width: 400px;
+  margin-left: 40px;
+  position: relative;
+}
+
+
+.content_link {
+  color: rgba(9, 167, 217, 1);
+  font-size: 24px;
+  margin-left: 30px;
+}
+
+.сontent button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(232, 231, 231, 1);
+  background-color: rgba(123, 26, 198, 1);
+  border-radius: 8px;
+  border: none;
+  width: 124px;
+  height: 48px;
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 100px;
 }

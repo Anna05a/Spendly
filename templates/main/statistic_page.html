@@ -422,28 +422,7 @@
         }
     }
 
-    const options = document.querySelectorAll('.dropdown-content a');
-
-  $(document).ready(function() {
-    $('#submit-button').click(function() {
-        var selectedValue = $('#dropdown').val(); // Get the selected value from the dropdown
-        var dataToSend = {
-            'selected_value': selectedValue,
-            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val() 
-        };
-
-        $.ajax({
-            url: 'statistics_page',
-            type: 'POST',
-            data: dataToSend,
-            success: function(response) {
-                console.log(response);
-                window.location.href = 'statistics_page?selected_value=' + selectedValue;
-            }
-        });
-    });
-});
-
+   
 
 </script>
 </body>
