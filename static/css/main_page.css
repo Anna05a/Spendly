@@ -603,9 +603,11 @@ body.dialog-open::before {
   overflow: hidden;
 }
 
+
 .deleteAcount {
   width: 476px;
   height: 211px;
+  font-family: "Montserrat", sans-serif;
   font-size: 20px;
   border: 1px solid red;
   border-radius: 8px;
@@ -615,11 +617,26 @@ body.dialog-open::before {
 .logOut {
   width: 476px;
   height: 211px;
+  font-family: "Montserrat", sans-serif;
   font-size: 20px;
   border: 1px solid red;
   border-radius: 8px;
   overflow: hidden;
 }
+
+.warning{
+  width: 476px;
+  height: 393px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  border: 1px solid red;
+  border-radius: 8px;
+}
+
+.warning p{
+  margin-top: 20px;
+}
+
 
 .сontent {
   width: 400px;

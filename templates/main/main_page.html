@@ -184,7 +184,8 @@
             </div>
             <hr>
             <div class="сontent">
-                <p>You really want to delete your account?</p>
+                <p>You really want to delete your <br>
+                    account?</p>
                 <a href={% url 'delete_profile' %}>
                     <button>Delete</button>
                 </a>
@@ -207,6 +208,35 @@
                 </a>
             </div>
         </dialog>
+
+
+             <!-- діалогове вікно "Попередження про використання особистої інофрмації" -->
+             <dialog id="warning" class="warning">
+                <div class="dialog_header">
+                    <button id="closeWarning" class="close">
+                        <img src={% static "img/pngwing.com.png" %} alt="">
+                    </button>
+                    <h4>Warning</h4>
+                </div>
+                <hr>
+                <div class="сontent">
+                    <p>By using our service, you <b>agree</b>  <br>
+                        <b>that we will store your data.</b> </p>
+
+                     <p>We do this so that you can <b>track</b> your <br>
+                        <b> spending categories </b> and history for <br>
+                         <b> more than 30 days.</b> </p>
+
+
+                    <p>But after clicking on “delete account” <br>
+                         your <b> data will be cleared.</b>
+                    </p>
+
+                   
+                    <button>I agree</button>
+                   
+                </div>
+            </dialog>
 
     </div>
 
@@ -326,6 +356,27 @@
         document.querySelector('.overlay').style.display = 'none';
         document.getElementById('logOut').close();
     }
+
+     //діалогове вікно "Попередження про зберігання особистих даних"
+     document.querySelector('#warning').onclick = function () {
+            document.body.classList.add('dialog-open');
+            document.querySelector('.overlay').style.display = 'block';
+            document.getElementById('warning').showModal();
+        }
+
+        document.querySelector('#closeWarning').onclick = function () {
+            document.body.classList.remove('dialog-open');
+            document.querySelector('.overlay').style.display = 'none';
+            document.getElementById('warning').close();
+        }
+
+        function closeCurrentModal() {
+            var currentModal = document.querySelector('dialog[open]');
+            if (currentModal) {
+                currentModal.close();
+            }
+        }
+
 
 
     //реалізація календаря

@@ -214,7 +214,7 @@ header h2 {
 .wrapper_content_main{
   display: flex;
     gap: 30px;
-    justify-content: space-between;
+    justify-content: center;
     padding: 50px;
 }
 
@@ -469,7 +469,6 @@ hr {
     font-size: 16px;
     font-weight: 100;
     margin-left: 20px;
-    /* line-height: 2; */
     width: 180px;
    
 }
@@ -478,9 +477,7 @@ hr {
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: 400;
-  /* margin: 0; */
   width: 180px;
-  /* line-height: 2; */
  justify-content: end;
 }
 
@@ -603,13 +600,13 @@ body.dialog-open::before {
   border-radius: 8px;
 }
 
-.сontent {
+.content {
   width: 300px;
   margin-left: 50px;
   position: relative;
 }
 
-.сontent button {
+.content button {
   font-family: "Montserrat", sans-serif;
   font-size: 20px;
   font-weight: 500;
