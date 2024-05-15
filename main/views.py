@@ -193,7 +193,6 @@ class AddCardView(View):
             client = Client(token)
             user_info = client.get_client_info()
             request.session['token'] = token
-            user = request.user
             print(user_info)
             if user_info:
                 for user_account in user_info['accounts']:
