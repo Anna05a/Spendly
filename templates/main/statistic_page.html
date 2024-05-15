@@ -324,7 +324,45 @@
     const config = {
         type: 'doughnut',
         data: newdata,
-    };
+        options: {
+                cutoutPercentage: 80,
+    		elements: {
+        	arc: {
+          	borderWidth: 12,
+          },
+        },
+        legend: {
+        	display: false,
+        },
+        animation: {
+        	onComplete: function(animation) {
+          	if (!window.segmentHovered) {
+              var value = this.config.data.datasets[0].data.reduce(function(a, b) { 
+                return a + b;
+              }, 0);
+              var label = 'T O T A L';
+
+              textInCenter(value, label);
+            }
+          },
+        },
+        tooltips: {
+        	enabled: false,
+        	custom: function(tooltip) {
+          	if (tooltip.body) {
+              var line = tooltip.body[0].lines[0],
+              	parts = line.split(': ');
+              textInCenter(parts[1], parts[0].split('').join(' ').toUpperCase());
+              window.segmentHovered = true;
+            } else {
+            	window.segmentHovered = false;
+            }
+          },
+        },
+    },
+};
+
+    
 
 
     document.addEventListener('DOMContentLoaded', function () {
