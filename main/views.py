@@ -196,12 +196,13 @@ class AddCardView(View):
             print(user_info)
             if user_info:
                 for user_account in user_info['accounts']:
+                    print(user_info)
                     originBalance = user_account['balance'] // 100
                     card_balance = originBalance
                     card_number = user_account['maskedPan'][0]
                     card_id = user_account['id']
                     card_ids.append(card_id)
-
+                    curr='UAH'
                     encrypted_card_id = caesar_cipher_encrypt(card_id, 3)
 
                     card_ids.append(encrypted_card_id)
@@ -245,7 +246,7 @@ class ClearCardsView(View):
         payments= Category.objects.filter(user=request.user)
         payments.delete()
         return redirect('home')
-#ujjMBKKsjBxQvU0YnGIhPuZg6szKZb-M9nc6D0o9gkKs
+
 
 class GetPaymentsView(View):
     @staticmethod

@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Card, Category
 
 class CardAdmin(admin.ModelAdmin):
-    list_display = ('id', 'card_id', 'user', 'currency', 'balance', 'card_number', 'token', 'type', 'system')
+    list_display = ('id', 'card_id', 'user', 'balance', 'card_number', 'token', 'type', 'system')
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'card_id', 'payment_id', 'payment_desc', 'user', 'time', 'amount', 'currency', 'category')
