@@ -11,6 +11,7 @@ from datetime import datetime, date, timedelta
 from django.utils import timezone
 from .models import Card, Category
 import uuid
+import seaborn as sns
 
 
 
@@ -377,20 +378,16 @@ class GetPaymentsView(View):
                     })
                     if category in category_expenses:
                             # Якщо так, додати суму витрат до існуючого значення
-                        category_expenses[category] += originAmount
+                        category_expenses[category] += abs(originAmount)
                     else:
                             # Якщо ні, створити новий запис з відповідною сумою витрат
-                        category_expenses[category] = originAmount
+                        category_expenses[category] = abs(originAmount)
                     labels = list(category_expenses.keys())
                     data = list(category_expenses.values())
-                    if category_expenses == None:
-                        labels=0
-                        data=0
                     if not Category.objects.filter(payment_id=payment_id).exists():
                         Category.objects.create(card_id=decrypted_card_id, payment_id=payment_id, payment_desc=payment['description'], user=request.user, time=new_time_str, amount=originAmount, currency=currency, category=category)
             else:
                 statements = Category.objects.filter(time__range=[start_date, end_date], user=request.user)
-                print(statements)
                 for payment in statements:
                     originAmount=payment.amount
                     category = payment.category
@@ -422,7 +419,7 @@ class GetPaymentsView(View):
                     category_expenses_int = {key: int(value) for key, value in category_expenses.items()}
                     data=list(category_expenses_int.values())
 
-                    print(labels, data)
+            print(labels, data)
             context = {'id':card_id,'expences': payments, 'cards': cards, 'labels': labels, 'data': data}
             return render(request, 'main/main_page.html', context)
 
