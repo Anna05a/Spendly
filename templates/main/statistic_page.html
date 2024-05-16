@@ -134,8 +134,8 @@
                             <span class="category_span">{{ i.category }}</span>
                             <div class="expences"></div>
                             <h6>UAH {{ i.amount }}</h6>
-                          
-                            
+
+
                         </div>
                         <div class="additional-info" style="display: none;">
                             <h2>All expenses:</h2>
@@ -452,30 +452,16 @@
         }
 
     //category-info
-let currentOpen = null;
-
-function toggleAdditionalInfo(category) {
-    const additionalInfo = category.nextElementSibling;
-    if (currentOpen && currentOpen!== additionalInfo) {
-        currentOpen.style.display = "none";
+    function toggleAdditionalInfo(category) {
+        var additionalInfo = category.querySelector(".additional-info");
+        if (additionalInfo.style.display === "none" || additionalInfo.style.display === "") {
+            additionalInfo.style.display = "block";
+        } else {
+            additionalInfo.style.display = "none";
+        }
     }
-    if (additionalInfo.style.display === "none" || additionalInfo.style.display === "") {
-        additionalInfo.style.display = "block";
-        currentOpen = additionalInfo;
-    } else {
-        additionalInfo.style.display = "none";
-        currentOpen = null;
-    }
-}
 
-
-const options = document.querySelectorAll('.dropdown-content a');
-options.forEach(option => {
-    option.addEventListener('click', event => {
-        const category = event.target.parentNode.parentNode; // 获取分类元素
-        toggleAdditionalInfo(category);
-    });
-});
+    const options = document.querySelectorAll('.dropdown-content a');
 
   $(document).ready(function() {
     $('#submit-button').click(function() {
