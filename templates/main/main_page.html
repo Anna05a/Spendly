@@ -44,7 +44,7 @@
         </div>
 
         <div class="bottom">
-            <button class="button_menu pasive openDialogClear" id="openDialogClear1">
+            <button class="button_menu pasive" id="openDialogClear">
                 <img src={% static "img/clear.svg" %} alt="">
                 <span>Clear history</span>
             </button>
@@ -249,77 +249,79 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script>
-    //diagram
-    const data = {
-        labels: [
-            {% for label in labels %}
-                '{{ label }}'{% if not forloop.last %},{% endif %}
-            {% endfor %}
-        ],
-        datasets: [{
-            label: 'My First Dataset',
-            data: {{ data|safe }},
-            backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)',
-                'rgb(52,190,14)'
-            ],
-            hoverOffset: 4
-        }]
-    };
-
-    const config = {
-        type: 'doughnut',
-        data: data,
-        options: {
-                cutoutPercentage: 80,
-    		elements: {
-        	arc: {
-          	borderWidth: 12,
-          },
-        },
-        legend: {
-        	display: false,
-        },
-        animation: {
-        	onComplete: function(animation) {
-          	if (!window.segmentHovered) {
-              var value = this.config.data.datasets[0].data.reduce(function(a, b) {
-                return a + b;
-              }, 0);
-              var label = 'T O T A L';
-
-              textInCenter(value, label);
-            }
-          },
-        },
-        tooltips: {
-        	enabled: false,
-        	custom: function(tooltip) {
-          	if (tooltip.body) {
-              var line = tooltip.body[0].lines[0],
-              	parts = line.split(': ');
-              textInCenter(parts[1], parts[0].split('').join(' ').toUpperCase());
-              window.segmentHovered = true;
-            } else {
-            	window.segmentHovered = false;
-            }
-          },
-        },
-    },
-};
-
-
-
-    document.addEventListener('DOMContentLoaded', function () {
-        var ctx = document.getElementById('myChart').getContext('2d');
-        new Chart(ctx, config);
-    });
-
+    // diagram
+    
+//     const data = {
+//      labels: [
+//          {% for label in labels %}
+//              '{{ label }}'{% if not forloop.last %},{% endif %}
+//          {% endfor %}
+//      ],
+//      datasets: [{
+//          label: 'My First Dataset',
+//          data: {{ data|safe }},
+//          backgroundColor: [
+//              'rgb(255, 99, 132)',
+//              'rgb(54, 162, 235)',
+//              'rgb(255, 205, 86)',
+//              'rgb(52, 190, 14)'
+//          ],
+//          hoverOffset: 4
+//      }]
+//  };
+ 
+ 
+//      const config = {
+//          type: 'doughnut',
+//          data: data,
+//          options: {
+//                  cutoutPercentage: 80,
+//              elements: {
+//              arc: {
+//                borderWidth: 12,
+//            },
+//          },
+//          legend: {
+//              display: false,
+//          },
+//          animation: {
+//              onComplete: function(animation) {
+//                if (!window.segmentHovered) {
+//                var value = this.config.data.datasets[0].data.reduce(function(a, b) { 
+//                  return a + b;
+//                }, 0);
+//                var label = 'T O T A L';
+ 
+//                textInCenter(value, label);
+//              }
+//            },
+//          },
+//          tooltips: {
+//              enabled: false,
+//              custom: function(tooltip) {
+//                if (tooltip.body) {
+//                var line = tooltip.body[0].lines[0],
+//                    parts = line.split(': ');
+//                textInCenter(parts[1], parts[0].split('').join(' ').toUpperCase());
+//                window.segmentHovered = true;
+//              } else {
+//                  window.segmentHovered = false;
+//              }
+//            },
+//          },
+//      },
+//  };
+ 
+     
+ 
+//      document.addEventListener('DOMContentLoaded', function () {
+//          var ctx = document.getElementById('myChart').getContext('2d');
+//          new Chart(ctx, config);
+//      });
 
    //діалогове вікно очищення історії
     document.querySelector('#openDialogClear').onclick = function () {
+        console.log('Hello')
         document.body.classList.add('dialog-open');
         document.querySelector('.overlay').style.display = 'block';
         document.getElementById('clearHistory').showModal();

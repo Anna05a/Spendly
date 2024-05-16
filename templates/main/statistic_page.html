@@ -472,10 +472,11 @@ function toggleAdditionalInfo(category) {
 const options = document.querySelectorAll('.dropdown-content a');
 options.forEach(option => {
     option.addEventListener('click', event => {
-        const category = event.target.parentNode.parentNode; // 获取分类元素
+        const category = event.target.parentNode.parentNode;
         toggleAdditionalInfo(category);
     });
 });
+
 
   $(document).ready(function() {
     $('#submit-button').click(function() {

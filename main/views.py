@@ -216,7 +216,7 @@ class AddCardView(View):
                     print(card_ids)
                     if not Card.objects.filter(card_id=encrypted_card_id).exists():
                         Card.objects.create(id=uuid.uuid4(), card_id=encrypted_card_id, balance=card_balance,
-                                                       card_number=card_number, user=request.user, token=token, type=card_type, system=card_type)
+                                                       card_number=card_number, user=request.user, token=token, type=type, system=card_type)
 
             return redirect('home_page')
 
