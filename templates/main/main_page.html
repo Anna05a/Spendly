@@ -44,7 +44,7 @@
         </div>
 
         <div class="bottom">
-            <button class="button_menu pasive" id="openDialogClear">
+            <button class="button_menu pasive openDialogClear" id="openDialogClear1">
                 <img src={% static "img/clear.svg" %} alt="">
                 <span>Clear history</span>
             </button>
@@ -318,7 +318,7 @@
     });
 
 
-    //діалогове вікно очищення історії
+   //діалогове вікно очищення історії
     document.querySelector('#openDialogClear').onclick = function () {
         document.body.classList.add('dialog-open');
         document.querySelector('.overlay').style.display = 'block';
@@ -357,20 +357,7 @@
         document.getElementById('logOut').close();
     }
 
-     //діалогове вікно "Попередження про зберігання особистих даних"
-     document.querySelector('#warning').onclick = function () {
-            document.body.classList.add('dialog-open');
-            document.querySelector('.overlay').style.display = 'block';
-            document.getElementById('warning').showModal();
-        }
-
-        document.querySelector('#closeWarning').onclick = function () {
-            document.body.classList.remove('dialog-open');
-            document.querySelector('.overlay').style.display = 'none';
-            document.getElementById('warning').close();
-        }
-
-        function closeCurrentModal() {
+    function closeCurrentModal() {
             var currentModal = document.querySelector('dialog[open]');
             if (currentModal) {
                 currentModal.close();
