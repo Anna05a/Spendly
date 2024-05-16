@@ -202,7 +202,7 @@ class AddCardView(View):
                     card_id = user_account['id']
                     card_type = user_account['type']
                     card_ids.append(card_id)
-
+                    system=user_account['maskedPan'][0]
                     encrypted_card_id = caesar_cipher_encrypt(card_id, 3)
 
                     card_ids.append(encrypted_card_id)
@@ -210,7 +210,7 @@ class AddCardView(View):
 
                     if not Card.objects.filter(card_id=encrypted_card_id).exists():
                         Card.objects.create(id=uuid.uuid4(), card_id=encrypted_card_id, balance=card_balance,
-                                                       card_number=card_number, user=request.user, token=token, type=card_type)
+                                                       card_number=card_number, user=request.user, token=token, type=card_type, system=system)
 
             return redirect('home_page')
 
