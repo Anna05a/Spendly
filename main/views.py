@@ -200,7 +200,6 @@ class AddCardView(View):
                     card_balance = originBalance
                     card_number = user_account['maskedPan'][0]
                     card_id = user_account['id']
-                    card_type = user_account['type']
                     card_ids.append(card_id)
 
                     encrypted_card_id = caesar_cipher_encrypt(card_id, 3)
@@ -246,7 +245,7 @@ class ClearCardsView(View):
         payments= Category.objects.filter(user=request.user)
         payments.delete()
         return redirect('home')
-
+#ujjMBKKsjBxQvU0YnGIhPuZg6szKZb-M9nc6D0o9gkKs
 
 class GetPaymentsView(View):
     @staticmethod
@@ -259,7 +258,8 @@ class GetPaymentsView(View):
             mono = monobank.Client(cards.first().token)
             originAmounts = []
             payments = []
-
+            labels= []
+            data=[]
             start_date = request.GET.get('start_date')
             end_date = request.GET.get('end_date')
             category_expenses ={}
@@ -382,6 +382,9 @@ class GetPaymentsView(View):
                         category_expenses[category] = originAmount
                     labels = list(category_expenses.keys())
                     data = list(category_expenses.values())
+                    if category_expenses == None:
+                        labels=0
+                        data=0
                     if not Category.objects.filter(payment_id=payment_id).exists():
                         Category.objects.create(card_id=decrypted_card_id, payment_id=payment_id, payment_desc=payment['description'], user=request.user, time=new_time_str, amount=originAmount, currency=currency, category=category)
             else:
@@ -412,10 +415,12 @@ class GetPaymentsView(View):
                     else:
                             # Якщо ні, створити новий запис з відповідною сумою витрат
                         category_expenses[category] = originAmount
+
                     labels = list(category_expenses.keys())
                     #data = list(category_expenses.values())
                     category_expenses_int = {key: int(value) for key, value in category_expenses.items()}
                     data=list(category_expenses_int.values())
+
                     print(labels, data)
             context = {'id':card_id,'expences': payments, 'cards': cards, 'labels': labels, 'data': data}
             return render(request, 'main/main_page.html', context)
