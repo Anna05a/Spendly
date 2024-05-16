@@ -85,7 +85,7 @@ html {
   width: 70%;
   height: 100%;
   background-color: rgba(217, 217, 217, 1);
-  position: relative;
+  position: relative; 
 }
 
 .circle::before {
@@ -154,8 +154,8 @@ h1 {
     font-size: 3vw; /* змінив розмір на відносну одиницю */
     width: 60%; /* змінив ширину на відносну одиницю */
   }
-}
-.active {
+  
+}.active {
   background-color: rgb(123, 26, 198);
 }
 
@@ -237,32 +237,29 @@ hr {
   display: flex;
 }
 
-.header_acounts_cards {
+.header_acounts_cards{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.refresh {
+.refresh{
   width: 50px;
   height: 50px;
   border: none;
   background-color: rgba(255, 255, 255, 0.001);
   margin-right: 5px;
+
 }
 
-.acounts_cards hr {
+.acounts_cards hr{
   margin-top: 0;
 }
 
 .card {
   width: 260px;
   height: 148px;
-  background: linear-gradient(
-    to left,
-    rgba(123, 26, 198, 1),
-    rgba(214, 172, 247, 0.1)
-  );
+  background: linear-gradient(to left,rgba(123, 26, 198, 1),rgba(214, 172, 247, 0.1));
   border-radius: 8px;
   margin-top: 5px;
   margin-left: 30px;
@@ -300,18 +297,18 @@ hr {
 }
 
 .bank_account_number {
-  margin-top: 10px;
+ margin-top: 10px;
   font-size: 20px;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
 }
 
-.wrapper_number_and_bin {
+.wrapper_number_and_bin{
   display: flex;
   justify-content: space-around;
 }
 
-.delete_card {
+.delete_card{
   background-color: rgba(255, 255, 255, 0.001);
   border: none;
 }
@@ -352,8 +349,8 @@ hr {
   margin-top: 30px;
   border-radius: 8px;
 }
-.category-detail {
-  width: 900px;
+.category-detail{
+   width: 900px;
   height: 50%;
   display: block;
   background-color: rgba(232, 231, 231, 1);
@@ -405,6 +402,8 @@ hr {
   pointer-events: none;
 }
 
+
+
 .diaram_and_inf {
   display: flex;
 }
@@ -429,7 +428,7 @@ hr {
   padding-bottom: 10px;
 }
 
-.block {
+.block{
   width: 420px;
   height: 47px;
   justify-content: center;
@@ -446,7 +445,7 @@ hr {
   display: none;
 }
 
-.front {
+.front{
   display: flex;
   align-items: center;
   position: relative;
@@ -465,7 +464,7 @@ hr {
   height: 32px;
   margin-left: 20px;
   margin-top: 5px;
-}
+} 
 
 .front span {
   width: 70%;
@@ -496,8 +495,8 @@ hr {
   position: absolute;
   border: none;
   border-radius: 8px;
-  width: 100%;
-  height: 100%;
+  width: 100%; 
+  height: 100%; 
   justify-content: space-between;
 }
 
@@ -510,7 +509,7 @@ hr {
   margin-left: 10px;
 }
 
-.date {
+.date{
   position: relative;
   margin-right: 20px;
   white-space: nowrap;
@@ -558,6 +557,7 @@ hr {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
+
 body.dialog-open::before {
   content: "";
   position: fixed;
@@ -603,6 +603,7 @@ body.dialog-open::before {
   overflow: hidden;
 }
 
+
 .deleteAcount {
   width: 476px;
   height: 211px;
@@ -623,7 +624,7 @@ body.dialog-open::before {
   overflow: hidden;
 }
 
-.warning {
+.warning{
   width: 476px;
   height: 393px;
   font-family: "Montserrat", sans-serif;
@@ -632,15 +633,17 @@ body.dialog-open::before {
   border-radius: 8px;
 }
 
-.warning p {
+.warning p{
   margin-top: 20px;
 }
+
 
 .сontent {
   width: 400px;
   margin-left: 40px;
   position: relative;
 }
+
 
 .content_link {
   color: rgba(9, 167, 217, 1);
@@ -663,12 +666,13 @@ body.dialog-open::before {
   margin-left: 100px;
 }
 
-.card-container {
+
+.card-container{
   display: flex;
   width: 880px;
-  overflow-x: scroll;
+  overflow: scroll;
 }
 
 .selected {
-  border: 2px solid red; /* Обводка карти */
+    border: 2px solid red; /* Обводка карти */
 }

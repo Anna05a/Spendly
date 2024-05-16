@@ -232,9 +232,9 @@
                          your <b> data will be cleared.</b>
                     </p>
 
-                   
+
                     <button>I agree</button>
-                   
+
                 </div>
             </dialog>
 
@@ -285,7 +285,7 @@
         animation: {
         	onComplete: function(animation) {
           	if (!window.segmentHovered) {
-              var value = this.config.data.datasets[0].data.reduce(function(a, b) { 
+              var value = this.config.data.datasets[0].data.reduce(function(a, b) {
                 return a + b;
               }, 0);
               var label = 'T O T A L';
@@ -310,7 +310,7 @@
     },
 };
 
-    
+
 
     document.addEventListener('DOMContentLoaded', function () {
         var ctx = document.getElementById('myChart').getContext('2d');
