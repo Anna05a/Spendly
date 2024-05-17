@@ -132,9 +132,9 @@
                         {% for expence in expences %}
                             <div class="category" onclick="toggleAdditionalInfo(this);">
                                 <div class="{{ expence.category }}">
-                                    {% if expence.category == 'Health and beauty' %}
+                                    {% if expence.category == 'Health-and-beauty' %}
                                         <img src="{% static 'img/health-and-beauty-outline.svg' %}" alt="">
-                                        {{ expence.category }}
+                                        Health and beauty
                                     {% elif expence.category == 'Groceries' %}
                                         <img src="{% static 'img/groceries.svg' %}" alt="">
                                         {{ expence.category }}
@@ -146,9 +146,6 @@
                                         {{ expence.category }}
                                     {% elif expence.category == 'Utility payments' %}
                                         <img src="{% static 'img/utility_payments.png' %}" alt="">
-                                        {{ expence.category }}
-                                    {% elif expence.category == 'перекази' %}
-                                        <img src="{% static 'img/transfer.svg' %}" alt="">
                                         {{ expence.category }}
                                     {% elif expence.category == 'Caffe-restaurant' %}
                                         <img src="{% static 'img/cafe.svg' %}" alt="">
@@ -183,12 +180,12 @@
                                     {% elif expence.category == 'Transfer' %}
                                         <img src="{% static 'img/transfer.svg' %}" alt="">
                                         {{ expence.category }}
-                                    {% else %}
+                                    {% elif expence.category == 'Other'%}
                                         <img src="{% static 'img/other.svg' %}" alt="">
-                                        {{ expence.category }}
+                                        Other
                                     {% endif %}
 
-                                    <h6>UAH {{ i.amount }}</h6>
+                                    <h6>UAH {{ expence.amount }}</h6>
                                 </div>
                             </div>
                             <div class="additional-info" style="display: none;">
