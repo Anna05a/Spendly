@@ -137,55 +137,65 @@
                 <div class="categories_inf">
                     {% for expence in expences %}
     <div class="block" id="block{{ forloop.counter }}">
-        <div class="front" style="border: 2px solid {{ expence.border }};">
-          
+       <div class="front" >
+            <div class="{{ expence.category }}">
             {% if expence.category == 'Health and beauty' %}
                 <img src="{% static 'img/health-and-beauty-outline.svg' %}" alt="">
-                <span>Здоров'я і краса</span>
+                {{ expence.category }}
             {% elif expence.category == 'Groceries' %}
                 <img src="{% static 'img/groceries.svg' %}" alt="">
-                <span>Продукти</span>
+                {{ expence.category }}
             {% elif expence.category == 'Shopping' %}
                 <img src="{% static 'img/shopping.svg' %}" alt="">
-                <span>Шопінг</span>
-            {% elif expence.category == 'Other' %}
-                <img src="{% static 'img/other.svg' %}" alt="">
-                <span>Інше</span>
+                {{ expence.category }}
             {% elif expence.category == 'Transportation' %}
                 <img src="{% static 'img/transportation.svg' %}" alt="">
-                <span>Транспорт</span>
+              {{ expence.category }}
             {% elif expence.category == 'Utility payments' %}
                 <img src="{% static 'img/utility_payments.png' %}" alt="">
-                <span>Платежі за комунальні послуги</span>
+                {{ expence.category }}
             {% elif expence.category == 'перекази' %}
                 <img src="{% static 'img/transfer.svg' %}" alt="">
-                <span>Перекази</span>
-            {% elif expence.category == 'Caffe/restaurant' %}
+                {{ expence.category }}
+            {% elif expence.category == 'Caffe-restaurant' %}
                 <img src="{% static 'img/cafe.svg' %}" alt="">
-                <span>Кава/ресторан</span>
+                Caffe/restaurant
             {% elif expence.category == 'Services' %}
                 <img src="{% static 'img/services.svg' %}" alt="">
-                <span>Послуги</span>
+                {{ expence.category }}
             {% elif expence.category == 'Finance' %}
                 <img src="{% static 'img/finance.png' %}" alt="">
-                <span>Фінанси</span>
+                {{ expence.category }}
             {% elif expence.category == 'Travel' %}
                 <img src="{% static 'img/travel.svg' %}" alt="">
-                <span>Подорожі</span>
+                {{ expence.category }}
             {% elif expence.category == 'Household' %}
                 <img src="{% static 'img/household.svg' %}" alt="">
-                <span>Побут</span>
+                {{ expence.category }}
             {% elif expence.category == 'Entertainment' %}
                 <img src="{% static 'img/entertainment.svg' %}" alt="">
-                <span>Розваги</span>
+                {{ expence.category }}
             {% elif expence.category == 'Car service' %}
                 <img src="{% static 'img/car-service.svg' %}" alt="">
-                <span>Автосервіс</span>
+                {{ expence.category }}
             {% elif expence.category == 'Education' %}
                 <img src="{% static 'img/education.svg' %}" alt="">
-                <span>Освіта</span>
+                {{ expence.category }}
+            {% elif expence.category == 'Mobile' %}
+                <img src="{% static 'img/mobile.svg' %}" alt=""> 
+                Mobile recharge
+            {% elif expence.category == 'Enrollment' %}
+                <img src="{% static 'img/enrollment.svg' %}" alt=""> 
+                {{ expence.category }}
+            {% elif expence.category == 'Transfer' %}
+                <img src="{% static 'img/transfer.svg' %}" alt=""> 
+                {{ expence.category }}
+            {% else %}
+                <img src="{% static 'img/other.svg' %}" alt="">
+               {{ expence.category }}
             {% endif %}
             <h6>{{ expence.amount }}</h6>
+            </div>
         </div>
         <div class="back" style="border: 2px solid rgba(16, 176, 80, 1);">
             <span class="place">{{ expence.description }}</span>
@@ -262,22 +272,44 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script>
     //diagram
+    const categoryBorderColors = {
+    'Shopping': 'rgba(0, 115, 46, 1)',
+    'Transfer': 'rgba(15, 110, 198, 1)',
+    'Enrollment': 'rgba(135, 16, 176, 1)',
+    'Utility payments': 'rgba(180, 16, 16, 1)',
+    'Transportation': 'rgba(213, 229, 25, 1)',
+    'Health and beauty': 'rgba(233, 54, 183, 1)',
+    'Groceries': 'rgba(16, 176, 80, 1)',
+    'Caffe-restaurant': 'rgba(100, 13, 141, 1)',
+    'Services': 'rgba(57, 17, 171, 1)',
+    'Entertainment': 'rgba(170, 16, 173, 1)',
+    'Travel': 'rgba(132, 193, 3, 1)',
+    'Household': 'rgba(176, 141, 16, 1)',
+    'Car service': 'rgba(12, 204, 170, 1)',
+    'Education': 'rgba(243, 220, 12, 1)',
+    'Mobile recharge': 'rgba(17, 198, 210, 1)',
+    'Mobile': 'rgba(17, 198, 210, 1)',
+    'Other': 'rgba(214, 115, 24, 1)',
+};
+    const labels = {{ labels|safe }};
+    
+   const borders = [];
+    for (let i = 0; i < labels.length; i++) {
+        const category = labels[i].trim();
+        let color = 'rgba(0, 0, 0, 1)'; // чорний колір за замовчуванням
+        if (categoryBorderColors.hasOwnProperty(category)) {
+            color = categoryBorderColors[category];
+        }
+        borders.push(color);
+    }
+    
     const data = {
         labels: 
             {{ labels|safe }},
     datasets: [{
         label: 'My First Dataset',
         data: {{ data|safe }},
-            backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)',
-                'rgb(52,190,14)',
-                'rgb(255, 99, 2)',
-                'rgb(198,53,119)',
-                'rgb(193,86,255)',
-                'rgb(190,14,14)'
-            ],
+            backgroundColor: borders,
             hoverOffset: 4
         }]
     };
@@ -289,7 +321,7 @@
                 cutoutPercentage: 80,
     		elements: {
         	arc: {
-          	borderWidth: 12,
+          	borderWidth: 8,
           },
         },
         legend: {

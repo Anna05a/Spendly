@@ -41,21 +41,21 @@
 
 
         <div class="bottom">
-                <button class="button_menu pasive" id="openDialogClear">
-                    <img src={% static "img/clear.svg" %} alt="">
-                    <span>Clear history</span>
-                </button>
+            <button class="button_menu pasive" id="openDialogClear">
+                <img src={% static "img/clear.svg" %} alt="">
+                <span>Clear history</span>
+            </button>
 
-                <button class="button_menu pasive" id="openDialogDelete">
-                    <img src={% static "img/delete.png" %} alt="">
-                    <span>Delete account</span>
-                </button>
+            <button class="button_menu pasive" id="openDialogDelete">
+                <img src={% static "img/delete.png" %} alt="">
+                <span>Delete account</span>
+            </button>
 
-                <button class="button_menu pasive" id="openLogOut">
-                    <img src={% static "img/log_out.svg" %} alt="">
-                    <span>Log out</span>
-                </button>
-            </div>
+            <button class="button_menu pasive" id="openLogOut">
+                <img src={% static "img/log_out.svg" %} alt="">
+                <span>Log out</span>
+            </button>
+        </div>
 
     </div>
 
@@ -63,7 +63,7 @@
 
         <header>
             <h2>Statistic</h2>
-            
+
             <button class="calendar" id="datepicker">
                 <img id="calendarIcon" src="{% static "img/calendar.svg.png" %}" alt="">
             </button>
@@ -77,23 +77,23 @@
                     <div class="header_chart">
                         <h3>Comparison Chart</h3>
                     </div>
-        
+
                     <hr>
-        
+
                     <div class="diagram">
                         <canvas id="myChart"></canvas>
                     </div>
-        
+
                 </div>
 
                 <div class="financial">
                     <div class="header_financeal_and_category">
                         <h3>Financial Breakdown</h3>
                     </div>
-    
+
                     <hr>
                     <div class="diagram_wrapper">
-    
+
                         <div class="diagram_doughnut">
                             <canvas id="myDoughnutChart"></canvas>
                         </div>
@@ -103,16 +103,16 @@
                                     <span>UAH {{ revenue_persent }}</span> %
                                 </p>
                             </div>
-    
+
                             <div class="text_diagram">
                                 <p>Total Expense <br>
                                     <span>UAH {{ expence_persent }}</span> %
                                 </p>
                             </div>
-    
+
                         </div>
                     </div>
-    
+
                 </div>
             </div>
 
@@ -120,279 +120,329 @@
             <div class="categories">
 
                 <div class="header_number1">
-                <div class="header_financeal_and_category">
-                    <h3>Category rating</h3>
-                </div>
-                <hr>
+                    <div class="header_financeal_and_category">
+                        <h3>Category rating</h3>
+                    </div>
+                    <hr>
 
+                    
                 </div>
                 <div class="categories_inf">
-                {% if expences %}
-                    {% for i in expences %}
-                        <div class="category" onclick="toggleAdditionalInfo(this);" style="border: 2px solid {{ i.border }};">
-                            <img src="{% static i.img %}" alt="{{ i.category }}">
-                            <span class="category_span">{{ i.category }}</span>
-                            <div class="expences"></div>
-                            <h6>UAH {{ i.amount }}</h6>
-                          
-                            
-                        </div>
-                        <div class="additional-info" style="display: none;">
-                            <h2>All expenses:</h2>
-                            <div class="wrapper_categories-info">
-                            {% for expense in i.data %}
-                                <div class="back" style="border: 1px solid rgba(163, 163, 163, 1);">
-                                    <span class="place block">{{ expense.description }}</span>
-                                    <span class="date block">{{ expense.time }}</span>
-                                    <h6 class="block">{{ expense.amount }}</h6>
+                    {% if expences %}
+                        {% for expence in expences %}
+                            <div class="category" onclick="toggleAdditionalInfo(this);">
+                                <div class="{{ expence.category }}">
+                                    {% if expence.category == 'Health and beauty' %}
+                                        <img src="{% static 'img/health-and-beauty-outline.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'Groceries' %}
+                                        <img src="{% static 'img/groceries.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'Shopping' %}
+                                        <img src="{% static 'img/shopping.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'Transportation' %}
+                                        <img src="{% static 'img/transportation.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'Utility payments' %}
+                                        <img src="{% static 'img/utility_payments.png' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'перекази' %}
+                                        <img src="{% static 'img/transfer.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'Caffe-restaurant' %}
+                                        <img src="{% static 'img/cafe.svg' %}" alt="">
+                                        Caffe/restaurant
+                                    {% elif expence.category == 'Services' %}
+                                        <img src="{% static 'img/services.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'Finance' %}
+                                        <img src="{% static 'img/finance.png' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'Travel' %}
+                                        <img src="{% static 'img/travel.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'Household' %}
+                                        <img src="{% static 'img/household.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'Entertainment' %}
+                                        <img src="{% static 'img/entertainment.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'Car service' %}
+                                        <img src="{% static 'img/car-service.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'Education' %}
+                                        <img src="{% static 'img/education.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'Mobile' %}
+                                        <img src="{% static 'img/mobile.svg' %}" alt="">
+                                        Mobile recharge
+                                    {% elif expence.category == 'Enrollment' %}
+                                        <img src="{% static 'img/enrollment.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% elif expence.category == 'Transfer' %}
+                                        <img src="{% static 'img/transfer.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% else %}
+                                        <img src="{% static 'img/other.svg' %}" alt="">
+                                        {{ expence.category }}
+                                    {% endif %}
+
+                                    <h6>UAH {{ i.amount }}</h6>
                                 </div>
-                                <br>
-                            {% endfor %}
-                        </div>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <h4>You don't use any category yet</h4>
-                {% endif %}
+                            </div>
+                            <div class="additional-info" style="display: none;">
+                                <h2>All expenses:</h2>
+                                <div class="wrapper_categories-info">
+                                    {% for expense in expence.data %}
+                                        <div class="back" style="border: 1px solid rgba(163, 163, 163, 1);">
+                                            <span class="place block">{{ expense.description }}</span>
+                                            <span class="date block">{{ expense.time }}</span>
+                                            <h6 class="block">{{ expense.amount }}</h6>
+                                        </div>
+                                        <br>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    {% else %}
+                        <h4>You don't use any category yet</h4>
+                    {% endif %}
                 </div>
+
+                <!-- діалогове вікно "Очищення історії" -->
+                <dialog id="clearHistory" class="clearHistory">
+                    <div class="dialog_header">
+                        <button id="closeDialogClear" class="close">
+                            <img src={% static "img/pngwing.com.png" %} alt="">
+                        </button>
+                        <h4>Warning</h4>
+                    </div>
+                    <hr>
+                    <div class="content">
+                        <p>You really want to clear history?</p>
+                        <a href={% url 'clear_history' %}>
+                            <button>Clear</button>
+                        </a>
+                    </div>
+                </dialog>
+
+                <!-- діалогове вікно "Видалення акаунту" -->
+                <dialog id="deleteAcount" class="deleteAcount">
+                    <div class="dialog_header">
+                        <button id="closeDialogDelete" class="close">
+                            <img src={% static "img/pngwing.com.png" %} alt="">
+                        </button>
+                        <h4>Warning</h4>
+                    </div>
+                    <hr>
+                    <div class="content">
+                        <p>You really want to delete your account?</p>
+                        <a href={% url 'delete_profile' %}>
+                            <button>Delete</button>
+                        </a>
+                    </div>
+                </dialog>
+
+                <!-- діалогове вікно "Вихід з акаунту" -->
+                <dialog id="logOut" class="logOut">
+                    <div class="dialog_header">
+
+                        <button id="closeDialogLogOut" class="close" onclick={% url 'logout' %}>
+                            <img src={% static "img/pngwing.com.png" %} alt="">
+                        </button>
+
+                        <h4>Warning</h4>
+                    </div>
+                    <hr>
+                    <div class="content">
+                        <p>You really want to log out of your account?</p>
+                        <a href={% url 'logout' %}>
+                            <button>Log out</button>
+                        </a>
+                    </div>
+                </dialog>
+
             </div>
 
         </div>
 
-        <!-- діалогове вікно "Очищення історії" -->
-        <dialog id="clearHistory" class="clearHistory">
-            <div class="dialog_header">
-                <button id="closeDialogClear" class="close">
-                    <img src={% static "img/pngwing.com.png" %} alt="">
-                </button>
-                <h4>Warning</h4>
-            </div>
-            <hr>
-            <div class="content">
-                <p>You really want to clear history?</p>
-                <a href={% url 'clear_history' %}>
-                    <button>Clear</button>
-                </a>
-            </div>
-        </dialog>
 
-        <!-- діалогове вікно "Видалення акаунту" -->
-        <dialog id="deleteAcount" class="deleteAcount">
-            <div class="dialog_header">
-                <button id="closeDialogDelete" class="close">
-                    <img src={% static "img/pngwing.com.png" %} alt="">
-                </button>
-                <h4>Warning</h4>
-            </div>
-            <hr>
-            <div class="content">
-                <p>You really want to delete your account?</p>
-                <a href={% url 'delete_profile' %}>
-                <button>Delete</button>
-                </a>
-            </div>
-        </dialog>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
-        <!-- діалогове вікно "Вихід з акаунту" -->
-        <dialog id="logOut" class="logOut">
-            <div class="dialog_header">
-              
-                <button id="closeDialogLogOut"  class="close" onclick={% url 'logout' %}>
-                    <img src={% static "img/pngwing.com.png" %} alt="">
-                </button>
-                
-                <h4>Warning</h4>
-            </div>
-            <hr>
-            <div class="content">
-                <p>You really want to log out of your account?</p>
-                <a href={% url 'logout' %}>
-                    <button>Log out</button>
-                </a>
-            </div>
-        </dialog>
+        <script>
 
-    </div>
+            //реалізація календаря
 
-</div>
+            document.addEventListener('DOMContentLoaded', function () {
+                var picker = new Litepicker({
+                    element: document.getElementById('datepicker'),
+                    singleMode: false,
+                    autoApply: true,
+                    onSelect: function (date1, date2) {
+                        var selectedValue1 = date1.toLocaleDateString();
+                        var selectedValue2 = date2.toLocaleDateString();
+                        var dataToSend = {
+                            'start_date': selectedValue1,
+                            'end_date': selectedValue2,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+
+                        };
+
+                        $.ajax({
+                            url: 'statistics_page',
+                            type: 'POST',
+                            data: dataToSend,
+                            success: function (response) {
+                                var formattedDateE = moment(selectedValue2, "DD.MM.YYYY").format("YYYY-MM-DD HH:mm:ss");
+                                var formattedDateS = moment(selectedValue1, "DD.MM.YYYY").format("YYYY-MM-DD HH:mm:ss");
+                                console.log(response);
+                                window.location.href = 'statistics_page?start_date=' + encodeURIComponent(formattedDateS) + '&end_date=' + encodeURIComponent(formattedDateE);
+                            },
+                            error: function (xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    }
+                });
+            });
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment/moment.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/js/main.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+            //diagram
 
-<script>
 
-    //реалізація календаря
-    
-    document.addEventListener('DOMContentLoaded', function () {
-    var picker = new Litepicker({
-        element: document.getElementById('datepicker'),
-        singleMode: false,
-        autoApply: true,
-        onSelect: function (date1, date2) {
-            var selectedValue1 = date1.toLocaleDateString();
-             var selectedValue2 = date2.toLocaleDateString();
-            var dataToSend = {
-                'start_date': selectedValue1,
-                'end_date': selectedValue2,
-                'csrfmiddlewaretoken': '{{ csrf_token }}' 
-                
+            const ctx = document.getElementById('myChart').getContext('2d');
+
+            const labels = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
+
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Revenue',
+                    data: {{ revenue_data | safe }}, // дані для доходів
+                    backgroundColor: 'rgba(200, 120, 255, 0.2)',
+                    borderColor: 'rgba(200, 120, 255)',
+
+                    borderWidth: 1
+                },
+                    {
+                        label: 'Expense',
+                        data: {{ expense_data | safe }}, // дані для витрат
+                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    }]
             };
 
-            $.ajax({
-                url: 'statistics_page',
-                type: 'POST',
-                data: dataToSend,
-                success: function(response) {
-                    var formattedDateE = moment(selectedValue2, "DD.MM.YYYY").format("YYYY-MM-DD HH:mm:ss");
-                    var formattedDateS = moment(selectedValue1, "DD.MM.YYYY").format("YYYY-MM-DD HH:mm:ss");
-                    console.log(response);
-                     window.location.href = 'statistics_page?start_date=' + encodeURIComponent(formattedDateS) + '&end_date=' + encodeURIComponent(formattedDateE);
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Chart.js Bar Chart'
+                        }
+                    }
                 },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
             });
-        }
-    });
-});
 
+            //donut diagram
+            const newdata = {
+                labels: [
+                    'Expense', 'Revenue',
+                ],
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: {{ data }},
+                    backgroundColor: [
+                        'rgb(138, 43, 226)',
+                        'rgb(200, 120, 255)'
+                    ],
+                    hoverOffset: 4
+                }]
+            };
 
-    //diagram
+            const config = {
+                type: 'doughnut',
+                data: newdata,
+                options: {
+                    cutoutPercentage: 80,
+                    elements: {
+                        arc: {
+                            borderWidth: 12,
+                        },
+                    },
+                    legend: {
+                        display: false,
+                    },
+                    animation: {
+                        onComplete: function (animation) {
+                            if (!window.segmentHovered) {
+                                var value = this.config.data.datasets[0].data.reduce(function (a, b) {
+                                    return a + b;
+                                }, 0);
+                                var label = 'T O T A L';
 
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-
-    const labels = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
-    
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'Revenue',
-            data: {{ revenue_data | safe }}, // дані для доходів
-            backgroundColor: 'rgba(200, 120, 255, 0.2)',
-            borderColor: 'rgba(200, 120, 255)',
-           
-            borderWidth: 1
-        },
-            {
-                label: 'Expense',
-                data: {{ expense_data | safe }}, // дані для витрат
-                backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-                borderWidth: 1
-            }]
-    };
-
-    const myChart = new Chart(ctx, {
-        type: 'bar',
-        data: data,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
+                                textInCenter(value, label);
+                            }
+                        },
+                    },
+                    tooltips: {
+                        enabled: false,
+                        custom: function (tooltip) {
+                            if (tooltip.body) {
+                                var line = tooltip.body[0].lines[0],
+                                    parts = line.split(': ');
+                                textInCenter(parts[1], parts[0].split('').join(' ').toUpperCase());
+                                window.segmentHovered = true;
+                            } else {
+                                window.segmentHovered = false;
+                            }
+                        },
+                    },
                 },
-                title: {
-                    display: true,
-                    text: 'Chart.js Bar Chart'
-                }
-            }
-        },
-    });
-
-    //donut diagram
-    const newdata = {
-        labels: [
-            'Expense','Revenue',
-        ],
-        datasets: [{
-            label: 'My First Dataset',
-            data: {{ data }},
-            backgroundColor: [
-                'rgb(138, 43, 226)',
-                'rgb(200, 120, 255)'
-            ],
-            hoverOffset: 4
-        }]
-    };
-
-    const config = {
-        type: 'doughnut',
-        data: newdata,
-        options: {
-                cutoutPercentage: 80,
-    		elements: {
-        	arc: {
-          	borderWidth: 12,
-          },
-        },
-        legend: {
-        	display: false,
-        },
-        animation: {
-        	onComplete: function(animation) {
-          	if (!window.segmentHovered) {
-              var value = this.config.data.datasets[0].data.reduce(function(a, b) { 
-                return a + b;
-              }, 0);
-              var label = 'T O T A L';
-
-              textInCenter(value, label);
-            }
-          },
-        },
-        tooltips: {
-        	enabled: false,
-        	custom: function(tooltip) {
-          	if (tooltip.body) {
-              var line = tooltip.body[0].lines[0],
-              	parts = line.split(': ');
-              textInCenter(parts[1], parts[0].split('').join(' ').toUpperCase());
-              window.segmentHovered = true;
-            } else {
-            	window.segmentHovered = false;
-            }
-          },
-        },
-    },
-};
-
-    
+            };
 
 
-    document.addEventListener('DOMContentLoaded', function () {
-        var ctx = document.getElementById('myDoughnutChart').getContext('2d');
-        new Chart(ctx, config);
-    });
+            document.addEventListener('DOMContentLoaded', function () {
+                var ctx = document.getElementById('myDoughnutChart').getContext('2d');
+                new Chart(ctx, config);
+            });
 
 
-    //кнопка для обирання day/week/month/year
-   // {#document.addEventListener("DOMContentLoaded", function () {#}
-// {#    var dropbtns = document.querySelectorAll(".dropbtn");#}
-  //  {##}
-    //{#    dropbtns.forEach(function (dropbtn) {#}
-    //{#        var dropdownContent = dropbtn.nextElementSibling;#}
-    //{##}
-    //{#        dropbtn.addEventListener("click", function () {#}
-    //{#            dropdownContent.classList.toggle("show");#}
-    //{#        });#}
-    //{##}
-    //{#        var menuItems = dropdownContent.getElementsByTagName("a");#}
-    //{#        for (var i = 0; i < menuItems.length; i++) {#}
-    //{#            menuItems[i].addEventListener("click", function () {#}
-    //{##}
-    //{#                var buttonText = this.textContent;#}
-    //{#                var buttonImg = this.querySelector("img");#}
-    //{#                var buttonImgSrc = buttonImg ? buttonImg.getAttribute("src") : null;#}
-    //{#                dropbtn.querySelector(".button_text").textContent = buttonText;#}
-    //{#                var img = dropbtn.querySelector(".button_img");#}
-   /* {#                if (buttonImgSrc) {#}
+            //кнопка для обирання day/week/month/year
+            // {#document.addEventListener("DOMContentLoaded", function () {#}
+            // {#    var dropbtns = document.querySelectorAll(".dropbtn");#}
+            //  {##}
+            //{#    dropbtns.forEach(function (dropbtn) {#}
+            //{#        var dropdownContent = dropbtn.nextElementSibling;#}
+            //{##}
+            //{#        dropbtn.addEventListener("click", function () {#}
+            //{#            dropdownContent.classList.toggle("show");#}
+            //{#        });#}
+            //{##}
+            //{#        var menuItems = dropdownContent.getElementsByTagName("a");#}
+            //{#        for (var i = 0; i < menuItems.length; i++) {#}
+            //{#            menuItems[i].addEventListener("click", function () {#}
+            //{##}
+            //{#                var buttonText = this.textContent;#}
+            //{#                var buttonImg = this.querySelector("img");#}
+            //{#                var buttonImgSrc = buttonImg ? buttonImg.getAttribute("src") : null;#}
+            //{#                dropbtn.querySelector(".button_text").textContent = buttonText;#}
+            //{#                var img = dropbtn.querySelector(".button_img");#}
+            /* {#                if (buttonImgSrc) {#}
     {#                    img.setAttribute("src", buttonImgSrc);#}
     {#                    img.style.display = "inline";#}
     {#                } else {#}
@@ -405,103 +455,104 @@
     {#);#} */
 
 
-    //діалогове вікно очищення історії
-    document.querySelector('#openDialogClear').onclick = function () {
-        document.body.classList.add('dialog-open');
-        document.querySelector('.overlay').style.display = 'block';
-        document.getElementById('clearHistory').showModal();
-    }
-
-    document.querySelector('#closeDialogClear').onclick = function () {
-        document.body.classList.remove('dialog-open');
-        document.querySelector('.overlay').style.display = 'none';
-        document.getElementById('clearHistory').close();
-    }
-
-    //діалогове вікно видалення акаунта
-    document.querySelector('#openDialogDelete').onclick = function () {
-        document.body.classList.add('dialog-open');
-        document.querySelector('.overlay').style.display = 'block';
-        document.getElementById('deleteAcount').showModal();
-    }
-
-    document.querySelector('#closeDialogDelete').onclick = function () {
-        document.body.classList.remove('dialog-open');
-        document.querySelector('.overlay').style.display = 'none';
-        document.getElementById('deleteAcount').close();
-    }
-
-    //діалогове вікно "вийти з акаунта"
-    document.querySelector('#openLogOut').onclick = function () {
-        document.body.classList.add('dialog-open');
-        document.querySelector('.overlay').style.display = 'block';
-        document.getElementById('logOut').showModal();
-    }
-
-    document.querySelector('#closeDialogLogOut').onclick = function () {
-        document.body.classList.remove('dialog-open');
-        document.querySelector('.overlay').style.display = 'none';
-        document.getElementById('logOut').close();
-    }
-
-    function closeCurrentModal() {
-            var currentModal = document.querySelector('dialog[open]');
-            if (currentModal) {
-                currentModal.close();
+            //діалогове вікно очищення історії
+            document.querySelector('#openDialogClear').onclick = function () {
+                document.body.classList.add('dialog-open');
+                document.querySelector('.overlay').style.display = 'block';
+                document.getElementById('clearHistory').showModal();
             }
-        }
 
-    //category-info
-let currentOpen = null;
-
-function toggleAdditionalInfo(category) {
-    const additionalInfo = category.nextElementSibling;
-    if (currentOpen && currentOpen!== additionalInfo) {
-        currentOpen.style.display = "none";
-    }
-    if (additionalInfo.style.display === "none" || additionalInfo.style.display === "") {
-        additionalInfo.style.display = "block";
-        currentOpen = additionalInfo;
-    } else {
-        additionalInfo.style.display = "none";
-        currentOpen = null;
-    }
-}
-
-
-const options = document.querySelectorAll('.dropdown-content a');
-options.forEach(option => {
-    option.addEventListener('click', event => {
-        const category = event.target.parentNode.parentNode;
-        toggleAdditionalInfo(category);
-    });
-});
-
-
-  $(document).ready(function() {
-    $('#submit-button').click(function() {
-        var selectedValue = $('#dropdown').val(); // Get the selected value from the dropdown
-        var dataToSend = {
-            'selected_value': selectedValue,
-            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val() 
-        };
-
-        $.ajax({
-            url: 'statistics_page',
-            type: 'POST',
-            data: dataToSend,
-            success: function(response) {
-                console.log(response);
-                window.location.href = 'statistics_page?selected_value=' + selectedValue;
+            document.querySelector('#closeDialogClear').onclick = function () {
+                document.body.classList.remove('dialog-open');
+                document.querySelector('.overlay').style.display = 'none';
+                document.getElementById('clearHistory').close();
             }
-        });
-    });
-});
 
-  document.getElementById('calendarIcon').addEventListener('click', function () {
-        document.getElementById('datepicker').click(); // Клік на кнопку календаря
-    });
-</script>
+            //діалогове вікно видалення акаунта
+            document.querySelector('#openDialogDelete').onclick = function () {
+                document.body.classList.add('dialog-open');
+                document.querySelector('.overlay').style.display = 'block';
+                document.getElementById('deleteAcount').showModal();
+            }
+
+            document.querySelector('#closeDialogDelete').onclick = function () {
+                document.body.classList.remove('dialog-open');
+                document.querySelector('.overlay').style.display = 'none';
+                document.getElementById('deleteAcount').close();
+            }
+
+            //діалогове вікно "вийти з акаунта"
+            document.querySelector('#openLogOut').onclick = function () {
+                document.body.classList.add('dialog-open');
+                document.querySelector('.overlay').style.display = 'block';
+                document.getElementById('logOut').showModal();
+            }
+
+            document.querySelector('#closeDialogLogOut').onclick = function () {
+                document.body.classList.remove('dialog-open');
+                document.querySelector('.overlay').style.display = 'none';
+                document.getElementById('logOut').close();
+            }
+
+            function closeCurrentModal() {
+                var currentModal = document.querySelector('dialog[open]');
+                if (currentModal) {
+                    currentModal.close();
+                }
+            }
+
+            //category-info
+            let currentOpen = null;
+
+            function toggleAdditionalInfo(category)
+            {
+                const additionalInfo = category.nextElementSibling;
+                if (currentOpen && currentOpen !== additionalInfo) {
+                    currentOpen.style.display = "none";
+                }
+                if (additionalInfo.style.display === "none" || additionalInfo.style.display === "") {
+                    additionalInfo.style.display = "block";
+                    currentOpen = additionalInfo;
+                } else {
+                    additionalInfo.style.display = "none";
+                    currentOpen = null;
+                }
+            }
+
+
+            const options = document.querySelectorAll('.dropdown-content a');
+            options.forEach(option => {
+                option.addEventListener('click', event => {
+                    const category = event.target.parentNode.parentNode;
+                    toggleAdditionalInfo(category);
+                });
+            });
+
+
+            $(document).ready(function () {
+                $('#submit-button').click(function () {
+                    var selectedValue = $('#dropdown').val(); // Get the selected value from the dropdown
+                    var dataToSend = {
+                        'selected_value': selectedValue,
+                        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+                    };
+
+                    $.ajax({
+                        url: 'statistics_page',
+                        type: 'POST',
+                        data: dataToSend,
+                        success: function (response) {
+                            console.log(response);
+                            window.location.href = 'statistics_page?selected_value=' + selectedValue;
+                        }
+                    });
+                });
+            });
+
+            document.getElementById('calendarIcon').addEventListener('click', function () {
+                document.getElementById('datepicker').click(); // Клік на кнопку календаря
+            });
+        </script>
 </body>
 
 </html>

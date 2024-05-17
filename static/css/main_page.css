@@ -463,9 +463,219 @@ hr {
 .front img {
   width: 32px;
   height: 32px;
-  margin-left: 20px;
-  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 5px;
+  margin-top: 2px;
 }
+
+.Shopping{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(0, 115, 46, 1);
+}
+
+.Transfer{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(15, 110, 198, 1);
+}
+
+.Enrollment{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(135, 16, 176, 1);
+}
+
+.Utility payments {
+   display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(180, 16, 16, 1);
+}
+
+.Transportation {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(213, 229, 25, 1);
+}
+
+.Health and beauty {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(233, 54, 183, 1);
+}
+
+.Groceries{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(16, 176, 80, 1);
+}
+
+.Caffe-restaurant {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(100, 13, 141, 1);
+}
+
+.Services{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(57, 17, 171, 1);
+}
+
+.Entertainment{
+   display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(170, 16, 173, 1);
+}
+
+.Travel{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(132, 193, 3, 1);
+}
+
+.Household{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(176, 141, 16, 1);
+}
+
+.Car service{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(12, 204, 170, 1);
+}
+
+.Education{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(243, 220, 12, 1);
+}
+
+.Mobile recharge {
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(243, 220, 12, 1);
+}
+
+.Mobile{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(17, 198, 210, 1);
+}
+
+
+.Other {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 47px;
+  border-radius: 8px;
+  border: 2px;
+  background-color: rgba(232, 231, 231, 1);
+  border: 2px solid rgba(214, 115, 24, 1);
+}
+
+
+
+
+
 
 .front span {
   width: 70%;
