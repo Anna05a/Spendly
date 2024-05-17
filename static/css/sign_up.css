@@ -108,6 +108,11 @@ h3 {
   text-align: center;
 }
 
+.or{
+  margin-top: 40px;
+  margin-left: -30px;
+}
+
 input {
   width: 600px;
   height: 50px;
